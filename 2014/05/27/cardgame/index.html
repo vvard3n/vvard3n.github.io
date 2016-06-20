@@ -1,0 +1,627 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="objective-c,iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="程序简介本程序的功能为随机生成12张卡片，通过卡片相似度来进行匹配。不同的相似度匹配成功后会有不同的得分，匹配错误会有相应的扣分，同时，每次翻拍一会有相应的分数损失。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个卡片匹配小游戏的设计-by Stanford iOS 7 Dev">
+<meta property="og:url" content="http://nvar.xyz/2014/05/27/cardgame/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="程序简介本程序的功能为随机生成12张卡片，通过卡片相似度来进行匹配。不同的相似度匹配成功后会有不同的得分，匹配错误会有相应的扣分，同时，每次翻拍一会有相应的分数损失。">
+<meta property="og:updated_time" content="2014-11-03T12:24:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个卡片匹配小游戏的设计-by Stanford iOS 7 Dev">
+<meta name="twitter:description" content="程序简介本程序的功能为随机生成12张卡片，通过卡片相似度来进行匹配。不同的相似度匹配成功后会有不同的得分，匹配错误会有相应的扣分，同时，每次翻拍一会有相应的分数损失。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2014/05/27/cardgame/"/>
+
+  <title> 一个卡片匹配小游戏的设计-by Stanford iOS 7 Dev | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个卡片匹配小游戏的设计-by Stanford iOS 7 Dev
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-05-27T01:41:06+08:00" content="2014-05-27">
+              2014-05-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="程序简介"><a href="#程序简介" class="headerlink" title="程序简介"></a>程序简介</h1><p>本程序的功能为随机生成12张卡片，通过卡片相似度来进行匹配。不同的相似度匹配成功后会有不同的得分，匹配错误会有相应的扣分，同时，每次翻拍一会有相应的分数损失。<br><a id="more"></a></p>
+<h1 id="程序所需类"><a href="#程序所需类" class="headerlink" title="程序所需类"></a>程序所需类</h1><ul>
+<li>Card</li>
+<li>CardMatchingGame</li>
+<li>Deck</li>
+<li>PlayingCard</li>
+<li>PlayingCardDeck</li>
+</ul>
+<h1 id="类公有成员简介"><a href="#类公有成员简介" class="headerlink" title="类公有成员简介"></a>类公有成员简介</h1><h3 id="Card类（卡片）"><a href="#Card类（卡片）" class="headerlink" title="Card类（卡片）"></a>Card类（卡片）</h3><p>我认为这个类是类似基类。<br>拥有三个属性和一个方法：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>)<span class="built_in">NSString</span> *contents;<span class="comment">//内容</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, getter = isChosen)<span class="built_in">BOOL</span> chosen;<span class="comment">//是否选择</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, getter = isMatched)<span class="built_in">BOOL</span> matched;<span class="comment">//是否匹配</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">int</span>)match:(<span class="built_in">NSArray</span> *)otherCards;<span class="comment">//要匹配的其他卡片</span></span><br></pre></td></tr></table></figure>
+<h3 id="CardMatchingGame类（卡片匹配游戏）"><a href="#CardMatchingGame类（卡片匹配游戏）" class="headerlink" title="CardMatchingGame类（卡片匹配游戏）"></a>CardMatchingGame类（卡片匹配游戏）</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定初始化器</span></span><br><span class="line">- (instancetype) initWithCardCount:(<span class="built_in">NSUInteger</span>)count</span><br><span class="line">                         usingDeck:(Deck *)deck;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)chooseCardAtIndex:(<span class="built_in">NSUInteger</span>)index;<span class="comment">//选中卡片的序号</span></span><br><span class="line">- (Card *)cardAtIndex:(<span class="built_in">NSUInteger</span>)index;<span class="comment">//卡片的序号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSInteger</span> score;<span class="comment">//分数</span></span><br></pre></td></tr></table></figure>
+<h3 id="Deck类（牌堆）"><a href="#Deck类（牌堆）" class="headerlink" title="Deck类（牌堆）"></a>Deck类（牌堆）</h3><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>addCard:<span class="params">(Card *)</span>card atTop:<span class="params">(BOOL)</span>atTop;</span><br><span class="line">- <span class="params">(void)</span>addCard:<span class="params">(Card *)</span>card;</span><br><span class="line"></span><br><span class="line">- <span class="params">(Card *)</span>drawRandomCard;   //抽随机卡</span><br></pre></td></tr></table></figure>
+<h3 id="PlayingCard类（玩卡片游戏）"><a href="#PlayingCard类（玩卡片游戏）" class="headerlink" title="PlayingCard类（玩卡片游戏）"></a>PlayingCard类（玩卡片游戏）</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *suit; <span class="comment">//花色</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">NSUInteger</span> rank; <span class="comment">//牌大小</span></span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">NSArray</span> *)validSuits;</span><br><span class="line">+ (<span class="built_in">NSUInteger</span>)maxRank;</span><br></pre></td></tr></table></figure>
+<h3 id="PlayingCardDeck（玩卡片游戏堆）"><a href="#PlayingCardDeck（玩卡片游戏堆）" class="headerlink" title="PlayingCardDeck（玩卡片游戏堆）"></a>PlayingCardDeck（玩卡片游戏堆）</h3><p>此类是Deck的一个子类,相当于一副完整的牌的牌堆(52张)，没有公共成员。</p>
+<h1 id="未完待续。"><a href="#未完待续。" class="headerlink" title="未完待续。"></a>未完待续。</h1>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/objective-c/" rel="tag">#objective-c</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/05/25/localoctopressstorehouse/" rel="next" title="重建本地Octopress仓库">
+                <i class="fa fa-chevron-left"></i> 重建本地Octopress仓库
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/05/31/buildablogforyourself/" rel="prev" title="自己着手创建一个博客">
+                自己着手创建一个博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#程序简介"><span class="nav-number">1.</span> <span class="nav-text">程序简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序所需类"><span class="nav-number">2.</span> <span class="nav-text">程序所需类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类公有成员简介"><span class="nav-number">3.</span> <span class="nav-text">类公有成员简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Card类（卡片）"><span class="nav-number">3.0.1.</span> <span class="nav-text">Card类（卡片）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CardMatchingGame类（卡片匹配游戏）"><span class="nav-number">3.0.2.</span> <span class="nav-text">CardMatchingGame类（卡片匹配游戏）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deck类（牌堆）"><span class="nav-number">3.0.3.</span> <span class="nav-text">Deck类（牌堆）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PlayingCard类（玩卡片游戏）"><span class="nav-number">3.0.4.</span> <span class="nav-text">PlayingCard类（玩卡片游戏）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PlayingCardDeck（玩卡片游戏堆）"><span class="nav-number">3.0.5.</span> <span class="nav-text">PlayingCardDeck（玩卡片游戏堆）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未完待续。"><span class="nav-number">4.</span> <span class="nav-text">未完待续。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

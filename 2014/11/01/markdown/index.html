@@ -1,0 +1,774 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="markdown," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown语法整理">
+<meta property="og:url" content="http://nvar.xyz/2014/11/01/markdown/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。">
+<meta property="og:image" content="http://25.io/smaller/favicon.ico">
+<meta property="og:image" content="http://resizesafari.com/favicon.ico">
+<meta property="og:updated_time" content="2014-11-03T12:25:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown语法整理">
+<meta name="twitter:description" content="Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。">
+<meta name="twitter:image" content="http://25.io/smaller/favicon.ico">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2014/11/01/markdown/"/>
+
+  <title> Markdown语法整理 | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Markdown语法整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-11-01T20:17:48+08:00" content="2014-11-01">
+              2014-11-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<br><a id="more"></a></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="粗体和斜体"><a href="#粗体和斜体" class="headerlink" title="粗体和斜体"></a>粗体和斜体</h4><p><code>**粗体** or __粗体__</code><strong>粗体</strong> or <strong>粗体</strong></p>
+<p><code>*斜体* or _斜体_</code><em>斜体</em> or <em>斜体</em></p>
+<p><code>**这段文字是粗体, 但是, 其中也可以包含 _斜体_ 的文本**</code></p>
+<p><strong>这段文字是粗体, 但是, 其中也可以包含 <em>斜体</em> 的文本</strong></p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><code>&gt; 使用一个 &amp;gt; 便可以使用引用块.</code></p>
+<blockquote>
+<p>使用一个 &gt; 便可以使用引用块.</p>
+</blockquote>
+<h4 id="链接和-Email"><a href="#链接和-Email" class="headerlink" title="链接和 Email"></a>链接和 Email</h4><p><code>这是一个Email &lt;example@example.com&gt; 链接。</code></p>
+<p>这是一个Email <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#x40;&#x65;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a> 链接。</p>
+<p><code>简单的内嵌链接 &lt;http://vvard3n.com&gt;, 有名字的内嵌链接 [vvard3n](http://vvard3n.com), 有名字有备注的内嵌链接 [vvard3n.com](http://vvard3n.com &quot;我的主页&quot;)。</code></p>
+<p>简单的内嵌链接 <a href="http://vvard3n.com" target="_blank" rel="external">http://vvard3n.com</a>, 有名字的内嵌链接 <a href="http://vvard3n.com" target="_blank" rel="external">vvard3n</a>, 有名字有备注的内嵌链接 <a href="http://vvard3n.com" title="我的主页" target="_blank" rel="external">vvard3n.com</a>.</p>
+<p><code>[参考风格链接][id],标题是可选的</code></p>
+<p><code>[id]: http://vvard3n.com &quot;我的主页&quot;</code></p>
+<p>[参考风格链接][id],标题是可选的</p>
+<p>[id]: <a href="http://vvard3n.com" target="_blank" rel="external">http://vvard3n.com</a> “我的主页”`</p>
+<h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><p><code>一个嵌入图片 ![Smaller icon](http://25.io/smaller/favicon.ico &quot;Title here&quot;), 标题可选。</code></p>
+<p>一个嵌入图片 <img src="http://25.io/smaller/favicon.ico" alt="Smaller icon" title="Title here">, 标题可选。</p>
+<p><code>![Resize icon][2] 参考风格的图片。</code></p>
+<p><code>[2]: http://resizesafari.com/favicon.ico &quot;Title&quot;</code></p>
+<p><img src="http://resizesafari.com/favicon.ico" alt="Resize icon" title="Title"> 参考风格的图片。</p>
+<h4 id="内嵌代码和代码块"><a href="#内嵌代码和代码块" class="headerlink" title="内嵌代码和代码块"></a>内嵌代码和代码块</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建`内嵌代码`, 用缩进创建代码块:</span><br><span class="line"></span><br><span class="line">	Indent each line <span class="keyword">by</span> <span class="keyword">at</span> least <span class="number">1</span> <span class="literal">tab</span>, <span class="keyword">or</span> <span class="number">4</span> spaces.</span><br><span class="line">    var Mou = exactlyTheAppIwant;</span><br></pre></td></tr></table></figure>
+<p>创建<code>内嵌代码</code>, 用缩进创建代码块:</p>
+<pre><code>Indent each line by at least 1 tab, or 4 spaces.
+var Mou = exactlyTheAppIwant; 
+</code></pre><h4 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>有序列表项</span><br><span class="line"><span class="bullet">2. </span>有序列表项</span><br><span class="line"><span class="bullet">3. </span>有序列表项</span><br><span class="line"><span class="bullet">1. </span>有序列表项</span><br><span class="line"><span class="bullet">1. </span>有序列表项</span><br></pre></td></tr></table></figure>
+<p>创建有序列表需使用 “1.” + Space:</p>
+<ol>
+<li>有序列表项</li>
+<li>有序列表项</li>
+<li>有序列表项</li>
+<li>有序列表项</li>
+<li>有序列表项</li>
+</ol>
+<p>由上面可得数字的顺序不是重要的，输出都会使用顺序列表</p>
+<h4 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">创建无序列表需使用 "<span class="strong">*" + Space:</span><br><span class="line"></span><br><span class="line"></span><span class="bullet">* </span>无序列表项</span><br><span class="line"><span class="bullet">* </span>无序列表项</span><br><span class="line"><span class="bullet">* </span>无序列表项</span><br><span class="line"></span><br><span class="line">或使用 "-" + Space:</span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>无序列表项</span><br><span class="line"><span class="bullet">- </span>无序列表项</span><br><span class="line"><span class="bullet">- </span>无序列表项</span><br></pre></td></tr></table></figure>
+<p>创建无序列表需使用 “*” + Space:</p>
+<ul>
+<li>无序列表项</li>
+<li>无序列表项</li>
+<li>无序列表项</li>
+</ul>
+<p>或使用 “-“ + Space:</p>
+<ul>
+<li>无序列表项</li>
+<li>无序列表项</li>
+<li>无序列表项</li>
+</ul>
+<h4 id="强制换行"><a href="#强制换行" class="headerlink" title="强制换行"></a>强制换行</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">段落结尾用两个或者以上空格即可强制换行, 在HTML中同 `&lt;br /&gt;` 。  </span><br><span class="line">换行测试。</span><br></pre></td></tr></table></figure>
+<p>段落结尾用两个或者以上空格即可强制换行, 在HTML中同 <code>&lt;br /&gt;</code> 。<br>换行测试。</p>
+<h4 id="分隔线"><a href="#分隔线" class="headerlink" title="分隔线"></a>分隔线</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">三个或以上的重复的下列符号:</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> - - -</span><br></pre></td></tr></table></figure>
+<p>分隔线</p>
+<hr>
+<hr>
+<hr>
+<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>可以用=或-分隔:</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">This is H1</span><br><span class="line">==========</span></span><br><span class="line"></span><br><span class="line"><span class="section">This is H2</span><br><span class="line">----------</span></span><br></pre></td></tr></table></figure>
+<h1 id="This-is-H1"><a href="#This-is-H1" class="headerlink" title="This is H1"></a>This is H1</h1><h2 id="This-is-H2"><a href="#This-is-H2" class="headerlink" title="This is H2"></a>This is H2</h2><p>可以用“#”号区分:</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># This is H1</span></span><br><span class="line"><span class="meta">## This is H2</span></span><br><span class="line"><span class="meta">### This is H3</span></span><br><span class="line"><span class="meta">#### This is H4</span></span><br><span class="line"><span class="meta">##### This is H5</span></span><br><span class="line"><span class="meta">###### This is H6</span></span><br></pre></td></tr></table></figure>
+<h1 id="This-is-H1-1"><a href="#This-is-H1-1" class="headerlink" title="This is H1"></a>This is H1</h1><h2 id="This-is-H2-1"><a href="#This-is-H2-1" class="headerlink" title="This is H2"></a>This is H2</h2><h3 id="This-is-H3"><a href="#This-is-H3" class="headerlink" title="This is H3"></a>This is H3</h3><h4 id="This-is-H4"><a href="#This-is-H4" class="headerlink" title="This is H4"></a>This is H4</h4><h5 id="This-is-H5"><a href="#This-is-H5" class="headerlink" title="This is H5"></a>This is H5</h5><h6 id="This-is-H6"><a href="#This-is-H6" class="headerlink" title="This is H6"></a>This is H6</h6><h3 id="额外的语法"><a href="#额外的语法" class="headerlink" title="额外的语法"></a>额外的语法</h3><h4 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">That<span class="symbol">'s</span> <span class="keyword">some</span> text <span class="keyword">with</span> a footnote.[^<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">左方括号^<span class="number">1</span>]: <span class="keyword">And</span> that<span class="symbol">'s</span> the footnote.</span><br></pre></td></tr></table></figure>
+<p>That’s some text with a footnote.[^1]</p>
+<p>[^1]: And that’s the footnote.</p>
+<h4 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h4><p><code>~~删除的文字~~</code></p>
+<p><del>删除的文字</del></p>
+<h4 id="Fenced-代码块"><a href="#Fenced-代码块" class="headerlink" title="Fenced 代码块"></a>Fenced 代码块</h4><p>用三个反引号包起来的代码块“    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p><code>``//不包含空格
+Fenced code blocks are like Stardard Markdown’s regular code
+blocks, except that they’re not indented and instead rely on
+a start and end fence lines to delimit the code block.
+`` </code>//不包含空格<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">样子是这样：</span><br></pre></td></tr></table></figure></p>
+<p>Fenced code blocks are like Stardard Markdown’s regular code<br>blocks, except that they’re not indented and instead rely on<br>a start and end fence lines to delimit the code block.<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#### 表格</span></span><br><span class="line"></span><br><span class="line">风格<span class="number">1</span>:</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">First Header |<span class="string"> Second Header </span>|<span class="string"> Third Header</span><br><span class="line">------------ </span>|<span class="string"> ------------- </span>|<span class="string"> ------------</span><br><span class="line">Content Cell </span>|<span class="string"> Content Cell  </span>|<span class="string"> Content Cell</span><br><span class="line">Content Cell </span>|<span class="string"> Content Cell  </span>|<span class="string"> Content Cell</span><br><span class="line"></span><br><span class="line">风格2:</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+<th>Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">|<span class="string"> First Header </span>|<span class="string"> Second Header </span>|<span class="string"> Third Header </span>|</span><br><span class="line">|<span class="string"> ------------ </span>|<span class="string"> ------------- </span>|<span class="string"> ------------ </span>|</span><br><span class="line">|<span class="string"> Content Cell </span>|<span class="string"> Content Cell  </span>|<span class="string"> Content Cell </span>|</span><br><span class="line">|<span class="string"> Content Cell </span>|<span class="string"> Content Cell  </span>|<span class="string"> Content Cell </span>|</span><br><span class="line"></span><br><span class="line">通过添加冒号分隔线指定每列的对齐:</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">First Header</th>
+<th style="text-align:center">Second Header</th>
+<th style="text-align:right">Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+</tbody>
+</table>
+<p>```</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">First Header</th>
+<th style="text-align:center">Second Header</th>
+<th style="text-align:right">Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+<tr>
+<td style="text-align:left">Left</td>
+<td style="text-align:center">Center</td>
+<td style="text-align:right">Right</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="End"><a href="#End" class="headerlink" title="End"></a>End</h3><h3 id="如有错误，欢迎指正"><a href="#如有错误，欢迎指正" class="headerlink" title="如有错误，欢迎指正"></a>如有错误，欢迎指正</h3>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag">#markdown</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/01/binarysearch/" rel="next" title="二分法查找">
+                <i class="fa fa-chevron-left"></i> 二分法查找
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/03/uitableviewanduitableviewcontroller/" rel="prev" title="UITableView and UITableViewController">
+                UITableView and UITableViewController <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#粗体和斜体"><span class="nav-number">1.1.</span> <span class="nav-text">粗体和斜体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用"><span class="nav-number">1.2.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链接和-Email"><span class="nav-number">1.3.</span> <span class="nav-text">链接和 Email</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片"><span class="nav-number">1.4.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内嵌代码和代码块"><span class="nav-number">1.5.</span> <span class="nav-text">内嵌代码和代码块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序列表"><span class="nav-number">1.6.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无序列表"><span class="nav-number">1.7.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强制换行"><span class="nav-number">1.8.</span> <span class="nav-text">强制换行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分隔线"><span class="nav-number">1.9.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标题"><span class="nav-number">1.10.</span> <span class="nav-text">标题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#This-is-H1"><span class="nav-number"></span> <span class="nav-text">This is H1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-H2"><span class="nav-number"></span> <span class="nav-text">This is H2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#This-is-H1-1"><span class="nav-number"></span> <span class="nav-text">This is H1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-H2-1"><span class="nav-number"></span> <span class="nav-text">This is H2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-is-H3"><span class="nav-number">1.</span> <span class="nav-text">This is H3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#This-is-H4"><span class="nav-number">1.1.</span> <span class="nav-text">This is H4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#This-is-H5"><span class="nav-number">1.1.1.</span> <span class="nav-text">This is H5</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#This-is-H6"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">This is H6</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外的语法"><span class="nav-number">2.</span> <span class="nav-text">额外的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#脚注"><span class="nav-number">2.1.</span> <span class="nav-text">脚注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除线"><span class="nav-number">2.2.</span> <span class="nav-text">删除线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fenced-代码块"><span class="nav-number">2.3.</span> <span class="nav-text">Fenced 代码块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#End"><span class="nav-number">3.</span> <span class="nav-text">End</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如有错误，欢迎指正"><span class="nav-number">4.</span> <span class="nav-text">如有错误，欢迎指正</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
