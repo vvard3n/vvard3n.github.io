@@ -94,7 +94,7 @@
 <meta property="og:description" content="Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。">
 <meta property="og:image" content="http://25.io/smaller/favicon.ico">
 <meta property="og:image" content="http://resizesafari.com/favicon.ico">
-<meta property="og:updated_time" content="2014-11-03T12:25:34.000Z">
+<meta property="og:updated_time" content="2016-06-21T00:52:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown语法整理">
 <meta name="twitter:description" content="Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。">
@@ -330,13 +330,13 @@
 <p>使用一个 &gt; 便可以使用引用块.</p>
 </blockquote>
 <h4 id="链接和-Email"><a href="#链接和-Email" class="headerlink" title="链接和 Email"></a>链接和 Email</h4><p><code>这是一个Email &lt;example@example.com&gt; 链接。</code></p>
-<p>这是一个Email <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;">&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;</a> 链接。</p>
-<p><code>简单的内嵌链接 &lt;http://vvard3n.com&gt;, 有名字的内嵌链接 [vvard3n](http://vvard3n.com), 有名字有备注的内嵌链接 [vvard3n.com](http://vvard3n.com &quot;我的主页&quot;)。</code></p>
-<p>简单的内嵌链接 <a href="http://vvard3n.com" target="_blank" rel="external">http://vvard3n.com</a>, 有名字的内嵌链接 <a href="http://vvard3n.com" target="_blank" rel="external">vvard3n</a>, 有名字有备注的内嵌链接 <a href="http://vvard3n.com" title="我的主页" target="_blank" rel="external">vvard3n.com</a>.</p>
+<p>这是一个Email <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x40;&#x65;&#120;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#x63;&#x6f;&#109;">&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x40;&#x65;&#120;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#x63;&#x6f;&#109;</a> 链接。</p>
+<p><code>简单的内嵌链接 &lt;http://nvar.xyz&gt;, 有名字的内嵌链接 [vvard3n](http://nvar.xyz), 有名字有备注的内嵌链接 [nvar.xyz](http://nvar.xyz &quot;我的主页&quot;)。</code></p>
+<p>简单的内嵌链接 <a href="http://nvar.xyz">http://nvar.xyz</a>, 有名字的内嵌链接 <a href="http://nvar.xyz">vvard3n</a>, 有名字有备注的内嵌链接 <a href="http://nvar.xyz" title="我的主页">nvar.xyz</a>.</p>
 <p><code>[参考风格链接][id],标题是可选的</code></p>
-<p><code>[id]: http://vvard3n.com &quot;我的主页&quot;</code></p>
+<p><code>[id]: http://nvar.xyz &quot;我的主页&quot;</code></p>
 <p>[参考风格链接][id],标题是可选的</p>
-<p>[id]: <a href="http://vvard3n.com" target="_blank" rel="external">http://vvard3n.com</a> “我的主页”`</p>
+<p>[id]: <a href="http://nvar.xyz">http://nvar.xyz</a> “我的主页”`</p>
 <h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><p><code>一个嵌入图片 ![Smaller icon](http://25.io/smaller/favicon.ico &quot;Title here&quot;), 标题可选。</code></p>
 <p>一个嵌入图片 <img src="http://25.io/smaller/favicon.ico" alt="Smaller icon" title="Title here">, 标题可选。</p>
 <p><code>![Resize icon][2] 参考风格的图片。</code></p>
@@ -345,7 +345,7 @@
 <h4 id="内嵌代码和代码块"><a href="#内嵌代码和代码块" class="headerlink" title="内嵌代码和代码块"></a>内嵌代码和代码块</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创建`内嵌代码`, 用缩进创建代码块:</span><br><span class="line"></span><br><span class="line">	Indent each line <span class="keyword">by</span> <span class="keyword">at</span> least <span class="number">1</span> <span class="literal">tab</span>, <span class="keyword">or</span> <span class="number">4</span> spaces.</span><br><span class="line">    var Mou = exactlyTheAppIwant;</span><br></pre></td></tr></table></figure>
 <p>创建<code>内嵌代码</code>, 用缩进创建代码块:</p>
 <pre><code>Indent each line by at least 1 tab, or 4 spaces.
-var Mou = exactlyTheAppIwant; 
+var Mou = exactlyTheAppIwant;
 </code></pre><h4 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>有序列表项</span><br><span class="line"><span class="bullet">2. </span>有序列表项</span><br><span class="line"><span class="bullet">3. </span>有序列表项</span><br><span class="line"><span class="bullet">1. </span>有序列表项</span><br><span class="line"><span class="bullet">1. </span>有序列表项</span><br></pre></td></tr></table></figure>
 <p>创建有序列表需使用 “1.” + Space:</p>
 <ol>
@@ -518,8 +518,8 @@ a start and end fence lines to delimit the code block.
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/11/03/uitableviewanduitableviewcontroller/" rel="prev" title="UITableView and UITableViewController">
-                UITableView and UITableViewController <i class="fa fa-chevron-right"></i>
+              <a href="/2014/11/03/uitableviewanduitableviewcontroller/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -588,7 +588,7 @@ a start and end fence lines to delimit the code block.
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -596,7 +596,7 @@ a start and end fence lines to delimit the code block.
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -605,7 +605,7 @@ a start and end fence lines to delimit the code block.
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

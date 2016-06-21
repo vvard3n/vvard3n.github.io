@@ -95,7 +95,7 @@ Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。
 <meta property="og:description" content="之前一直想搭建自己的博客，偶然的机会中，接触到了Octopress+Github Pages这个组合，在欣喜的心情中搭建好了属于自己的第一个博客。然而，在后期的使用当中，出现了陆陆续续的各种问题：生成速度下降，中文支持不佳，写post操作繁琐。在一次查找资料的时候，发现了Hexo这个东西。
 Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。在了解之后，决定将现有的Octopre">
 <meta property="og:image" content="https://hexo.io/logo.svg">
-<meta property="og:updated_time" content="2016-06-20T12:15:27.000Z">
+<meta property="og:updated_time" content="2016-06-21T00:53:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自己着手创建一个博客">
 <meta name="twitter:description" content="之前一直想搭建自己的博客，偶然的机会中，接触到了Octopress+Github Pages这个组合，在欣喜的心情中搭建好了属于自己的第一个博客。然而，在后期的使用当中，出现了陆陆续续的各种问题：生成速度下降，中文支持不佳，写post操作繁琐。在一次查找资料的时候，发现了Hexo这个东西。
@@ -356,9 +356,9 @@ Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。
 <p>在Github新建一个名字为<code>yourname.github.io</code>的代码仓库</p>
 <p>然后在Hexo文件夹中打开根目录的<code>_config.yml</code></p>
 <p>在文档的最下面，插入：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: github</span><br><span class="line">  <span class="attribute">repository</span>: <span class="attribute">https</span>:<span class="comment">//github.com/yourname/yourname.github.io.git</span></span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@git</span>.coding.<span class="attribute">net</span>:yourname/yourname.git</span><br><span class="line">  <span class="attribute">branch</span>: coding-pages</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意，上面的yourname全部要替换为你的用户名。</p>
+<p>注意，上面的yourname全部要替换为你的用户名。多个远程仓库需要使用-分隔。</p>
 </blockquote>
 <p>保存后，继续操作终端</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo <span class="keyword">generate</span></span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
@@ -484,7 +484,7 @@ Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -492,7 +492,7 @@ Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -501,7 +501,7 @@ Hexo是由Node.js驱动的一款快速、简单且功能强大的博客框架。
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
