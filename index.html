@@ -279,6 +279,140 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/23/Notification/" itemprop="url">
+                  NSNotificationCenter和NSNotification
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-23T08:43:15+08:00" content="2016-06-23">
+              2016-06-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/23/Notification/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/23/Notification/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="通知机制"><a href="#通知机制" class="headerlink" title="通知机制"></a>通知机制</h1><h3 id="NSNotificationCenter（通知中心）"><a href="#NSNotificationCenter（通知中心）" class="headerlink" title="NSNotificationCenter（通知中心）"></a>NSNotificationCenter（通知中心）</h3><p>每个应用程序有一个通知中心实例，专门负责协助不同对象之间的消息通信<br>任何一个对象都可以向通知中心发布通知，描述自己在做什么。其他感兴趣的对象可以申请在某个特定通知发布时（或在某个特定的对象发布通知时）收到这个通知。<br>一个完整的通知一般包含3个属性<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">(NSString *)name;</span><br><span class="line"></span>-<span class="ruby">(id) object;</span><br><span class="line"></span>-<span class="ruby">(NSDictionary *)userInfo</span></span><br></pre></td></tr></table></figure></p>
+<p>初始化一个通知（NSNotification）对象<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (instance<span class="keyword">type</span>)notificationWithName:(<span class="type">NSString</span> *)aName object:(id)anObject;</span><br><span class="line">+ (instance<span class="keyword">type</span>)notificationWithName:(<span class="type">NSString</span> *)aName object:(id)anObject userInfo:(<span class="type">NSDictionary</span> *)aUserInfo;</span><br><span class="line">- (instance<span class="keyword">type</span>)initWithName:(<span class="type">NSString</span> *)name object:(id)object userInfo:(<span class="type">NSDictionary</span> *)userInfo;</span><br></pre></td></tr></table></figure></p>
+<h2 id="通知的发布"><a href="#通知的发布" class="headerlink" title="通知的发布"></a>通知的发布</h2><p>通知中心(NSNotificationCenter)提供了相应的方法来帮助发布通知<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>postNotification:<span class="params">(NSNotification *)</span>notification;</span><br><span class="line">发布一个notification通知，可在notification对象中设置通知的名称、通知发布者、额外信息等</span><br><span class="line"></span><br><span class="line">- <span class="params">(void)</span>postNotificationName:<span class="params">(NSString *)</span>aName object:<span class="params">(id)</span>anObject;</span><br><span class="line">发布一个名称为aName的通知，anObject为这个通知的发布者</span><br><span class="line"></span><br><span class="line">- <span class="params">(void)</span>postNotificationName:<span class="params">(NSString *)</span>aName object:<span class="params">(id)</span>anObject userInfo:<span class="params">(NSDictionary *)</span>aUserInfo;</span><br><span class="line">发布一个名称为aName的通知，anObject为这个通知的发布者，aUserInfo为额外信息</span><br></pre></td></tr></table></figure></p>
+<h2 id="通知的监听"><a href="#通知的监听" class="headerlink" title="通知的监听"></a>通知的监听</h2><p>通知中心(NSNotificationCenter)提供了相应的方法来帮助发布通知<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>postNotification:<span class="params">(NSNotification *)</span>notification;</span><br><span class="line">发布一个notification通知，可在notification对象中设置通知的名称、通知发布者、额外信息等</span><br><span class="line"></span><br><span class="line">- <span class="params">(void)</span>postNotificationName:<span class="params">(NSString *)</span>aName object:<span class="params">(id)</span>anObject;</span><br><span class="line">发布一个名称为aName的通知，anObject为这个通知的发布者</span><br><span class="line"></span><br><span class="line">- <span class="params">(void)</span>postNotificationName:<span class="params">(NSString *)</span>aName object:<span class="params">(id)</span>anObject userInfo:<span class="params">(NSDictionary *)</span>aUserInfo;</span><br><span class="line">发布一个名称为aName的通知，anObject为这个通知的发布者，aUserInfo为额外信息</span><br></pre></td></tr></table></figure></p>
+<h2 id="通知的移除"><a href="#通知的移除" class="headerlink" title="通知的移除"></a>通知的移除</h2><p>通知中心不会保留(retain)监听器对象，在通知中心注册过的对象，必须在该对象释放前取消注册。否则，当相应的通知再次出现时，通知中心仍然会向该监听器发送消息。因为相应的监听器对象已经被释放了，所以可能会导致应用崩溃</p>
+<p>通知中心提供了相应的方法来取消注册监听器<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>removeObserver:<span class="params">(id)</span>observer;</span><br><span class="line">- <span class="params">(void)</span>removeObserver:<span class="params">(id)</span>observer name:<span class="params">(NSString *)</span>aName object:<span class="params">(id)</span>anObject;</span><br></pre></td></tr></table></figure></p>
+<p>一般在监听器销毁之前取消注册（如在监听器中加入下列代码）：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">dealloc</span> &#123;</span><br><span class="line">	<span class="comment">//[super dealloc];  非ARC中需要调用此句</span></span><br><span class="line">    <span class="selector-attr">[[NSNotificationCenter defaultCenter]</span> <span class="selector-tag">removeObserver</span><span class="selector-pseudo">:self</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用补充"><a href="#常用补充" class="headerlink" title="常用补充"></a>常用补充</h2><p>触发某些系统事件时，系统会自动发送一条关于该事件的通知<br>Controller里需要先订阅系统的关于键盘弹出的通知</p>
+<h3 id="UIDevice通知"><a href="#UIDevice通知" class="headerlink" title="UIDevice通知"></a>UIDevice通知</h3><p>UIDevice类提供了一个单例对象，它代表着设备，通过它可以获得一些设备相关的信息，比如电池电量值(batteryLevel)、电池状态(batteryState)、设备的类型(model，比如iPod、iPhone等)、设备的系统(systemVersion)</p>
+<p>通过[UIDevice currentDevice]可以获取这个单例对象<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIDevice</span>对象会不间断地发布一些通知，下列是<span class="built_in">UIDevice</span>对象所发布通知的名称常量：</span><br><span class="line"><span class="built_in">UIDeviceOrientationDidChangeNotification</span> <span class="comment">// 设备旋转</span></span><br><span class="line"><span class="built_in">UIDeviceBatteryStateDidChangeNotification</span> <span class="comment">// 电池状态改变</span></span><br><span class="line"><span class="built_in">UIDeviceBatteryLevelDidChangeNotification</span> <span class="comment">// 电池电量改变</span></span><br><span class="line"><span class="built_in">UIDeviceProximityStateDidChangeNotification</span> <span class="comment">// 近距离传感器(比如设备贴近了使用者的脸部)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="键盘通知"><a href="#键盘通知" class="headerlink" title="键盘通知"></a>键盘通知</h3><p>我们经常需要在键盘弹出或者隐藏的时候做一些特定的操作,因此需要监听键盘的状态。<br>键盘状态改变的时候,系统会发出一些特定的通知<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIKeyboardWillShowNotification</span> <span class="comment">// 键盘即将显示</span></span><br><span class="line"><span class="built_in">UIKeyboardDidShowNotification</span> <span class="comment">// 键盘显示完毕</span></span><br><span class="line"><span class="built_in">UIKeyboardWillHideNotification</span> <span class="comment">// 键盘即将隐藏</span></span><br><span class="line"><span class="built_in">UIKeyboardDidHideNotification</span> <span class="comment">// 键盘隐藏完毕</span></span><br><span class="line"><span class="built_in">UIKeyboardWillChangeFrameNotification</span> <span class="comment">// 键盘的位置尺寸即将发生改变</span></span><br><span class="line"><span class="built_in">UIKeyboardDidChangeFrameNotification</span> <span class="comment">// 键盘的位置尺寸改变完毕</span></span><br></pre></td></tr></table></figure></p>
+<p>系统发出键盘通知时,会附带一下跟键盘有关的额外信息(字典),字典常见的key如下:<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIKeyboardFrameBeginUserInfoKey</span> <span class="comment">// 键盘刚开始的frame</span></span><br><span class="line"><span class="built_in">UIKeyboardFrameEndUserInfoKey</span> <span class="comment">// 键盘最终的frame(动画执行完毕后)</span></span><br><span class="line"><span class="built_in">UIKeyboardAnimationDurationUserInfoKey</span> <span class="comment">// 键盘动画的时间</span></span><br><span class="line"><span class="built_in">UIKeyboardAnimationCurveUserInfoKey</span> <span class="comment">// 键盘动画的执行节奏(快慢)</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>备注：监听系统对象时，object参数直接传入nil</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/21/frameModel/" itemprop="url">
                   Frame模型
                 </a>
@@ -1362,140 +1496,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/07/iosstring/" itemprop="url">
-                  iOS开发之玩转字符串
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-06-07T22:55:46+08:00" content="2014-06-07">
-              2014-06-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/objective-c/" itemprop="url" rel="index">
-                    <span itemprop="name">objective-c</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/objective-c/iOSDev/" itemprop="url" rel="index">
-                    <span itemprop="name">iOSDev</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/06/07/iosstring/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/07/iosstring/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在每个应用里我们都大量使用字符串。下面我们将快速看看一些常见的操作字符串的方法，过一遍常见操作的最佳实践。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/07/iosstring/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1541,7 +1541,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1549,7 +1549,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1558,7 +1558,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
