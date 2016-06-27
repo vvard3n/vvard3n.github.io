@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,UITableVIew,Objective-C,UITableVIewCell," />
+  <meta name="keywords" content="iOS,Objective-C,UITableViewCell," />
 
 
 
@@ -86,16 +86,25 @@
 
 
 
-<meta name="description" content="简介当系统自带的三种Cell风格无法满足实际需求时，就需要自定义Cell了。下面介绍了两种基本的自定义Cell方法。">
+<meta name="description" content="静态单元格动态单元格；无法在设计师指定显示的数据，必须在运行的时候，根据你设置的数据来进行显示静态单元格：内容静态固定不变，设计时是什么样子，以后就是什么样子
+当一些数据一致都不会发生改变，或者一些界面不需要随着数据的不同而不同时，就用静态单元格
+静态单元格可以直接在storyBoard直接定义好，内容不需要改变的单元格。
+如何定义静态单元格打开Storyboard，在TableView的属性检">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义Cell">
-<meta property="og:url" content="http://nvar.xyz/2016/06/21/customcell/index.html">
+<meta property="og:title" content="静态单元格和原型Cell">
+<meta property="og:url" content="http://nvar.xyz/2016/06/25/jtdygandyxcell/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
-<meta property="og:description" content="简介当系统自带的三种Cell风格无法满足实际需求时，就需要自定义Cell了。下面介绍了两种基本的自定义Cell方法。">
-<meta property="og:updated_time" content="2016-06-21T17:41:23.000Z">
+<meta property="og:description" content="静态单元格动态单元格；无法在设计师指定显示的数据，必须在运行的时候，根据你设置的数据来进行显示静态单元格：内容静态固定不变，设计时是什么样子，以后就是什么样子
+当一些数据一致都不会发生改变，或者一些界面不需要随着数据的不同而不同时，就用静态单元格
+静态单元格可以直接在storyBoard直接定义好，内容不需要改变的单元格。
+如何定义静态单元格打开Storyboard，在TableView的属性检">
+<meta property="og:updated_time" content="2016-06-27T05:10:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义Cell">
-<meta name="twitter:description" content="简介当系统自带的三种Cell风格无法满足实际需求时，就需要自定义Cell了。下面介绍了两种基本的自定义Cell方法。">
+<meta name="twitter:title" content="静态单元格和原型Cell">
+<meta name="twitter:description" content="静态单元格动态单元格；无法在设计师指定显示的数据，必须在运行的时候，根据你设置的数据来进行显示静态单元格：内容静态固定不变，设计时是什么样子，以后就是什么样子
+当一些数据一致都不会发生改变，或者一些界面不需要随着数据的不同而不同时，就用静态单元格
+静态单元格可以直接在storyBoard直接定义好，内容不需要改变的单元格。
+如何定义静态单元格打开Storyboard，在TableView的属性检">
 
 
 
@@ -116,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="http://nvar.xyz/2016/06/21/customcell/"/>
+  <link rel="canonical" href="http://nvar.xyz/2016/06/25/jtdygandyxcell/"/>
 
-  <title> 自定义Cell | vvard3n's Blog </title>
+  <title> 静态单元格和原型Cell | vvard3n's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +286,7 @@
             
             
               
-                自定义Cell
+                静态单元格和原型Cell
               
             
           </h1>
@@ -289,8 +298,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-21T08:35:34+08:00" content="2016-06-21">
-              2016-06-21
+            <time itemprop="dateCreated" datetime="2016-06-25T08:31:33+08:00" content="2016-06-25">
+              2016-06-25
             </time>
           </span>
 
@@ -319,8 +328,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/21/customcell/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/21/customcell/" itemprop="commentsCount"></span>
+                <a href="/2016/06/25/jtdygandyxcell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/25/jtdygandyxcell/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,20 +352,42 @@
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>当系统自带的三种Cell风格无法满足实际需求时，就需要自定义Cell了。下面介绍了两种基本的自定义Cell方法。<br><a id="more"></a></p>
-<h1 id="自定义Cell"><a href="#自定义Cell" class="headerlink" title="自定义Cell"></a>自定义Cell</h1><h2 id="Xib创建方式"><a href="#Xib创建方式" class="headerlink" title="Xib创建方式"></a>Xib创建方式</h2><ol>
-<li>使用可视化视图编辑器搭建Cell界面。创建时不需要选择View，直接选择空的UserInserface模板即可。  </li>
-<li>直接拖入Cell并放好所需固件。  </li>
-<li>在与类关联连线时，UIImageView等不能命名为imageView，因为Cell自身带有imageView这个属性，不能重名，否则将调用默认的属性。</li>
-<li>加载Xib文件<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此段代码可封装到Cell的Class中，添加类方法，创建Cell通过传入参数tableView，并返回cell即可</span></span><br><span class="line">MyCell *cell = [tableView <span class="string">dequeueReusableCellWithIdentifier:</span>@<span class="string">"cellID"</span>];</span><br><span class="line"><span class="keyword">if</span> (!cell) &#123;</span><br><span class="line">  cell = [[NSBundle mainBundle] <span class="string">loadNibNamed:</span>@<span class="string">"cellID"</span> <span class="string">owner:</span>nil <span class="string">options:</span>nil] lastObject];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span><br><span class="line">  设置cell</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">return</span> cell;</span><br></pre></td></tr></table></figure>
+        <a id="more"></a>
+<h1 id="静态单元格"><a href="#静态单元格" class="headerlink" title="静态单元格"></a>静态单元格</h1><p>动态单元格；无法在设计师指定显示的数据，必须在运行的时候，根据你设置的数据来进行显示<br>静态单元格：内容静态固定不变，设计时是什么样子，以后就是什么样子</p>
+<p>当一些数据一致都不会发生改变，或者一些界面不需要随着数据的不同而不同时，就用静态单元格</p>
+<p>静态单元格可以直接在storyBoard直接定义好，内容不需要改变的单元格。</p>
+<h2 id="如何定义静态单元格"><a href="#如何定义静态单元格" class="headerlink" title="如何定义静态单元格"></a>如何定义静态单元格</h2><p>打开Storyboard，在TableView的属性检查器中，选择content属性，修改为static cells</p>
+<blockquote>
+<p>静态单元格仅适用于UITableViewController</p>
+</blockquote>
+<h3 id="cell的风格"><a href="#cell的风格" class="headerlink" title="cell的风格"></a>cell的风格</h3><p><strong>custom</strong> 自定义（仅此选项可以拖控件）<br><strong>basic</strong> 图片+label<br><strong>right detial</strong> 详情文字在右，无图<br><strong>left detial</strong> 详情文字在左，无图<br><strong>subtitle</strong> 包含imageView，label，detialLabel</p>
+<p><strong>accesstory</strong> 设置右侧箭头样式<br><strong>disclosure indicator</strong> 为最常用选项（单箭头）</p>
+<h3 id="选中tableview，可在sections选择分组数量"><a href="#选中tableview，可在sections选择分组数量" class="headerlink" title="选中tableview，可在sections选择分组数量"></a>选中tableview，可在sections选择分组数量</h3><p>组头样式（style）<br><strong>plan</strong> 分组没有间隔<br><strong>group</strong> 分组有间隔  </p>
+<p>分组中选择rows可定义每组的单元格数量</p>
+<h3 id="组头修改为按钮的方式"><a href="#组头修改为按钮的方式" class="headerlink" title="组头修改为按钮的方式"></a>组头修改为按钮的方式</h3><p>使用UITableView的代理方法：<code>tableView:viewForHeaderInsection:</code>来返回一个组头。<br>此方法可以为组头返回一个UIView，那么就可以自定义组头了。由于组头实质是一个<code>UITableVIewHeaderFooterView</code>，所以需要返回一个同类型的View。  </p>
+<h3 id="重用方式："><a href="#重用方式：" class="headerlink" title="重用方式："></a>重用方式：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UIView</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView viewForHeaderInSection:(<span class="built_in">NSInteger</span>)section &#123;</span><br><span class="line">    <span class="built_in">UITableVIewHeaderFooterView</span> *header = [tableView dequeueResuableHeaderFooterViewWithIdentifier:重用ID];</span><br><span class="line">    <span class="keyword">if</span> (!header) &#123;</span><br><span class="line">      header = [<span class="built_in">UITableVIewHeaderFooterView</span> alloc] initWithResueIdentifier:重用ID];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> header;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义组头：（代码）"><a href="#自定义组头：（代码）" class="headerlink" title="自定义组头：（代码）"></a>自定义组头：（代码）</h3><ol>
+<li>新建类继承至UITableVIewHeaderFooterView</li>
+<li>重写初始化方法进行初始化，并在初始化方法中添加需要添加的控件或者属性。</li>
+<li>可以添加一个类方法快速创建对象，并重写initWithResueIdentifier:方法，方便重用和自定义。</li>
+</ol>
+<h3 id="调用自定义组头的方式："><a href="#调用自定义组头的方式：" class="headerlink" title="调用自定义组头的方式："></a>调用自定义组头的方式：</h3><p>使用自定义类新建组头即可</p>
+<h3 id="layoutSbviews方法的调用时机："><a href="#layoutSbviews方法的调用时机：" class="headerlink" title="layoutSbviews方法的调用时机："></a>layoutSbviews方法的调用时机：</h3><ol>
+<li>当加入到父控件时会被调用</li>
+<li>当控件的frame发生变化时</li>
+<li>当屏幕发生旋转时会被调用<blockquote>
+<p>需要调用[super Sbviews];方法</p>
+</blockquote>
 </li>
 </ol>
-<p>当xib被创建（被加载）时会立即调用这个方法：<br><code>-(void)awakeFromNib;</code></p>
-<p>通过重写<code>initWithStyle</code>方法，在里面添加子控件，可以满足类似微博这种多控件形式的Cell风格，通过动态添加控件实现。<br>注意：添加空间需要添加到cell的 <strong>cententView</strong> 里面，以免以后出问题。<br><code>[self.contentView addSubview];</code></p>
+<h1 id="原型Cell-Prototype-Cells"><a href="#原型Cell-Prototype-Cells" class="headerlink" title="原型Cell(Prototype Cells)"></a>原型Cell(Prototype Cells)</h1><h2 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h2><ol>
+<li>必须要提供 <strong>Identifler</strong> ，添加到属性检查器中。</li>
+<li>当需要自定义时，cell的风格必须选择 <strong>custom</strong> 。</li>
+</ol>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>使用I<code>dequeueReusableCellWithIdentifier:</code>方法获取Cell。</p>
 <blockquote>
-<p>计算label大小，可以调用NSString的方法：<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="name"><span class="builtin-name">string</span></span> boundingRectWithSize:&lt;#(<span class="name">CGSize</span>)#&gt; options:&lt;#(<span class="name">NSStringDrawingOptions</span>)#&gt; attributes:&lt;#(<span class="name">nullable</span> NSDictionary&lt;NSString *,id&gt; *)#&gt; context:&lt;#(<span class="name">nullable</span> NSStringDrawingContext *)#&gt;]<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>此方法一经调用，优先寻找缓存池中的Cell，如果没有找到，就使用原型Cell新建一个Cell。不需要判断是否为空然后重新手动生成一个。请参考以下代码。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-</span>(UITableViewCell *)<span class="selector-tag">tableView</span><span class="selector-pseudo">:(UITableView</span> *)<span class="selector-tag">tableView</span> <span class="selector-tag">cellForRowAtIndexPath</span><span class="selector-pseudo">:(NSIndexPath</span> *)<span class="selector-tag">indexPath</span>&#123;</span><br><span class="line">    return <span class="selector-attr">[tableView dequeueReusableCellWithIdentifier:@"cellReuseId"]</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="纯代码构造方式"><a href="#纯代码构造方式" class="headerlink" title="纯代码构造方式"></a>纯代码构造方式</h2><p>使用代码创建Cell，需要创建一个继承自UITableViewCell的类，通过重写构造方法和添加类方法快速创建对象（可选），即可使用代码方式创建Cell对象。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-</span> (instancetype)<span class="selector-tag">initWithStyle</span><span class="selector-pseudo">:(UITableViewCellStyle)style</span> <span class="selector-tag">reuseIdentifier</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">reuseIdentifier</span> &#123;</span><br><span class="line">    <span class="selector-tag">if</span> (self = [super <span class="attribute">initWithStyle</span>:style <span class="attribute">reuseIdentifier</span>:reuseIdentifier]) &#123;</span><br><span class="line">        <span class="comment">// 添加控件</span></span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -380,11 +411,9 @@
           
             <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/UITableVIew/" rel="tag">#UITableVIew</a>
-          
             <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
           
-            <a href="/tags/UITableVIewCell/" rel="tag">#UITableVIewCell</a>
+            <a href="/tags/UITableViewCell/" rel="tag">#UITableViewCell</a>
           
         </div>
       
@@ -393,16 +422,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/19/UITableView和UITableViewCell/" rel="next" title="UITableView和UITableViewCell的基本知识整理">
-                <i class="fa fa-chevron-left"></i> UITableView和UITableViewCell的基本知识整理
+              <a href="/2016/06/23/Notification/" rel="next" title="NSNotificationCenter和NSNotification">
+                <i class="fa fa-chevron-left"></i> NSNotificationCenter和NSNotification
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/21/UITableViewController/" rel="prev" title="UITableViewController">
-                UITableViewController <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/26/autolayout/" rel="prev" title="Auto Layout(自动布局)">
+                Auto Layout(自动布局) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -569,7 +598,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义Cell"><span class="nav-number">2.</span> <span class="nav-text">自定义Cell</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xib创建方式"><span class="nav-number">2.1.</span> <span class="nav-text">Xib创建方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#纯代码构造方式"><span class="nav-number">2.2.</span> <span class="nav-text">纯代码构造方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#静态单元格"><span class="nav-number">1.</span> <span class="nav-text">静态单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何定义静态单元格"><span class="nav-number">1.1.</span> <span class="nav-text">如何定义静态单元格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cell的风格"><span class="nav-number">1.1.1.</span> <span class="nav-text">cell的风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选中tableview，可在sections选择分组数量"><span class="nav-number">1.1.2.</span> <span class="nav-text">选中tableview，可在sections选择分组数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组头修改为按钮的方式"><span class="nav-number">1.1.3.</span> <span class="nav-text">组头修改为按钮的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重用方式："><span class="nav-number">1.1.4.</span> <span class="nav-text">重用方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义组头：（代码）"><span class="nav-number">1.1.5.</span> <span class="nav-text">自定义组头：（代码）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用自定义组头的方式："><span class="nav-number">1.1.6.</span> <span class="nav-text">调用自定义组头的方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#layoutSbviews方法的调用时机："><span class="nav-number">1.1.7.</span> <span class="nav-text">layoutSbviews方法的调用时机：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型Cell-Prototype-Cells"><span class="nav-number">2.</span> <span class="nav-text">原型Cell(Prototype Cells)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用注意事项"><span class="nav-number">2.1.</span> <span class="nav-text">使用注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方式"><span class="nav-number">2.2.</span> <span class="nav-text">使用方式</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -689,9 +718,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'vvard3nsblog';
-      var disqus_identifier = '2016/06/21/customcell/';
-      var disqus_title = "自定义Cell";
-      var disqus_url = 'http://nvar.xyz/2016/06/21/customcell/';
+      var disqus_identifier = '2016/06/25/jtdygandyxcell/';
+      var disqus_title = "静态单元格和原型Cell";
+      var disqus_url = 'http://nvar.xyz/2016/06/25/jtdygandyxcell/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

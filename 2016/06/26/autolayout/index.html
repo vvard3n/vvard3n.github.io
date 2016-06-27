@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS,autolayout,自动布局," />
 
 
 
@@ -86,15 +86,16 @@
 
 
 
-<meta name="description" content="「Stay hungry. Stay foolish.」">
-<meta property="og:type" content="website">
-<meta property="og:title" content="vvard3n's Blog">
-<meta property="og:url" content="http://nvar.xyz/tags/googleapis/index.html">
+<meta name="description" content="本文整理中本文整理中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Auto Layout(自动布局)">
+<meta property="og:url" content="http://nvar.xyz/2016/06/26/autolayout/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
-<meta property="og:description" content="「Stay hungry. Stay foolish.」">
+<meta property="og:description" content="本文整理中本文整理中">
+<meta property="og:updated_time" content="2016-06-27T06:51:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vvard3n's Blog">
-<meta name="twitter:description" content="「Stay hungry. Stay foolish.」">
+<meta name="twitter:title" content="Auto Layout(自动布局)">
+<meta name="twitter:description" content="本文整理中本文整理中">
 
 
 
@@ -115,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="http://nvar.xyz/tags/googleapis/"/>
+  <link rel="canonical" href="http://nvar.xyz/2016/06/26/autolayout/"/>
 
-  <title> 标签: googleapis | vvard3n's Blog </title>
+  <title> Auto Layout(自动布局) | vvard3n's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +158,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,46 +256,195 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        googleapis
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Auto Layout(自动布局)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-26T08:45:42+08:00" content="2016-06-26">
+              2016-06-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/26/autolayout/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/26/autolayout/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="本文整理中"><a href="#本文整理中" class="headerlink" title="本文整理中"></a>本文整理中</h1><p>本文整理中<br><a id="more"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h1 id="autoresize"><a href="#autoresize" class="headerlink" title="autoresize"></a>autoresize</h1><h2 id="autoresize的使用"><a href="#autoresize的使用" class="headerlink" title="autoresize的使用"></a>autoresize的使用</h2><h2 id="autoresize的弊端"><a href="#autoresize的弊端" class="headerlink" title="autoresize的弊端"></a>autoresize的弊端</h2><h1 id="autolayout"><a href="#autolayout" class="headerlink" title="autolayout"></a>autolayout</h1><p>constrain to margins默认间距20<br>update frame根据约束更新frame<br>update constraints根据当前frame更新约束</p>
+<p>核心公式<br>first item:第一个控件<br>relation 关系<br>second item参照的控件<br>multiplier乘数<br>constant常数</p>
+<p>first item的属性 relation (==、&gt;=、&lt;=) second item ) * multiplier + constant</p>
+<p>代码添加约束：<br>添加约束的规则<br>在创建约束之后，需要将其添加到作用的View上<br>利用NSLayoutCOnstraint类创建具体的约束对象<br>addConstraint<br>addConstraints:<br>代码实现AutoLayout的注意点<br>先禁止Autoresize功能<br>view.translatesAutoresizingMaskIntoConstraints = NO;</p>
+<p>VFL可视化语言<br>可以等于，但不支持运算</p>
+<p>三方框架 丹麦 masonry</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2015/01/30/g2ogleapis/" itemprop="url">
-              
-                <span itemprop="name">修改网站google字体地址，加速访问速度</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-01-30T15:25:55+08:00"
-              content="2015-01-30" >
-          01-30
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/autolayout/" rel="tag">#autolayout</a>
+          
+            <a href="/tags/自动布局/" rel="tag">#自动布局</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/25/jtdygandyxcell/" rel="next" title="静态单元格和原型Cell">
+                <i class="fa fa-chevron-left"></i> 静态单元格和原型Cell
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -302,6 +452,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -321,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -379,6 +549,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本文整理中"><span class="nav-number">1.</span> <span class="nav-text">本文整理中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#autoresize"><span class="nav-number">3.</span> <span class="nav-text">autoresize</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#autoresize的使用"><span class="nav-number">3.1.</span> <span class="nav-text">autoresize的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#autoresize的弊端"><span class="nav-number">3.2.</span> <span class="nav-text">autoresize的弊端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#autolayout"><span class="nav-number">4.</span> <span class="nav-text">autolayout</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -475,6 +656,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -491,9 +676,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'vvard3nsblog';
-      var disqus_identifier = 'tags/googleapis/index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2016/06/26/autolayout/';
+      var disqus_title = "Auto Layout(自动布局)";
+      var disqus_url = 'http://nvar.xyz/2016/06/26/autolayout/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -504,6 +689,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   

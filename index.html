@@ -279,6 +279,283 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/26/autolayout/" itemprop="url">
+                  Auto Layout(自动布局)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-26T08:45:42+08:00" content="2016-06-26">
+              2016-06-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/26/autolayout/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/26/autolayout/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="本文整理中"><a href="#本文整理中" class="headerlink" title="本文整理中"></a>本文整理中</h1><p>本文整理中<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/26/autolayout/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/25/jtdygandyxcell/" itemprop="url">
+                  静态单元格和原型Cell
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-25T08:31:33+08:00" content="2016-06-25">
+              2016-06-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/25/jtdygandyxcell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/25/jtdygandyxcell/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="静态单元格"><a href="#静态单元格" class="headerlink" title="静态单元格"></a>静态单元格</h1><p>动态单元格；无法在设计师指定显示的数据，必须在运行的时候，根据你设置的数据来进行显示<br>静态单元格：内容静态固定不变，设计时是什么样子，以后就是什么样子</p>
+<p>当一些数据一致都不会发生改变，或者一些界面不需要随着数据的不同而不同时，就用静态单元格</p>
+<p>静态单元格可以直接在storyBoard直接定义好，内容不需要改变的单元格。</p>
+<h2 id="如何定义静态单元格"><a href="#如何定义静态单元格" class="headerlink" title="如何定义静态单元格"></a>如何定义静态单元格</h2><p>打开Storyboard，在TableView的属性检查器中，选择content属性，修改为static cells</p>
+<blockquote>
+<p>静态单元格仅适用于UITableViewController</p>
+</blockquote>
+<h3 id="cell的风格"><a href="#cell的风格" class="headerlink" title="cell的风格"></a>cell的风格</h3><p><strong>custom</strong> 自定义（仅此选项可以拖控件）<br><strong>basic</strong> 图片+label<br><strong>right detial</strong> 详情文字在右，无图<br><strong>left detial</strong> 详情文字在左，无图<br><strong>subtitle</strong> 包含imageView，label，detialLabel</p>
+<p><strong>accesstory</strong> 设置右侧箭头样式<br><strong>disclosure indicator</strong> 为最常用选项（单箭头）</p>
+<h3 id="选中tableview，可在sections选择分组数量"><a href="#选中tableview，可在sections选择分组数量" class="headerlink" title="选中tableview，可在sections选择分组数量"></a>选中tableview，可在sections选择分组数量</h3><p>组头样式（style）<br><strong>plan</strong> 分组没有间隔<br><strong>group</strong> 分组有间隔  </p>
+<p>分组中选择rows可定义每组的单元格数量</p>
+<h3 id="组头修改为按钮的方式"><a href="#组头修改为按钮的方式" class="headerlink" title="组头修改为按钮的方式"></a>组头修改为按钮的方式</h3><p>使用UITableView的代理方法：<code>tableView:viewForHeaderInsection:</code>来返回一个组头。<br>此方法可以为组头返回一个UIView，那么就可以自定义组头了。由于组头实质是一个<code>UITableVIewHeaderFooterView</code>，所以需要返回一个同类型的View。  </p>
+<h3 id="重用方式："><a href="#重用方式：" class="headerlink" title="重用方式："></a>重用方式：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="built_in">UIView</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView viewForHeaderInSection:(<span class="built_in">NSInteger</span>)section &#123;</span><br><span class="line">    <span class="built_in">UITableVIewHeaderFooterView</span> *header = [tableView dequeueResuableHeaderFooterViewWithIdentifier:重用ID];</span><br><span class="line">    <span class="keyword">if</span> (!header) &#123;</span><br><span class="line">      header = [<span class="built_in">UITableVIewHeaderFooterView</span> alloc] initWithResueIdentifier:重用ID];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> header;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义组头：（代码）"><a href="#自定义组头：（代码）" class="headerlink" title="自定义组头：（代码）"></a>自定义组头：（代码）</h3><ol>
+<li>新建类继承至UITableVIewHeaderFooterView</li>
+<li>重写初始化方法进行初始化，并在初始化方法中添加需要添加的控件或者属性。</li>
+<li>可以添加一个类方法快速创建对象，并重写initWithResueIdentifier:方法，方便重用和自定义。</li>
+</ol>
+<h3 id="调用自定义组头的方式："><a href="#调用自定义组头的方式：" class="headerlink" title="调用自定义组头的方式："></a>调用自定义组头的方式：</h3><p>使用自定义类新建组头即可</p>
+<h3 id="layoutSbviews方法的调用时机："><a href="#layoutSbviews方法的调用时机：" class="headerlink" title="layoutSbviews方法的调用时机："></a>layoutSbviews方法的调用时机：</h3><ol>
+<li>当加入到父控件时会被调用</li>
+<li>当控件的frame发生变化时</li>
+<li>当屏幕发生旋转时会被调用<blockquote>
+<p>需要调用[super Sbviews];方法</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="原型Cell-Prototype-Cells"><a href="#原型Cell-Prototype-Cells" class="headerlink" title="原型Cell(Prototype Cells)"></a>原型Cell(Prototype Cells)</h1><h2 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h2><ol>
+<li>必须要提供 <strong>Identifler</strong> ，添加到属性检查器中。</li>
+<li>当需要自定义时，cell的风格必须选择 <strong>custom</strong> 。</li>
+</ol>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>使用I<code>dequeueReusableCellWithIdentifier:</code>方法获取Cell。</p>
+<blockquote>
+<p>此方法一经调用，优先寻找缓存池中的Cell，如果没有找到，就使用原型Cell新建一个Cell。不需要判断是否为空然后重新手动生成一个。请参考以下代码。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-</span>(UITableViewCell *)<span class="selector-tag">tableView</span><span class="selector-pseudo">:(UITableView</span> *)<span class="selector-tag">tableView</span> <span class="selector-tag">cellForRowAtIndexPath</span><span class="selector-pseudo">:(NSIndexPath</span> *)<span class="selector-tag">indexPath</span>&#123;</span><br><span class="line">    return <span class="selector-attr">[tableView dequeueReusableCellWithIdentifier:@"cellReuseId"]</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/23/Notification/" itemprop="url">
                   NSNotificationCenter和NSNotification
                 </a>
@@ -1235,255 +1512,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/01/binarysearch/" itemprop="url">
-                  二分法查找
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-01T00:13:01+08:00" content="2014-11-01">
-              2014-11-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/11/01/binarysearch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/01/binarysearch/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li><strong>优点</strong>：高效  </li>
-<li><strong>缺点</strong>：仅适用于有序数列  </li>
-<li><strong>时间复杂度</strong>：O(log2n)</li>
-</ul>
-<p>点击标题查看代码<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/01/binarysearch/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/08/24/nbyz/" itemprop="url">
-                  年宝玉则－郎木寺－花湖9日之旅[100P+，慎入！多图杀猫]
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-08-24T23:37:32+08:00" content="2014-08-24">
-              2014-08-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/08/24/nbyz/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/24/nbyz/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本人文笔不好，各位看官主要看图就行，谢谢捧场。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/24/nbyz/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1529,7 +1557,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1546,7 +1574,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
