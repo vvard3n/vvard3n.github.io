@@ -1,0 +1,814 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,UICollectionView," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="UICollectionView是苹果自iOS 6推出的非常常用的一个俗称九宫格的控件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UICollectionView">
+<meta property="og:url" content="http://nvar.xyz/2016/06/28/UICollectionView/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="UICollectionView是苹果自iOS 6推出的非常常用的一个俗称九宫格的控件。">
+<meta property="og:updated_time" content="2016-06-28T13:46:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UICollectionView">
+<meta name="twitter:description" content="UICollectionView是苹果自iOS 6推出的非常常用的一个俗称九宫格的控件。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2016/06/28/UICollectionView/"/>
+
+  <title> UICollectionView | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-51513222-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f7d05de4c415460201cbf2d7d4ac9cff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                UICollectionView
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T18:45:42+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/28/UICollectionView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/28/UICollectionView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>UICollectionView是苹果自iOS 6推出的非常常用的一个俗称九宫格的控件。<br><a id="more"></a></p>
+<h1 id="UICollectionView简介"><a href="#UICollectionView简介" class="headerlink" title="UICollectionView简介"></a>UICollectionView简介</h1><p>UICollectionView在iOS6中推出得，也是UIKit视图类中的一颗新星。它和UITableView共享API设计，但也在UITableView上做了一些扩展。UICollectionView最强大、同时显著超出UITableView的特色就是其 <strong>完全灵活的布局结构</strong>。<br>UITableView和UICollectionView都是由 <strong>dataSoure</strong> 和 <strong>delegate</strong> 驱动的。他们为其显示的子视图集扮演为愚蠢的 <strong>容器</strong>，对他们真实的内容毫不知情。</p>
+<h1 id="UICollectionViewFlowLayout简介"><a href="#UICollectionViewFlowLayout简介" class="headerlink" title="UICollectionViewFlowLayout简介"></a>UICollectionViewFlowLayout简介</h1><p>UICollectionView相比UITableVIew进一步抽象了。它将其子视图的位置，大小和外观的控制权委托给一个单独的布局对象。通过提供一个自定义布局对象，你几乎可以实现任何你能想象到的布局。UICollectionViewLayout是一个抽象基类，具体起作用的是他的子类，所以UICollectionView的布局对象只能传入一个UICollectionViewLayout的子类对象。iOS 6中以UICollectionViewFlowLayout类的形式提出了一个具体的布局实现。<br>Flow layout可以被用来实现一个标准的Grid view，这可能是在Collection view中最常见的使用案例了。尽管大多数人都这么想，但是Apple很聪明，没有明确的命名这个类为UICollectionViewGridLayout。而使用了更为通用的术语Flow layout，这更好的描述了该类的能力：它通过一个接一个的放置cell来建立自己的布局，当需要的时候，插入横排或竖排的分栏符。通过自定义滚动方向，大小和cell之间的间距，Flow layout也可以在单行或单列中布局cell。</p>
+<h1 id="如何展示数据"><a href="#如何展示数据" class="headerlink" title="如何展示数据"></a>如何展示数据</h1><ul>
+<li>UICollectionView需要layout和数据源(dataSource) 来显示数据,</li>
+<li>UICollecitonView会向数据源查询一共有多少行数据以及每一个显示什么数据等,在查询每一个显示什么数据前要确定设置了layout而且itemSize不能小于{0，0}</li>
+<li>没有设置layout布局对象程序会崩溃</li>
+<li>没有设置数据源和布局对象的UICollectionView只是个空壳</li>
+<li>凡是遵守UITableViewDataSource协议的OC对象，都可以是UICollectionView的数据源</li>
+</ul>
+<h2 id="UICollectionView常用数据源方法"><a href="#UICollectionView常用数据源方法" class="headerlink" title="UICollectionView常用数据源方法"></a>UICollectionView常用数据源方法</h2><ol>
+<li><p>调用数据源的下面方法得知一共有多少组数据</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(NSInteger)</span>numberOfSectionsInCollectionView:<span class="params">(UICollectionView *)</span>collectionView;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用数据源的下面方法得知每一组有多少项数据</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(NSInteger)</span>collectionView:<span class="params">(UICollectionView *)</span>collectionView numberOfItemsInSection:<span class="params">(NSInteger)</span>section;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用数据源的下面方法得知每一项显示什么内容</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(UICollectionViewCell *)</span>collectionView:<span class="params">(UICollectionView *)</span> collectionView cellForItemAtIndexPath:<span class="params">(NSIndexPath *)</span>indexPath;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>UICollectionView的数据源必须实现第二个方法和第三个方法,第一个方法不实现默认就是1组</p>
+</blockquote>
+<h2 id="UICollectionView的常见属性"><a href="#UICollectionView的常见属性" class="headerlink" title="UICollectionView的常见属性"></a>UICollectionView的常见属性</h2><ol>
+<li><p>布局对象</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">UICollectionViewLayout</span> *collectionViewLayout;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>背景视图,会自动填充整个UICollectionView</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">UIView</span> *backgroundView;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>是否允许选中cell 默认允许选中</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) BOOL allowsSelection;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>是否可以多选 默认只是单选</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) BOOL allowsMultipleSelection;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="UICollectionViewFlowLayout常用属性"><a href="#UICollectionViewFlowLayout常用属性" class="headerlink" title="UICollectionViewFlowLayout常用属性"></a>UICollectionViewFlowLayout常用属性</h2><ol>
+<li><p>cell之间的最小行间距</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGFloat minimumLineSpacing;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cell之间的最小列间距</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGFloat minimumInteritemSpacing;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cell的尺寸</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGSize itemSize;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cell的预估尺寸</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGSize estimatedItemSize;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UICollectionView的滚动方向,默认是垂直滚动</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) UICollectionViewScrollDirection scrollDirection;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HeaderView的尺寸</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGSize headerReferenceSize;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>FooterView的尺寸</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) CGSize footerReferenceSize;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分区的四边距    </p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) UIEdgeInsets sectionInset;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置是否当元素超出屏幕之后固定页眉视图位置，默认NO</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) BOOL sectionHeadersPinToVisibleBounds;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置是否当元素超出屏幕之后固定页脚视图位置，默认NO</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(nonatomic) BOOL sectionFootersPinToVisibleBounds</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="自定义布局的常用方法"><a href="#自定义布局的常用方法" class="headerlink" title="自定义布局的常用方法"></a>自定义布局的常用方法</h2><ol>
+<li><p>UICollectionView将要显示时准备布局,每当布局更新时,调用该方法做布局前的准备</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="name">void</span>)prepareLayout<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建指定索引的cell的布局属性</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="name">UICollectionViewLayoutAttributes</span> *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPat<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回UICollectionView内所有的控件的布局属性</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(NSArray *)</span>layoutAttributesForElementsInRect:<span class="params">(CGRect)</span>rect;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义布局时一定要实现此方法来返回UICollectionView的contentSize,内容尺寸,UICollectionView的滚动范围</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="name">CGSize</span>)collectionViewContentSize<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="cell必须使用以下方法来创建："><a href="#cell必须使用以下方法来创建：" class="headerlink" title="cell必须使用以下方法来创建："></a>cell必须使用以下方法来创建：</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[collectionView <span class="string">dequeueReusableCellWithReuseIdentifier:</span>rid <span class="string">forIndexPath:</span>indexPath];</span><br></pre></td></tr></table></figure>
+<p>UICollectionView在创建时，必须要传入布局对象，否则要报错  </p>
+<blockquote>
+<p>注意：这个布局对象，不能是UICollectionViewLayout，而只能是它的子类比如：UICollectionViewFlowLayout</p>
+</blockquote>
+<p>必须提前注册Cell：</p>
+<ol>
+<li>注册一个nib</li>
+<li>注册一个Class</li>
+<li>使用一个原型Cell来注册<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[collectionView registClass:[UICollectionViewCell <span class="class"><span class="keyword">class</span>] <span class="title">forCellWithReuseIdentifier</span>:<span class="type">rid];</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>UICollectionViewLayout对象用于控制所有外观属性。</p>
+<blockquote>
+<p>UICollectionView中组与组之间是没有间距的，也无法设置组与组之间的间距<br>只能通过设置组的组内间距来达到组和组之间看起来有间距的效果</p>
+</blockquote>
+<h1 id="瀑布流"><a href="#瀑布流" class="headerlink" title="瀑布流"></a>瀑布流</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>瀑布流，又称瀑布式布局。是比较流行的一种 <strong>网站页面布局</strong>，视觉表现为参差不齐的多栏布局，随着页面滚动条向下滚动，这种布局还 <strong>会不断加载数据块并附加至当前尾部</strong>。最早采用此布局的网站是Pinterest，逐渐在国内流行开来。国内大多数清新站基本为这类风格</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p><strong>琳琅满目</strong>：整版以图片为主，大小不一的图片按照一定的规律排列<br><strong>唯美</strong>：图片的风格以唯美的图片为主<br><strong>操作简单</strong>：在浏览网站的时候只需要轻轻滑动一下鼠标滚轮，一切的美妙的图片精彩便可呈现在你面前  </p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>瀑布流对于图片的展现，是高效而具有吸引力的，用户一眼扫过的快速阅读模式可以在短时间内获得更多的信息量，而瀑布流里 <strong>懒加载模式</strong> 又避免了用户鼠标点击的翻页操作<br>瀑布流的主要特性便是错落有致，<strong>定宽而不定高的设计</strong> 让页面区别于传统的矩阵式图片布局模式，巧妙的利用视觉层级，视线的任意流动又缓解了视觉疲劳</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><strong>有效的降低了界面复杂度，节省了空间</strong>：我们不再需要臃肿复杂的页码导航链接或按钮了  </li>
+<li><strong>对触屏设备来说，交互方式更符合直觉</strong>：在移动应用的交互环境当中，通过向上滑动进行滚屏的操作已经成为最基本的用户习惯，而且所需要的操作精准程度远远低于点击链接或按钮</li>
+<li><strong>更高的参与度</strong>：以上两点所带来的交互便捷性可以使用户将注意力更多的集中在内容而不是操作上，从而让他们更乐于沉浸在探索与浏览当中<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li><strong>有限的用例</strong>：无限滚动的方式只适用于某些特定类型产品当中一部分特定类型的内容</li>
+<li><strong>额外的复杂度</strong></li>
+<li>再见了，<strong>页脚</strong></li>
+<li><strong>SEO</strong>：集中在一页当中动态加载数据，不利于SEO，对于网站而言，存在一定的风险</li>
+<li><strong>页面的数量</strong>：如果网站需要通过更多的内容页面展示更多的相关信息(包括广告)是很重要的策略，那么单页无限滚动的方式就不适用了</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/UICollectionView/" rel="tag">#UICollectionView</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/26/autolayout/" rel="next" title="Auto Layout(自动布局)">
+                <i class="fa fa-chevron-left"></i> Auto Layout(自动布局)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UICollectionView简介"><span class="nav-number">1.</span> <span class="nav-text">UICollectionView简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UICollectionViewFlowLayout简介"><span class="nav-number">2.</span> <span class="nav-text">UICollectionViewFlowLayout简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何展示数据"><span class="nav-number">3.</span> <span class="nav-text">如何展示数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView常用数据源方法"><span class="nav-number">3.1.</span> <span class="nav-text">UICollectionView常用数据源方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView的常见属性"><span class="nav-number">3.2.</span> <span class="nav-text">UICollectionView的常见属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionViewFlowLayout常用属性"><span class="nav-number">3.3.</span> <span class="nav-text">UICollectionViewFlowLayout常用属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义布局的常用方法"><span class="nav-number">3.4.</span> <span class="nav-text">自定义布局的常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell必须使用以下方法来创建："><span class="nav-number">3.5.</span> <span class="nav-text">cell必须使用以下方法来创建：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#瀑布流"><span class="nav-number">4.</span> <span class="nav-text">瀑布流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">4.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">4.3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">4.4.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">4.4.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">4.4.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vvard3nsblog';
+      var disqus_identifier = '2016/06/28/UICollectionView/';
+      var disqus_title = "UICollectionView";
+      var disqus_url = 'http://nvar.xyz/2016/06/28/UICollectionView/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

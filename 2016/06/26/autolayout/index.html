@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="本文主要介绍了AutoLayout的相关知识。">
+<meta name="description" content="本文主要介绍了AutoLayout的相关知识。本文整理中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Auto Layout(自动布局)">
 <meta property="og:url" content="http://nvar.xyz/2016/06/26/autolayout/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
-<meta property="og:description" content="本文主要介绍了AutoLayout的相关知识。">
+<meta property="og:description" content="本文主要介绍了AutoLayout的相关知识。本文整理中">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79gw1f5a0h4a079j30ta0migqo">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79gw1f5a0iajo5nj30xc0niq7l">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79gw1f5a0iuad6bj30tm0kiq6v">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79gw1f5a0j9x495j30vi0hs0vd">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79gw1f5a0ju95vdj30s00fu76c">
-<meta property="og:updated_time" content="2016-06-27T11:38:42.000Z">
+<meta property="og:updated_time" content="2016-06-28T00:57:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Auto Layout(自动布局)">
-<meta name="twitter:description" content="本文主要介绍了AutoLayout的相关知识。">
+<meta name="twitter:description" content="本文主要介绍了AutoLayout的相关知识。本文整理中">
 <meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006tNc79gw1f5a0h4a079j30ta0migqo">
 
 
@@ -349,7 +349,7 @@
       
 
       
-        <p>本文主要介绍了AutoLayout的相关知识。<br><a id="more"></a></p>
+        <p>本文主要介绍了AutoLayout的相关知识。本文整理中<br><a id="more"></a></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="屏幕适配的发展"><a href="#屏幕适配的发展" class="headerlink" title="屏幕适配的发展"></a>屏幕适配的发展</h2><h3 id="直接使用-frame-计算控件的位置、大小-MagicNumber"><a href="#直接使用-frame-计算控件的位置、大小-MagicNumber" class="headerlink" title="直接使用 frame 计算控件的位置、大小(MagicNumber)"></a>直接使用 frame 计算控件的位置、大小(MagicNumber)</h3><p>iPhone3GS \ iPhone4 \ iPhone4S 屏幕的物理尺寸是一样的(无需屏幕适配), 而且一个当时的应用要么是横屏要么是竖屏, 不存在能同时进行横竖屏切换的应用</p>
 <h3 id="使用-Autoresizing进行屏幕适配（设置显示规则，只能按照父控件来设置参照）"><a href="#使用-Autoresizing进行屏幕适配（设置显示规则，只能按照父控件来设置参照）" class="headerlink" title="使用 Autoresizing进行屏幕适配（设置显示规则，只能按照父控件来设置参照）"></a>使用 Autoresizing进行屏幕适配（设置显示规则，只能按照父控件来设置参照）</h3><p>随着iPad 的发布, 屏幕物理大小发生了变化, 并且要求部分应用程序实现横竖屏切换，所以不能把控件的 frame 都写死了，需要进行屏幕适配。<br>Autoresizing的核心思想就是：参照父容器来设置子控件的 frame。不再写死 frame, 而是参照。<br>举例: 在竖屏下有一个按钮要占据整个屏幕宽度, 当切换到横屏下以后同样要占据整个屏幕的宽度<br>注意: Autoresizing只能设置当前控件与父控件之间的相对关系</p>
 <h3 id="使用-Auto-Layout（从-iOS6开始-Xcode4-5）进行屏幕适配"><a href="#使用-Auto-Layout（从-iOS6开始-Xcode4-5）进行屏幕适配" class="headerlink" title="使用 Auto Layout（从 iOS6开始,Xcode4.5）进行屏幕适配"></a>使用 Auto Layout（从 iOS6开始,Xcode4.5）进行屏幕适配</h3><p>随着 iPhone5 \ iPhone5s 等的发布苹果设备不同尺寸的屏幕变得越来越多, 不仅要求能根据控件父子关系来设置相对位置, 也要求能根据”任意”控件之间的关系来设置位置<br>因为 Autoresizing只能设置当前控件与父控件之间的相对关系, 当遇到要设置兄弟控件之间的关系的时候 Autoresizing就无能为力了<br>举例: 在竖屏下, 屏幕底部有两个按钮, 这两个按钮的间距为一个固定的值(宽度不指定); 当切换为横屏的时候要求这两个按钮还显示在屏幕底部, 并且按钮间的间距不变, 按钮可以随之变宽。</p>
@@ -465,6 +465,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/06/28/UICollectionView/" rel="prev" title="UICollectionView">
+                UICollectionView <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -576,7 +580,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -593,7 +597,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
