@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="googleapis,fonts,博客加速," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,19 +86,16 @@
 
 
 
-<meta name="description" content="生存在我朝的新老程序员在搭建自己的网站，使用模板或者一些特殊情况的时候，有时候会遇到网页加载缓慢的情况，F12会发现，是由于某墙的关系，谷歌的服务被屏蔽了。目前我想到的解决方案有两个以下做一个记录，以后经常会用到。
-1.镜像源加速2.本地加载">
+<meta name="description" content="当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修改网站google字体地址，加速访问速度">
-<meta property="og:url" content="http://nvar.xyz/2015/01/30/g2ogleapis/index.html">
+<meta property="og:title" content="控制器的创建">
+<meta property="og:url" content="http://nvar.xyz/2016/07/04/控制器的创建/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
-<meta property="og:description" content="生存在我朝的新老程序员在搭建自己的网站，使用模板或者一些特殊情况的时候，有时候会遇到网页加载缓慢的情况，F12会发现，是由于某墙的关系，谷歌的服务被屏蔽了。目前我想到的解决方案有两个以下做一个记录，以后经常会用到。
-1.镜像源加速2.本地加载">
-<meta property="og:updated_time" content="2016-06-21T00:52:47.000Z">
+<meta property="og:description" content="当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。">
+<meta property="og:updated_time" content="2016-07-04T13:19:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修改网站google字体地址，加速访问速度">
-<meta name="twitter:description" content="生存在我朝的新老程序员在搭建自己的网站，使用模板或者一些特殊情况的时候，有时候会遇到网页加载缓慢的情况，F12会发现，是由于某墙的关系，谷歌的服务被屏蔽了。目前我想到的解决方案有两个以下做一个记录，以后经常会用到。
-1.镜像源加速2.本地加载">
+<meta name="twitter:title" content="控制器的创建">
+<meta name="twitter:description" content="当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。">
 
 
 
@@ -119,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="http://nvar.xyz/2015/01/30/g2ogleapis/"/>
+  <link rel="canonical" href="http://nvar.xyz/2016/07/04/控制器的创建/"/>
 
-  <title> 修改网站google字体地址，加速访问速度 | vvard3n's Blog </title>
+  <title> 控制器的创建 | vvard3n's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +277,7 @@
             
             
               
-                修改网站google字体地址，加速访问速度
+                控制器的创建
               
             
           </h1>
@@ -292,38 +289,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-30T15:25:55+08:00" content="2015-01-30">
-              2015-01-30
+            <time itemprop="dateCreated" datetime="2016-07-04T21:07:04+08:00" content="2016-07-04">
+              2016-07-04
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Blog/" itemprop="url" rel="index">
-                    <span itemprop="name">Blog</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/01/30/g2ogleapis/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/01/30/g2ogleapis/" itemprop="commentsCount"></span>
+                <a href="/2016/07/04/控制器的创建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/04/控制器的创建/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,19 +324,13 @@
       
 
       
-        <p>生存在我朝的新老程序员在搭建自己的网站，使用模板或者一些特殊情况的时候，有时候会遇到网页加载缓慢的情况，F12会发现，是由于某墙的关系，谷歌的服务被屏蔽了。<br>目前我想到的解决方案有两个以下做一个记录，以后经常会用到。</p>
-<p>1.镜像源加速<br>2.本地加载  </p>
-<a id="more"></a>
-<hr>
-<h1 id="镜像加速"><a href="#镜像加速" class="headerlink" title="镜像加速"></a>镜像加速</h1><p>若要节省服务器硬盘空间，镜像源加速是很好的方法：<br>找到<br><code>http://fonts.googleapis.com/css?family=...</code><br>修改<br><code>googleapis</code>为<code>useso</code>即可。  </p>
+        <p>当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。<br><a id="more"></a></p>
+<h1 id="直接alloc-init创建"><a href="#直接alloc-init创建" class="headerlink" title="直接alloc init创建"></a>直接alloc init创建</h1><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.window = <span class="comment">[<span class="comment">[UIWindow alloc]</span> initWithFrame:<span class="comment">[UIScreen mainScreen]</span>.bounds]</span>;</span><br><span class="line">ViewController *vc = <span class="comment">[<span class="comment">[ViewController alloc]</span> init]</span>;</span><br><span class="line">self.window.rootViewController = vc;</span><br><span class="line"><span class="comment">[self.window makeKeyAndVisible]</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="通过Storyboard创建"><a href="#通过Storyboard创建" class="headerlink" title="通过Storyboard创建"></a>通过Storyboard创建</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.window = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen].bounds];</span><br><span class="line"><span class="built_in">UIStoryboard</span> *sb = [<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"myStoryBoard"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Initial View Controller</span></span><br><span class="line"><span class="built_in">UIViewController</span> *vc = [sb instantiateInitialViewController];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Identifier</span></span><br><span class="line"><span class="comment">//UIViewController *vc1 = [sb instantiateViewControllerWithIdentifier:@"viewId"];</span></span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = vc <span class="comment">/* or vc1 */</span>;</span><br><span class="line">[<span class="keyword">self</span>.window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
+<h1 id="通过Xib创建"><a href="#通过Xib创建" class="headerlink" title="通过Xib创建"></a>通过Xib创建</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.window = [<span class="built_in">UIWindow</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen].bounds;</span><br><span class="line"><span class="comment">//这里bundel传入nil的话，系统会默认使用mainbundel</span></span><br><span class="line">ViewController *vc = [[ViewController alloc] initWithNibName:<span class="string">@"nibName"</span> bundel:<span class="literal">nil</span>];</span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = vc;</span><br><span class="line">[<span class="keyword">self</span>.window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
+<p>这里需要注意，如果没有指定xib的名称,xib文件和类文件同名的话，可以直接使用类名alloc init，如：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ViewController *vc = <span class="comment">[<span class="comment">[ViewController alloc]</span> init]</span>;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>本服务由360网站卫士提供，若没有洁癖的话，可以使用。<br>优点就是只需修改一个单词，方便快捷。<br>详见：libs.useso.com</p>
-</blockquote>
-<hr>
-<h1 id="本地加载"><a href="#本地加载" class="headerlink" title="本地加载"></a>本地加载</h1><p>本地加载这个方法很简单，找个途径下载下来，存放到本地路径，然后把<br><code>http://fonts.googleapis.com/css?family=...</code><br>这个网络路径改为本地路径即可。  </p>
-<hr>
-<blockquote>
-<p>编者注：<br>只需修改googleapis，链接后面的内容不需要修改，我上面的”…”只是省略了后面的内容而已。</p>
+<p>若使用此方法，编译器会优先查找ViewController.xib，如果没找到的话，则会查找View.xib，同名优先，否则名字带Controller的优先</p>
 </blockquote>
 
       
@@ -379,32 +351,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/googleapis/" rel="tag">#googleapis</a>
-          
-            <a href="/tags/fonts/" rel="tag">#fonts</a>
-          
-            <a href="/tags/博客加速/" rel="tag">#博客加速</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/11/03/uitableviewanduitableviewcontroller/" rel="next" title="UITableView and UITableViewController">
-                <i class="fa fa-chevron-left"></i> UITableView and UITableViewController
+              <a href="/2016/07/04/UIApplicationDelegate/" rel="next" title="iOS程序生命周期">
+                <i class="fa fa-chevron-left"></i> iOS程序生命周期
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/19/UITableView和UITableViewCell/" rel="prev" title="UITableView和UITableViewCell的基本知识整理">
-                UITableView和UITableViewCell的基本知识整理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -570,7 +528,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#镜像加速"><span class="nav-number">1.</span> <span class="nav-text">镜像加速</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地加载"><span class="nav-number">2.</span> <span class="nav-text">本地加载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#直接alloc-init创建"><span class="nav-number">1.</span> <span class="nav-text">直接alloc init创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过Storyboard创建"><span class="nav-number">2.</span> <span class="nav-text">通过Storyboard创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过Xib创建"><span class="nav-number">3.</span> <span class="nav-text">通过Xib创建</span></a></li></ol></div>
             
           </div>
         </section>
@@ -690,9 +648,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'vvard3nsblog';
-      var disqus_identifier = '2015/01/30/g2ogleapis/';
-      var disqus_title = "修改网站google字体地址，加速访问速度";
-      var disqus_url = 'http://nvar.xyz/2015/01/30/g2ogleapis/';
+      var disqus_identifier = '2016/07/04/控制器的创建/';
+      var disqus_title = "控制器的创建";
+      var disqus_url = 'http://nvar.xyz/2016/07/04/控制器的创建/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
