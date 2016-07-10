@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://nvar.xyz/2016/07/04/控制器的创建/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
 <meta property="og:description" content="当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。">
-<meta property="og:updated_time" content="2016-07-04T13:19:51.000Z">
+<meta property="og:updated_time" content="2016-07-09T00:50:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="控制器的创建">
 <meta name="twitter:description" content="当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。">
@@ -345,7 +345,7 @@
       
         <p>当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。<br><a id="more"></a></p>
 <h1 id="直接alloc-init创建"><a href="#直接alloc-init创建" class="headerlink" title="直接alloc init创建"></a>直接alloc init创建</h1><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.window = <span class="comment">[<span class="comment">[UIWindow alloc]</span> initWithFrame:<span class="comment">[UIScreen mainScreen]</span>.bounds]</span>;</span><br><span class="line">ViewController *vc = <span class="comment">[<span class="comment">[ViewController alloc]</span> init]</span>;</span><br><span class="line">self.window.rootViewController = vc;</span><br><span class="line"><span class="comment">[self.window makeKeyAndVisible]</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="通过Storyboard创建"><a href="#通过Storyboard创建" class="headerlink" title="通过Storyboard创建"></a>通过Storyboard创建</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.window = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen].bounds];</span><br><span class="line"><span class="built_in">UIStoryboard</span> *sb = [<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"myStoryBoard"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Initial View Controller</span></span><br><span class="line"><span class="built_in">UIViewController</span> *vc = [sb instantiateInitialViewController];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Identifier</span></span><br><span class="line"><span class="comment">//UIViewController *vc1 = [sb instantiateViewControllerWithIdentifier:@"viewId"];</span></span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = vc <span class="comment">/* or vc1 */</span>;</span><br><span class="line">[<span class="keyword">self</span>.window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
+<h1 id="通过Storyboard创建"><a href="#通过Storyboard创建" class="headerlink" title="通过Storyboard创建"></a>通过Storyboard创建</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.window = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen].bounds];</span><br><span class="line"><span class="built_in">UIStoryboard</span> *sb = [<span class="built_in">UIStoryboard</span> storyboardWithName:<span class="string">@"myStoryBoard"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Initial View Controller</span></span><br><span class="line"><span class="built_in">UIViewController</span> *vc = [sb instantiateInitialViewController];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Identifier</span></span><br><span class="line"><span class="built_in">UIViewController</span> *vc1 = [sb instantiateViewControllerWithIdentifier:<span class="string">@"viewId"</span>];</span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = vc <span class="comment">/* or vc1 */</span>;</span><br><span class="line">[<span class="keyword">self</span>.window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
 <h1 id="通过Xib创建"><a href="#通过Xib创建" class="headerlink" title="通过Xib创建"></a>通过Xib创建</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.window = [<span class="built_in">UIWindow</span> alloc] initWithFrame:[<span class="built_in">UIScreen</span> mainScreen].bounds;</span><br><span class="line"><span class="comment">//这里bundel传入nil的话，系统会默认使用mainbundel</span></span><br><span class="line">ViewController *vc = [[ViewController alloc] initWithNibName:<span class="string">@"nibName"</span> bundel:<span class="literal">nil</span>];</span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = vc;</span><br><span class="line">[<span class="keyword">self</span>.window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
 <p>这里需要注意，如果没有指定xib的名称,xib文件和类文件同名的话，可以直接使用类名alloc init，如：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ViewController *vc = <span class="comment">[<span class="comment">[ViewController alloc]</span> init]</span>;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
@@ -388,6 +388,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/09/Quartz-2D/" rel="prev" title="Quartz-2D">
+                Quartz-2D <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,7 +504,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -517,7 +521,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

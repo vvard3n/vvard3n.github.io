@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Quartz-2D," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quartz-2D">
+<meta property="og:url" content="http://nvar.xyz/2016/07/09/Quartz-2D/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/72f96cbagw1f5p2sha9nrj20ah0f0dg5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/72f96cbagw1f5p2p8sfwlj20bb07pjrh.jpg">
+<meta property="og:updated_time" content="2016-07-10T12:48:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quartz-2D">
+<meta name="twitter:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/72f96cbagw1f5p2sha9nrj20ah0f0dg5.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2016/07/09/Quartz-2D/"/>
+
+  <title> Quartz-2D | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-51513222-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f7d05de4c415460201cbf2d7d4ac9cff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Quartz-2D
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-09T08:48:59+08:00" content="2016-07-09">
+              2016-07-09
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/09/Quartz-2D/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/09/Quartz-2D/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。<br>Quartz 2D能完成的工作<br>绘制图形 : 线条、三角形、矩形、圆、弧等<br>绘制文字<br>绘制、生成图片(图像)<br>读取、生成PDF<br>截图、裁剪图片<br>自定义UI控件<br>等等<br><a id="more"></a></p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制一条线</span></span><br><span class="line"><span class="comment">// 获取当前上下文</span></span><br><span class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line"><span class="comment">// 绘制路径</span></span><br><span class="line">  <span class="comment">// 起点</span></span><br><span class="line">  <span class="built_in">CGContextMoveToPoint</span>(ctx, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="comment">// 终点</span></span><br><span class="line">  <span class="built_in">CGContextAddLineToPoint</span>(ctx, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">// 渲染</span></span><br><span class="line"><span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br></pre></td></tr></table></figure>
+<h1 id="绘图步骤"><a href="#绘图步骤" class="headerlink" title="绘图步骤"></a>绘图步骤</h1><h2 id="获取上下文"><a href="#获取上下文" class="headerlink" title="获取上下文"></a>获取上下文</h2><p>图形上下文（Graphics Context）：是一个CGContextRef类型的数据</p>
+<h3 id="图形上下文中主要包含如下信息："><a href="#图形上下文中主要包含如下信息：" class="headerlink" title="图形上下文中主要包含如下信息："></a>图形上下文中主要包含如下信息：</h3><ol>
+<li>绘图路径（各种各样的图形）  </li>
+<li>绘图状态（颜色、线宽、样式、旋转、缩放、平移、图片裁剪区域等）  </li>
+<li>输出目标（绘制到什么地方去？UIView、图片、pdf、打印机等）  <blockquote>
+<p>输出目标可以是PDF文件、Bitmap或者显示器的窗口上</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Quartz2D提供了以下几种类型的Graphics-Context："><a href="#Quartz2D提供了以下几种类型的Graphics-Context：" class="headerlink" title="Quartz2D提供了以下几种类型的Graphics Context："></a>Quartz2D提供了以下几种类型的Graphics Context：</h3><ol>
+<li>Bitmap Graphics Context(图片)  </li>
+<li>PDF Graphics Context(PDF)  </li>
+<li>Window Graphics Context(用于macOS系统)  </li>
+<li>Layer Graphics Context(UI控件)  </li>
+<li>Printer Graphics Context(用于打印的文件)</li>
+</ol>
+<h3 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h2><h3 id="常用拼接路径函数"><a href="#常用拼接路径函数" class="headerlink" title="常用拼接路径函数"></a>常用拼接路径函数</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新建一个起点</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextMoveToPoint</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> x, <span class="built_in">CGFloat</span> y)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加新的线段到某个点</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextAddLineToPoint</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> x, <span class="built_in">CGFloat</span> y)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一个矩形</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextAddRect</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGRect</span> rect)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一个椭圆</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextAddEllipseInRect</span>(<span class="built_in">CGContextRef</span> context, <span class="built_in">CGRect</span> rect)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一个圆弧</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextAddArc</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> x, <span class="built_in">CGFloat</span> y,</span><br><span class="line">  <span class="built_in">CGFloat</span> radius, <span class="built_in">CGFloat</span> startAngle, <span class="built_in">CGFloat</span> endAngle, <span class="keyword">int</span> clockwise)</span><br><span class="line"></span><br><span class="line"><span class="comment">//自动封口</span></span><br><span class="line"><span class="built_in">CGContextClosePath</span>(<span class="built_in">CGContextRef</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* --- OC方法，使用UIBezierPath调用。例如</span><br><span class="line"> * UIBezierPath *path = [UIBezierPath bezierPath];</span><br><span class="line"> * [path moveToPoint:CGPointMake(50, 50)];</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="keyword">void</span>)moveToPoint:(<span class="built_in">CGPoint</span>)point;</span><br><span class="line">- (<span class="keyword">void</span>)addLineToPoint:(<span class="built_in">CGPoint</span>)point;</span><br><span class="line">- (<span class="keyword">void</span>)closePath;</span><br></pre></td></tr></table></figure>
+<h3 id="常用绘制路径函数"><a href="#常用绘制路径函数" class="headerlink" title="常用绘制路径函数"></a>常用绘制路径函数</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Mode参数决定绘制的模式</span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextDrawPath</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGPathDrawingMode</span> mode)</span><br><span class="line"></span><br><span class="line">绘制空心路径</span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextStrokePath</span>(<span class="built_in">CGContextRef</span> c)</span><br><span class="line"></span><br><span class="line">绘制实心路径</span><br><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextFillPath</span>(<span class="built_in">CGContextRef</span> c)</span><br></pre></td></tr></table></figure>
+<h3 id="绘制路径完成后，需要将路径添加到上下文中"><a href="#绘制路径完成后，需要将路径添加到上下文中" class="headerlink" title="绘制路径完成后，需要将路径添加到上下文中"></a>绘制路径完成后，需要将路径添加到上下文中</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGContextAddPath</span>(<span class="built_in">CGContextRef</span> __nullable c, <span class="built_in">CGPathRef</span> __nullable path);</span><br></pre></td></tr></table></figure>
+<h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGContextStrokePath(<span class="name">CGContextRef</span> __nullable c)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h1 id="绘图的几种方式"><a href="#绘图的几种方式" class="headerlink" title="绘图的几种方式"></a>绘图的几种方式</h1><ol>
+<li>纯C语言方式 （例：快速开始）</li>
+<li><p>C、OC语言嵌套（使用OC的路径）</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ------ 示例 ----- */</span></span><br><span class="line"><span class="comment">// 1. 获取"图形上下文"</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 创建 UIBezierPath 对象</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line">    [path moveToPoint:<span class="built_in">CGPointMake</span>(<span class="number">50</span>, <span class="number">50</span>)];</span><br><span class="line">    [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">100</span>, <span class="number">100</span>)];</span><br><span class="line">    [path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">30</span>, <span class="number">250</span>)];</span><br><span class="line">    [path closePath];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 把路径对象添加到上下文中</span></span><br><span class="line">    <span class="built_in">CGContextAddPath</span>(ctx, path.CGPath);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 渲染（kCGPathStroke空心渲染、另kCGPathFill为实心渲染）</span></span><br><span class="line">    <span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>纯OC方式 (封装了，原理不变）  </p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ------ 示例 ----- */</span></span><br><span class="line"><span class="comment">// 1.绘制路径</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line"></span><br><span class="line">[path moveToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>)];</span><br><span class="line">[path addLineToPoint:<span class="built_in">CGPointMake</span>(<span class="number">200</span>, <span class="number">200</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.渲染 stroke 空心（fill实心）</span></span><br><span class="line">[path stroke];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="drawRect"><a href="#drawRect" class="headerlink" title="drawRect"></a>drawRect</h1><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)drawRect:(CGRect)<span class="built_in">rect</span></span><br></pre></td></tr></table></figure>
+<p><strong>只有在此方法中，系统才能帮我们获取上下文。</strong><br><em>rect</em> 参数表示当前 UIView 的 bounds。<br>此方法在View <strong>展示</strong> 的时候，只会调用 <strong>一次</strong>。<br>此方法 <strong>不能手动调用</strong>，于是我们需要调用重绘方法：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self setNeedsDisplay]<span class="comment">;</span></span><br><span class="line">[self setNeedsDisplayInRect:(<span class="name">CGRect</span>)rect]<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>调用以上方法，系统会再次调用 <strong>drawRect:</strong> 方法</p>
+<h1 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h1><h2 id="几种渲染模式"><a href="#几种渲染模式" class="headerlink" title="几种渲染模式"></a>几种渲染模式</h2><ul>
+<li>空心 StrokePath</li>
+<li><p>实心 FillPath 和 EOFillPath (填充)</p>
+<ul>
+<li>填充一个路径的时候，路径里面的子路径都是独立填充的。  </li>
+<li><p>假如是重叠的路径，决定一个点是否被填充，有两种规则：</p>
+<ol>
+<li>nonzero winding number rule（非零绕数规则），假如一个点被从左到右跨过，计数器+1，从右到左跨过，计数器-1，最后，如果结果是0，那么不填充，如果是非零，那么填充。</li>
+<li><p>even-odd rule（奇偶规则），假如一个点被跨过1次，被跨过了奇数次，那么要被填充，被跨过偶数次则不填充，和方向没有关系。  </p>
+<p><strong>图形化示例：</strong><br><img src="http://ww4.sinaimg.cn/large/72f96cbagw1f5p2sha9nrj20ah0f0dg5.jpg" alt="EOFillPath"><br>OC:<br>[path stroke] 空心渲染<br>[path fill] 实心渲染<br>C:<br>kCGPathFill 实心<br>kCGPathStroke 空心<br>kCGPathFillStroke 空实心<br>kCGPathEOFill 奇偶填充  </p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="基本图形绘制"><a href="#基本图形绘制" class="headerlink" title="基本图形绘制"></a>基本图形绘制</h1><h2 id="三角形"><a href="#三角形" class="headerlink" title="三角形"></a>三角形</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>获取当前上下文</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绘制路径</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPath];</span><br><span class="line"><span class="comment">//起点</span></span><br><span class="line">[path moveToPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">150</span>)];</span><br><span class="line"><span class="comment">//第一条边</span></span><br><span class="line">[path addLineToPathTpPoint:<span class="built_in">CGPointMake</span>(<span class="number">150</span>, <span class="number">150</span>)];</span><br><span class="line"><span class="comment">//第二条边</span></span><br><span class="line">[path addLineToPathTpPoint:<span class="built_in">CGPointMake</span>(<span class="number">300</span>, <span class="number">150</span>)];</span><br><span class="line"><span class="comment">//第三条边</span></span><br><span class="line"><span class="comment">//[path addLineToPathTpPoint:CGPointMake(0, 150)];</span></span><br><span class="line"><span class="comment">//第三条边或者使用此方法关闭路径</span></span><br><span class="line">[path closePath];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加路径</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGContextAddPath(<span class="name">ctx</span>, path)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>渲染</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">CGContextDrawPath</span><span class="params">(ctx, kCGPathStroke)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line"><span class="comment">//直角矩形</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)];</span><br><span class="line"><span class="comment">//圆角矩形</span></span><br><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>) cornerRadius(<span class="number">30</span>)];</span><br><span class="line"><span class="comment">//将路径添加到当前上下文</span></span><br><span class="line"><span class="built_in">CGContextAddPath</span>(ctx, path.CGPath);</span><br><span class="line"><span class="comment">//渲染</span></span><br><span class="line"><span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br></pre></td></tr></table></figure>
+<h3 id="设置圆角矩形时半径的含义"><a href="#设置圆角矩形时半径的含义" class="headerlink" title="设置圆角矩形时半径的含义"></a>设置圆角矩形时半径的含义</h3><p><img src="http://ww1.sinaimg.cn/large/72f96cbagw1f5p2p8sfwlj20bb07pjrh.jpg" alt="20:14:40.jpg"><br>例如：cornerRadius(30);使用半径为30的圆，替换边角  </p>
+<blockquote>
+<p>当圆角半径大约大于宽高3分之1，宽高相等时，就是正圆  </p>
+</blockquote>
+<h2 id="椭圆"><a href="#椭圆" class="headerlink" title="椭圆"></a>椭圆</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="built_in">CGRectMake</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">200</span>, <span class="number">100</span>)];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>宽高一致时，就是正圆</p>
+</blockquote>
+<h2 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取当前上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.绘制路径</span></span><br><span class="line">        <span class="comment">// center  圆心</span></span><br><span class="line">        <span class="built_in">CGPoint</span> center = <span class="built_in">CGPointMake</span>(<span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// radius  半径</span></span><br><span class="line">        <span class="built_in">CGFloat</span> radius = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// startAngle 开始角度  开始位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> startAngle =  <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// endAngle 结束位置</span></span><br><span class="line">        <span class="built_in">CGFloat</span> endAngle = -M_PI_4;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//clockWise  顺时针 逆时针</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建路径</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 添加路径</span></span><br><span class="line">    <span class="built_in">CGContextAddPath</span>(ctx, path.CGPath);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3.渲染</span></span><br><span class="line">    <span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br></pre></td></tr></table></figure>
+<h1 id="绘图的样式"><a href="#绘图的样式" class="headerlink" title="绘图的样式"></a>绘图的样式</h1><h2 id="设置线宽"><a href="#设置线宽" class="headerlink" title="设置线宽"></a>设置线宽</h2><p>CGContextSetLineWidth(ctx, 10);<br>或<br>path.lineWidth = 10;</p>
+<h2 id="设置颜色"><a href="#设置颜色" class="headerlink" title="设置颜色"></a>设置颜色</h2><p>CGContextSetRGBStrokeColor(ctx, 1.0, 0.3, 0.3, 1.0);<br>或<br>[[UIColor greenColor] setStroke];<br>[[UIColor greenColor] setFill];</p>
+<h2 id="线头样式"><a href="#线头样式" class="headerlink" title="线头样式"></a>线头样式</h2><p>kCGLineCapButt 直角<br>kCGLineCapRound 圆角<br>kCGLineCapSquare 直角（首位带间距）</p>
+<h2 id="拐角样式"><a href="#拐角样式" class="headerlink" title="拐角样式"></a>拐角样式</h2><p>kCGLineJoinMiter 尖角（默认）<br>kCGLineJoinRound 圆角<br>kCGLineJoinBevel 平角</p>
+<blockquote>
+<p>除了颜色以外，不能C/OC设置方式混用，谁渲染谁设置</p>
+</blockquote>
+<h1 id="矩阵操作-仿射变换"><a href="#矩阵操作-仿射变换" class="headerlink" title="矩阵操作 - 仿射变换"></a>矩阵操作 - 仿射变换</h1><h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextRotateCTM</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> angle)</span><br></pre></td></tr></table></figure>
+<h2 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextTranslateCTM</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> tx, <span class="built_in">CGFloat</span> ty)</span><br></pre></td></tr></table></figure>
+<h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="built_in">CGContextScaleCTM</span>(<span class="built_in">CGContextRef</span> c, <span class="built_in">CGFloat</span> sx, <span class="built_in">CGFloat</span> sy)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意 : 此处是先把上下文旋转、缩放、平移了, 然后后面再绘制的所有图形就都是在旋转、缩放、平移之后的上下文中进行了。</p>
+</blockquote>
+<h1 id="绘制文字"><a href="#绘制文字" class="headerlink" title="绘制文字"></a>绘制文字</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[str drawAtPoint:]</span><br><span class="line">[str drawInRect:]</span><br></pre></td></tr></table></figure>
+<h1 id="绘制图片"><a href="#绘制图片" class="headerlink" title="绘制图片"></a>绘制图片</h1><p>创建要绘制的图片<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"123"</span>];</span><br></pre></td></tr></table></figure></p>
+<p>默认<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[image drawAtPoint:CGPointZero]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>拉伸<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">image</span> drawInRect:<span class="built_in">rect</span>]</span><br></pre></td></tr></table></figure></p>
+<p>平铺<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">image</span> drawAsPatternInRect:<span class="built_in">rect</span>];</span><br></pre></td></tr></table></figure></p>
+<h1 id="图片上下文"><a href="#图片上下文" class="headerlink" title="图片上下文"></a>图片上下文</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//裁剪带圆环的头像图片</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1.获取裁剪的图片</span></span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"me"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.开启图片上下文</span></span><br><span class="line">    <span class="built_in">CGFloat</span> margin = <span class="number">5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//上下文的大小 之所以大一点 是因为 线宽的问题</span></span><br><span class="line">    <span class="built_in">CGSize</span> contextSize = <span class="built_in">CGSizeMake</span>(image.size.width + <span class="number">2</span> * margin, image.size.height + <span class="number">2</span> * margin);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(contextSize, <span class="literal">NO</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3.获取当前上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//4.绘制圆环 渲染</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment">//圆心</span></span><br><span class="line">    <span class="built_in">CGPoint</span>  center = <span class="built_in">CGPointMake</span>(contextSize.width * <span class="number">0.5</span>, contextSize.height * <span class="number">0.5</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//半径</span></span><br><span class="line">    <span class="built_in">CGFloat</span> radius = MIN(image.size.width, image.size.height) * <span class="number">0.5</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIBezierPath</span> *firstPath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置线宽</span></span><br><span class="line">    <span class="built_in">CGContextSetLineWidth</span>(ctx, <span class="number">10</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置绿色</span></span><br><span class="line">    [[<span class="built_in">UIColor</span> greenColor] set];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextAddPath</span>(ctx, firstPath.CGPath);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//5.绘制固定的显示区域 圆环</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *secdPath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:center radius:radius startAngle:<span class="number">0</span> endAngle:M_PI * <span class="number">2</span> clockwise:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CGContextAddPath</span>(ctx, secdPath.CGPath);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//6.裁剪</span></span><br><span class="line">    <span class="built_in">CGContextClip</span>(ctx);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//7.绘制图片</span></span><br><span class="line">    [image drawAtPoint:<span class="built_in">CGPointMake</span>(margin, margin)];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//获取带圆环的头像</span></span><br><span class="line">    image = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//8.关闭图片上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//9.保存图片到本地文件</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment">//9.1获取保存的路径</span></span><br><span class="line">    <span class="built_in">NSString</span> *filePath = [[<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject] stringByAppendingPathComponent:<span class="string">@"me.png"</span>];</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//9.2 保存UIIMage 需要转换成二进制 NSData</span></span><br><span class="line">    <span class="built_in">NSData</span> * imageData = <span class="built_in">UIImagePNGRepresentation</span>(image);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//9.3 writeTofile</span></span><br><span class="line">    [imageData writeToFile:filePath atomically:<span class="literal">YES</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>绘制图片和使用图片上下文操作图片的区别在于，需要返回UIView，就使用绘制图片。需要返回图片，进行上传，保存等操作的时候，就使用图片上下文进行操作。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Quartz-2D/" rel="tag">#Quartz-2D</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/04/控制器的创建/" rel="next" title="控制器的创建">
+                <i class="fa fa-chevron-left"></i> 控制器的创建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速开始"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘图步骤"><span class="nav-number">2.</span> <span class="nav-text">绘图步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取上下文"><span class="nav-number">2.1.</span> <span class="nav-text">获取上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图形上下文中主要包含如下信息："><span class="nav-number">2.1.1.</span> <span class="nav-text">图形上下文中主要包含如下信息：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quartz2D提供了以下几种类型的Graphics-Context："><span class="nav-number">2.1.2.</span> <span class="nav-text">Quartz2D提供了以下几种类型的Graphics Context：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方式"><span class="nav-number">2.1.3.</span> <span class="nav-text">获取方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制路径"><span class="nav-number">2.2.</span> <span class="nav-text">绘制路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用拼接路径函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">常用拼接路径函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用绘制路径函数"><span class="nav-number">2.2.2.</span> <span class="nav-text">常用绘制路径函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制路径完成后，需要将路径添加到上下文中"><span class="nav-number">2.2.3.</span> <span class="nav-text">绘制路径完成后，需要将路径添加到上下文中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染"><span class="nav-number">2.3.</span> <span class="nav-text">渲染</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘图的几种方式"><span class="nav-number">3.</span> <span class="nav-text">绘图的几种方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drawRect"><span class="nav-number">4.</span> <span class="nav-text">drawRect</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充内容"><span class="nav-number">5.</span> <span class="nav-text">补充内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几种渲染模式"><span class="nav-number">5.1.</span> <span class="nav-text">几种渲染模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本图形绘制"><span class="nav-number">6.</span> <span class="nav-text">基本图形绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三角形"><span class="nav-number">6.1.</span> <span class="nav-text">三角形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">6.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩形"><span class="nav-number">6.2.</span> <span class="nav-text">矩形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置圆角矩形时半径的含义"><span class="nav-number">6.2.1.</span> <span class="nav-text">设置圆角矩形时半径的含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#椭圆"><span class="nav-number">6.3.</span> <span class="nav-text">椭圆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圆弧"><span class="nav-number">6.4.</span> <span class="nav-text">圆弧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘图的样式"><span class="nav-number">7.</span> <span class="nav-text">绘图的样式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置线宽"><span class="nav-number">7.1.</span> <span class="nav-text">设置线宽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置颜色"><span class="nav-number">7.2.</span> <span class="nav-text">设置颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线头样式"><span class="nav-number">7.3.</span> <span class="nav-text">线头样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拐角样式"><span class="nav-number">7.4.</span> <span class="nav-text">拐角样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵操作-仿射变换"><span class="nav-number">8.</span> <span class="nav-text">矩阵操作 - 仿射变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转"><span class="nav-number">8.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平移"><span class="nav-number">8.2.</span> <span class="nav-text">平移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩放"><span class="nav-number">8.3.</span> <span class="nav-text">缩放</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘制文字"><span class="nav-number">9.</span> <span class="nav-text">绘制文字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绘制图片"><span class="nav-number">10.</span> <span class="nav-text">绘制图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片上下文"><span class="nav-number">11.</span> <span class="nav-text">图片上下文</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vvard3nsblog';
+      var disqus_identifier = '2016/07/09/Quartz-2D/';
+      var disqus_title = "Quartz-2D";
+      var disqus_url = 'http://nvar.xyz/2016/07/09/Quartz-2D/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
