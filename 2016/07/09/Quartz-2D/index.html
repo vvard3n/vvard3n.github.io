@@ -86,18 +86,39 @@
 
 
 
-<meta name="description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta name="description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作：  
+
+绘制图形 : 线条、三角形、矩形、圆、弧等  
+绘制文字  
+绘制、生成图片(图像)  
+读取、生成PDF  
+截图、裁剪图片  
+自定义UI控件……">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Quartz-2D">
 <meta property="og:url" content="http://nvar.xyz/2016/07/09/Quartz-2D/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
-<meta property="og:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta property="og:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作：  
+
+绘制图形 : 线条、三角形、矩形、圆、弧等  
+绘制文字  
+绘制、生成图片(图像)  
+读取、生成PDF  
+截图、裁剪图片  
+自定义UI控件……">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/72f96cbagw1f5p2sha9nrj20ah0f0dg5.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/72f96cbagw1f5p2p8sfwlj20bb07pjrh.jpg">
-<meta property="og:updated_time" content="2016-07-10T12:52:25.000Z">
+<meta property="og:updated_time" content="2016-07-10T12:53:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Quartz-2D">
-<meta name="twitter:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作绘制图形 : 线条、三角形、矩形、圆、弧等绘制文字绘制、生成图片(图像)读取、生成PDF截图、裁剪图片自定义UI控件等等">
+<meta name="twitter:description" content="Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。Quartz 2D能完成的工作：  
+
+绘制图形 : 线条、三角形、矩形、圆、弧等  
+绘制文字  
+绘制、生成图片(图像)  
+读取、生成PDF  
+截图、裁剪图片  
+自定义UI控件……">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/72f96cbagw1f5p2sha9nrj20ah0f0dg5.jpg">
 
 
@@ -346,7 +367,16 @@
       
 
       
-        <p>Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。<br>Quartz 2D能完成的工作<br>绘制图形 : 线条、三角形、矩形、圆、弧等<br>绘制文字<br>绘制、生成图片(图像)<br>读取、生成PDF<br>截图、裁剪图片<br>自定义UI控件<br>等等<br><a id="more"></a></p>
+        <p>Quartz 2D是一个二维绘图引擎，同时支持iOS和Mac OS X系统（跨Apple移动端和电脑平台，纯C语言的）。它被包含在 Core Graphics 框架中。<br>Quartz 2D能完成的工作：  </p>
+<ul>
+<li>绘制图形 : 线条、三角形、矩形、圆、弧等  </li>
+<li>绘制文字  </li>
+<li>绘制、生成图片(图像)  </li>
+<li>读取、生成PDF  </li>
+<li>截图、裁剪图片  </li>
+<li>自定义UI控件<br>……<a id="more"></a>
+</li>
+</ul>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制一条线</span></span><br><span class="line"><span class="comment">// 获取当前上下文</span></span><br><span class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line"><span class="comment">// 绘制路径</span></span><br><span class="line">  <span class="comment">// 起点</span></span><br><span class="line">  <span class="built_in">CGContextMoveToPoint</span>(ctx, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="comment">// 终点</span></span><br><span class="line">  <span class="built_in">CGContextAddLineToPoint</span>(ctx, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line"><span class="comment">// 渲染</span></span><br><span class="line"><span class="built_in">CGContextDrawPath</span>(ctx, kCGPathStroke);</span><br></pre></td></tr></table></figure>
 <h1 id="绘图步骤"><a href="#绘图步骤" class="headerlink" title="绘图步骤"></a>绘图步骤</h1><h2 id="获取上下文"><a href="#获取上下文" class="headerlink" title="获取上下文"></a>获取上下文</h2><p>图形上下文（Graphics Context）：是一个CGContextRef类型的数据</p>
 <h3 id="图形上下文中主要包含如下信息："><a href="#图形上下文中主要包含如下信息：" class="headerlink" title="图形上下文中主要包含如下信息："></a>图形上下文中主要包含如下信息：</h3><ol>
