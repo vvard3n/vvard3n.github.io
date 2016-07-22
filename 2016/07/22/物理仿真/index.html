@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://nvar.xyz/2016/07/22/物理仿真/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
 <meta property="og:description" content="UIKit动力学最大的特点是将现实世界动力驱动的动画引入了UIKit，比如重力，铰链连接，碰撞，悬挂等效果，即将2D物理学引擎引入了UIKit。">
-<meta property="og:updated_time" content="2016-07-22T13:06:10.000Z">
+<meta property="og:updated_time" content="2016-07-22T13:07:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="物理仿真">
 <meta name="twitter:description" content="UIKit动力学最大的特点是将现实世界动力驱动的动画引入了UIKit，比如重力，铰链连接，碰撞，悬挂等效果，即将2D物理学引擎引入了UIKit。">
@@ -387,7 +387,7 @@
 </tr>
 <tr>
 <td>UIPushBehavior:</td>
-<td>推动行为</td>
+<td>推行为</td>
 </tr>
 <tr>
 <td>UIDynamicItemBehavior:</td>
@@ -399,7 +399,10 @@
 <h1 id="常用动力学行为"><a href="#常用动力学行为" class="headerlink" title="常用动力学行为"></a>常用动力学行为</h1><h2 id="重力行为（Gravity）"><a href="#重力行为（Gravity）" class="headerlink" title="重力行为（Gravity）"></a>重力行为（Gravity）</h2><p>重力行为用于给动力学元素指定一个重力向量<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 实例化一个重力行为，并传入需要做动力仿真的对象view</span><br><span class="line">UIGravityBehavior *gravity = <span class="string">[[UIGravityBehavior alloc] initWithItems:@[view]]</span>;</span><br><span class="line">// 将重力行为添加到animator</span><br><span class="line">[animator addBehavior:gravity];</span><br></pre></td></tr></table></figure></p>
 <h2 id="碰撞行为（Collision）"><a href="#碰撞行为（Collision）" class="headerlink" title="碰撞行为（Collision）"></a>碰撞行为（Collision）</h2><p>碰撞行为用于指定一组动力学元素，在指定的边界范围内，可以彼此发生碰撞<br>碰撞行为提供了代理方法，可用于在物体碰撞前、后对动力学元素做碰撞后续的处理<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化碰撞行为，并指定view参与碰撞</span></span><br><span class="line"><span class="built_in">UICollisionBehavior</span> *collsion = [[<span class="built_in">UICollisionBehavior</span> alloc] initWithItems:@[view]];</span><br><span class="line"><span class="comment">// 指定是否启用参照系的边界</span></span><br><span class="line">collsion.translatesReferenceBoundsIntoBoundary = <span class="literal">YES</span>;</span><br><span class="line"><span class="comment">// 将碰撞行为添加至animator</span></span><br><span class="line">[animator addBehavior:collsion];</span><br></pre></td></tr></table></figure></p>
 <h2 id="吸附行为（Snap）"><a href="#吸附行为（Snap）" class="headerlink" title="吸附行为（Snap）"></a>吸附行为（Snap）</h2><p>吸附行为可以将视图通过动画吸附到某个点上<br>初始化设定一下UISnapBehavior的initWithItem:snapToPoint:即可</p>
-<p>属性：<br><strong>damping</strong>：振幅大小，默认为0.5f</p>
+<p>属性：  </p>
+<ul>
+<li><strong>damping</strong>：振幅大小，默认为0.5f</li>
+</ul>
 <h2 id="附着行为（Attachment）"><a href="#附着行为（Attachment）" class="headerlink" title="附着行为（Attachment）"></a>附着行为（Attachment）</h2><p>附着行为描述一个视图与一个锚点或者另一个视图相连接的情况<br>附着行为描述的是两点之间的连接情况，可以模拟刚性或者弹性连接<br>在多个物体间设定多个UIAttachmentBehavior，可以模拟多物体连接  </p>
 <p>属性：</p>
 <ul>
