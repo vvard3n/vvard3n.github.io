@@ -279,6 +279,217 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/27/iOS开发之多线程/" itemprop="url">
+                  iOS开发之多线程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-27T08:32:18+08:00" content="2016-07-27">
+              2016-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/27/iOS开发之多线程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/27/iOS开发之多线程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="同步-异步"><a href="#同步-异步" class="headerlink" title="同步/异步"></a>同步/异步</h2><h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>我们之前写程序的时候都是从上到下,从左到右,代码执行顺序<br>1个人执行多个任务,也是依次执行，1个人同一时间执行1个任务  </p>
+<h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><p>多个人可以同时执行多个任务  </p>
+<h2 id="进程-线程"><a href="#进程-线程" class="headerlink" title="进程/线程"></a>进程/线程</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是指在系统中正在运行的一个应用程序<br>每个进程之间是独立的，每个进程均运行在其专用的且受保护的内存空间内<br>通过“活动监视器”可以查看Mac系统中所开启的进程  </p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>1个进程有多个线程组成（1个进程至少要有1个线程）<br>线程是进程的基本执行单元，一个进程的所有任务都在线程中执行  </p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>1个进程中可以开启多个线程，多个线程可以“同时”执行不同的任务<br>进程-公司，线程-员工，老板是什么？<br>多线程可以解决程序阻塞的问题<br>多线程可以提高程序的执行效率  </p>
+<h3 id="多线程执行原理"><a href="#多线程执行原理" class="headerlink" title="多线程执行原理"></a>多线程执行原理</h3><ul>
+<li>单核CPU）同一时间，cpu只能处理1个线程，只有1个线程在执行  </li>
+<li>多线程同时执行：是CPU快速的在多个线程之间的切换</li>
+<li>cpu调度线程的时间足够快，就造成了多线程的”同时”执行</li>
+<li>如果线程数非常多，cpu会在n个线程之间切换，消耗大量的cpu资源</li>
+<li>每个线程被调度的次数会降低，线程的执行效率降低</li>
+</ul>
+<h3 id="多线程优-缺点"><a href="#多线程优-缺点" class="headerlink" title="多线程优/缺点"></a>多线程优/缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>能适当提高程序的执行效率<br>能适当提高资源的利用率（cpu，内存）<br>线程上的任务执行完成后，线程会自动销毁</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>开启线程需要占用一定的内存空间（默认情况下，每一个线程都占512KB）<br>如果开启大量的线程，会占用大量的内存空间，降低程序的性能<br>线程越多，cpu在调用线程上的开销就越大<br>程序设计更加复杂，比如线程间的通信、多线程的数据共享</p>
+<h1 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h1><p>一个程序运行后，默认会开启1个线程，称为“主线程”或“UI线程”。<br>主线程一般用来刷新UI界面，处理UI事件（比如：点击、滚动、拖拽等事件）。  </p>
+<blockquote>
+<p>主线程使用注意<br>别将耗时的操作放到主线程中<br>耗时操作会卡住主线程，严重影响UI的流畅度，给用户一种卡的坏体验</p>
+</blockquote>
+<h1 id="iOS中多线程的技术方案"><a href="#iOS中多线程的技术方案" class="headerlink" title="iOS中多线程的技术方案"></a>iOS中多线程的技术方案</h1><h2 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h2><ul>
+<li>一套通用的多线程API</li>
+<li>适用于Unix、Linux、Windows系统</li>
+<li>跨平台/可移植</li>
+<li>使用难度大  </li>
+</ul>
+<p>pthread是使用 <strong>C语言</strong> 的技术方案，它的生命周期由 <strong>程序员管理</strong>。</p>
+<h2 id="NSThread"><a href="#NSThread" class="headerlink" title="NSThread"></a>NSThread</h2><ul>
+<li>使用更加面向对象</li>
+<li>简单易用，可直接操作线程对象</li>
+</ul>
+<p>是使用 <strong>Objective-C</strong> 的技术方案，它的生命周期由 <strong>程序员管理</strong>。</p>
+<h2 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h2><ul>
+<li>旨在替代NSThread等线程技术</li>
+<li>充分利用设备的多核</li>
+</ul>
+<p>是使用 <strong>C语言</strong> 的技术方案，它的生命周期由 <strong>程序自动管理</strong>。</p>
+<h2 id="NSOperation"><a href="#NSOperation" class="headerlink" title="NSOperation"></a>NSOperation</h2><ul>
+<li>基于GCD（底层是GCD）</li>
+<li>比GCD多了一些更简单实用的功能</li>
+<li>使用更加面向对象</li>
+</ul>
+<p>是使用 <strong>Objective-C</strong> 的技术方案，它的生命周期由 <strong>程序自动管理</strong>。</p>
+<h1 id="多线程的使用"><a href="#多线程的使用" class="headerlink" title="多线程的使用"></a>多线程的使用</h1><h2 id="pthread-1"><a href="#pthread-1" class="headerlink" title="pthread"></a>pthread</h2><p>pthread包含在头文件 <em>pthread.h</em> 中，需要手动导入：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>实现代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程编号的地址</span></span><br><span class="line">    <span class="keyword">pthread_t</span> pthread;</span><br><span class="line">    <span class="comment">//第一个参数 线程编号的地址</span></span><br><span class="line">    <span class="comment">//第二个参数 线程的属性</span></span><br><span class="line">    <span class="comment">//第三个参数 线程要执行的方法</span></span><br><span class="line">        <span class="comment">//void *   (*)   (void *)</span></span><br><span class="line">        <span class="comment">//函数的返回值类型  void *    int *指向int的指针  void * 指向任意类型的指针    类似于oc中的id</span></span><br><span class="line">        <span class="comment">//函数的名称  函数指针</span></span><br><span class="line">        <span class="comment">//函数的参数  void *</span></span><br><span class="line">    <span class="comment">//第四个参数 线程要执行的方法的 参数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方法的返回值  0 成功 其它失败</span></span><br><span class="line">    <span class="keyword">int</span> result =  pthread_create(&amp;pthread, <span class="literal">NULL</span>, demo, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="NSThread-1"><a href="#NSThread-1" class="headerlink" title="NSThread"></a>NSThread</h2><p>方式1<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSThread *thread = [[NSThread alloc] <span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="meta">@selector</span>(<span class="string">demo:</span>) <span class="string">object:</span>nil];</span><br><span class="line">[thread start];</span><br></pre></td></tr></table></figure></p>
+<p>方式2<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NSThread <span class="string">detachNewThreadSelector:</span><span class="meta">@selector</span>(<span class="string">demo:</span>) <span class="string">toTarget:</span>self <span class="string">withObject:</span>nil];</span><br></pre></td></tr></table></figure></p>
+<p>方式3<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self <span class="string">performSelectorInBackground:</span><span class="meta">@selector</span>(<span class="string">demo:</span>) <span class="string">withObject:</span>nil];</span><br></pre></td></tr></table></figure></p>
+<h1 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h1><p><img src="http://ww4.sinaimg.cn/large/72f96cbagw1f68qz0vqyhj2116094q4w.jpg" alt=""></p>
+<h2 id="控制线程的状态"><a href="#控制线程的状态" class="headerlink" title="控制线程的状态"></a>控制线程的状态</h2><h3 id="启动线程"><a href="#启动线程" class="headerlink" title="启动线程"></a>启动线程</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="name">void</span>)start<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>此时线程进入就绪状态，当线程执行完毕后自动进入死亡状态。</p>
+<h3 id="暂停（阻塞）线程"><a href="#暂停（阻塞）线程" class="headerlink" title="暂停（阻塞）线程"></a>暂停（阻塞）线程</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)<span class="string">sleepUntilDate:</span>(NSDate *)date;</span><br><span class="line">+ (<span class="keyword">void</span>)<span class="string">sleepForTimeInterval:</span>(NSTimeInterval)ti;</span><br></pre></td></tr></table></figure>
+<p>线程进入阻塞状态</p>
+<h3 id="停止线程"><a href="#停止线程" class="headerlink" title="停止线程"></a>停止线程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)<span class="built_in">exit</span>;</span><br></pre></td></tr></table></figure>
+<p>线程进入死亡状态</p>
+<blockquote>
+<p>注意：一旦线程停止（死亡）了，就不能再次开启任务</p>
+</blockquote>
+<h1 id="线程的属性"><a href="#线程的属性" class="headerlink" title="线程的属性"></a>线程的属性</h1><h2 id="线程名称"><a href="#线程名称" class="headerlink" title="线程名称"></a>线程名称</h2><p>设置线程名称可以当线程执行的方法内部出现异常的时候记录 异常和当前线程</p>
+<h2 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h2><p>内核调度算法在决定该运行哪个线程时，会把线程的优先级作为考量因素，较高优先级的线程会比较低优先级的线程具有更多的运行机会。较高优先级不保证你的线程具体执行的时间，只是相比较低优先级的线程，它更有可能被调度器选择执行而已。</p>
+<h1 id="多线程访问共享资源的问题"><a href="#多线程访问共享资源的问题" class="headerlink" title="多线程访问共享资源的问题"></a>多线程访问共享资源的问题</h1><ul>
+<li>共享资源<ul>
+<li>一块资源可能会被多个线程共享，也就是多个线程可能会访问同一块资源  </li>
+<li>比如多个线程访问同一个对象、同一个变量、同一个文件  </li>
+</ul>
+</li>
+<li>当多个线程访问同一块资源时，很容易引发数据错乱和数据安全问题  </li>
+</ul>
+<h1 id="互斥锁-线程同步"><a href="#互斥锁-线程同步" class="headerlink" title="互斥锁(线程同步)"></a>互斥锁(线程同步)</h1><h2 id="互斥锁原理"><a href="#互斥锁原理" class="headerlink" title="互斥锁原理"></a>互斥锁原理</h2><p>每一个对象(NSObject)内部都有一个锁(变量)，当有线程要进入synchronized到代码块中会先检查对象的锁是打开还是关闭状态，默认锁是打开状态(1)，如果是线程执行到代码块内部 会先上锁(0)。如果锁被关闭，再有线程要执行代码块就先等待，直到锁打开才可以进入。<br>当线程执行到 <em>synchronized</em> 代码的时候  </p>
+<ol>
+<li>检查锁状态 如果是开锁状态(1)转到步骤2  如果上锁(0)转到步骤5</li>
+<li>上锁(0)</li>
+<li>执行代码块</li>
+<li>执行完毕 开锁(1)</li>
+<li>线程等待(就绪状态)</li>
+</ol>
+<blockquote>
+<p>加锁后程序执行的效率比不加锁的时候要低，因为要线程要等待锁，但是锁保证了多个线程同时操作全局变量的安全性，能有效防止因多线程抢夺资源造成的数据安全问题</p>
+</blockquote>
+<h2 id="互斥锁使用"><a href="#互斥锁使用" class="headerlink" title="互斥锁使用"></a>互斥锁使用</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@synchronized(锁对象)</span> &#123; <span class="comment">// 需要锁定的代码  &#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>相关专业术语：线程同步<br>  线程同步的意思是：多条线程按顺序地执行任务<br>  互斥锁，就是使用了线程同步技术</p>
+</blockquote>
+<h1 id="原子属性"><a href="#原子属性" class="headerlink" title="原子属性"></a>原子属性</h1><h2 id="属性中的修饰符"><a href="#属性中的修饰符" class="headerlink" title="属性中的修饰符"></a>属性中的修饰符</h2><ul>
+<li>nonatomic 非原子属性  </li>
+<li>atomic 原子属性(线程安全)，针对多线程设计的，默认值  <ul>
+<li>保证同一时间只有一个线程能够写入(但是同一个时间多个线程都可以取值)  </li>
+<li>atomic  本身就有一把锁(自旋锁)  </li>
+<li>单写多读：单个线程写入，多个线程可以读取  </li>
+</ul>
+</li>
+</ul>
+<h2 id="nonatomic和atomic对比"><a href="#nonatomic和atomic对比" class="headerlink" title="nonatomic和atomic对比"></a>nonatomic和atomic对比</h2><p><strong>atomic</strong>：线程安全，需要消耗大量的资源<br><strong>nonatomic</strong>：非线程安全，适合内存小的移动设备  </p>
+<h1 id="iOS开发的建议"><a href="#iOS开发的建议" class="headerlink" title="iOS开发的建议"></a>iOS开发的建议</h1><p>所有属性都声明为 <strong>nonatomic</strong><br>尽量避免多线程抢夺同一块资源<br>尽量将加锁、资源抢夺的业务逻辑 <strong>交给服务器端</strong> 处理，减小移动客户端的压力  </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/22/UIDynamic/" itemprop="url">
                   UIDynamic（物理仿真）
                 </a>
@@ -1363,128 +1574,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/21/frameModel/" itemprop="url">
-                  Frame模型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-21T17:07:45+08:00" content="2016-06-21">
-              2016-06-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
-                    <span itemprop="name">iOSDev</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/21/frameModel/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/21/frameModel/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>当使用自定义Cell的TableView界面的时候（类似微博主页面），某行Cell移出屏幕，通过TableView的缓存池进行Cell复用时，会造成Cell的高度或者包含的控件不匹配新的数据。而每次获取Cell的时候进行计算Cell的Frame值又会降低APP的整体运行效率。为解决此问题，对Frame模型的封装应运而生。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/21/frameModel/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1530,7 +1619,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1547,7 +1636,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
