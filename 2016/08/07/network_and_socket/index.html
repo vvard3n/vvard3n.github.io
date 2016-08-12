@@ -102,7 +102,7 @@
 响应（Response）：服务器对客户端的请求做出的反应,一般指返回数据给客户端">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg">
-<meta property="og:updated_time" content="2016-08-12T11:40:31.000Z">
+<meta property="og:updated_time" content="2016-08-12T12:48:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基本概念和Socket">
 <meta name="twitter:description" content="概念
@@ -614,6 +614,42 @@
 </tr>
 </tbody>
 </table>
+<h1 id="GET和POST请求简介"><a href="#GET和POST请求简介" class="headerlink" title="GET和POST请求简介"></a>GET和POST请求简介</h1><ul>
+<li>GET和POST请求,是HTTP协议下常用的两种请求网络数据的方法.</li>
+</ul>
+<h2 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h2><ul>
+<li><code>GET</code>的本质是<code>得</code>.</li>
+<li>从服务器获取数据,效率比<code>POST</code>高.</li>
+<li>GET请求能够被缓存</li>
+<li>在 HTTP 协议定义中,没有对<code>GET</code>请求的数据大小限制,不过因为浏览器不同一般限制在 <code>2~8K</code> 之间.</li>
+<li>GET发送请求时,URL中除了资源路径以外,所有的参数(查询字符串)也包装在URL中,并且服务器的访问日志会记录,不要传递敏感信息.</li>
+<li>参数格式<ul>
+<li>在资源路径末尾添加 <code>?</code> 表示追加参数.</li>
+<li>每一个变量及值按照 <code>变量名=变量</code>值 方式设定,不能包含空格或者中文.</li>
+<li>多个参数使用 <code>&amp;</code> 连接.</li>
+<li><strong>注意 :</strong> URL 字符串中如果包含空格或者中文,需要添加百分号转义.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>浏览器可以监视<code>GET</code>请求.</p>
+</blockquote>
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><ul>
+<li><code>POST</code>的本质是<code>给</code>.</li>
+<li>向服务器发送数据,也可以获得服务器处理之后的结果,效率不如<code>GET</code>.</li>
+<li>POST请求不能被缓存.</li>
+<li>POST提交数据比较大,大小靠服务器的设定值限制,PHP通常限定 2M.</li>
+<li>POST发送请求时,URL中只有资源路径,但不包含参数,服务器日志不会记录参数,<code>相对更安全</code>.</li>
+<li>参数被包装成二进制的数据体,格式与 GET 基本一致,只是<code>不包含 ?</code>.</li>
+<li><strong>注意 :</strong> 所有涉及到<code>用户隐私</code>的数据（密码，银行卡号）一定记住使用 <code>POST</code> 方式传递.</li>
+</ul>
+<blockquote>
+<p>浏览器可以监视<code>POST</code>请求.但是不容易捕捉到.</p>
+</blockquote>
+<h1 id="NSURLRequest"><a href="#NSURLRequest" class="headerlink" title="NSURLRequest"></a>NSURLRequest</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:url];</span><br></pre></td></tr></table></figure>
+<p>NSURLRequest不可以修改参数，默认为<code>GET</code></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSMutableURLRequest *requestM = <span class="string">[NSMutableURLRequest requestWithURL:url]</span>;</span><br><span class="line">//设置请求方式</span><br><span class="line">requestM.HTTPMethod = @<span class="string">"<span class="keyword">POST</span>或者<span class="keyword">GET</span>"</span>;</span><br><span class="line">//设置请求头</span><br><span class="line"><span class="string">[requestM setValue:@"值"forHTTPHeaderField:@"键"]</span>;</span><br></pre></td></tr></table></figure>
+<p>NSMutableURLRequest则可以自定义各种属性</p>
 
       
     </div>
@@ -826,7 +862,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL基本概念"><span class="nav-number">2.</span> <span class="nav-text">URL基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-格式"><span class="nav-number">2.1.</span> <span class="nav-text">URL 格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议头"><span class="nav-number">2.2.</span> <span class="nav-text">协议头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机地址"><span class="nav-number">2.3.</span> <span class="nav-text">主机地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">3.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP协议基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">3.1.2.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议特点"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP协议特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#长连接和短连接-amp-心跳包"><span class="nav-number">3.2.1.</span> <span class="nav-text">长连接和短连接 & 心跳包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络通信过程-请求"><span class="nav-number">4.</span> <span class="nav-text">网络通信过程-请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-number">4.1.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求行"><span class="nav-number">4.1.1.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求头"><span class="nav-number">4.1.2.</span> <span class="nav-text">请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求体"><span class="nav-number">4.1.3.</span> <span class="nav-text">请求体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求格式"><span class="nav-number">4.1.4.</span> <span class="nav-text">请求格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应"><span class="nav-number">4.2.</span> <span class="nav-text">响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态行"><span class="nav-number">4.2.1.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应头"><span class="nav-number">4.2.2.</span> <span class="nav-text">响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应体"><span class="nav-number">4.2.3.</span> <span class="nav-text">响应体</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络开发方案"><span class="nav-number">5.</span> <span class="nav-text">网络开发方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL基本概念"><span class="nav-number">2.</span> <span class="nav-text">URL基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-格式"><span class="nav-number">2.1.</span> <span class="nav-text">URL 格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议头"><span class="nav-number">2.2.</span> <span class="nav-text">协议头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机地址"><span class="nav-number">2.3.</span> <span class="nav-text">主机地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">3.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP协议基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">3.1.2.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议特点"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP协议特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#长连接和短连接-amp-心跳包"><span class="nav-number">3.2.1.</span> <span class="nav-text">长连接和短连接 & 心跳包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络通信过程-请求"><span class="nav-number">4.</span> <span class="nav-text">网络通信过程-请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-number">4.1.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求行"><span class="nav-number">4.1.1.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求头"><span class="nav-number">4.1.2.</span> <span class="nav-text">请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求体"><span class="nav-number">4.1.3.</span> <span class="nav-text">请求体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求格式"><span class="nav-number">4.1.4.</span> <span class="nav-text">请求格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应"><span class="nav-number">4.2.</span> <span class="nav-text">响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态行"><span class="nav-number">4.2.1.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应头"><span class="nav-number">4.2.2.</span> <span class="nav-text">响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应体"><span class="nav-number">4.2.3.</span> <span class="nav-text">响应体</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络开发方案"><span class="nav-number">5.</span> <span class="nav-text">网络开发方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GET和POST请求简介"><span class="nav-number">6.</span> <span class="nav-text">GET和POST请求简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET请求"><span class="nav-number">6.1.</span> <span class="nav-text">GET请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST请求"><span class="nav-number">6.2.</span> <span class="nav-text">POST请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSURLRequest"><span class="nav-number">7.</span> <span class="nav-text">NSURLRequest</span></a></li></ol></div>
             
           </div>
         </section>
