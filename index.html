@@ -348,22 +348,12 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><ol>
-<li><code>NSURL</code>：确定要访问的资源</li>
-<li><code>NSURLRequest</code>：根据 <code>URL</code> 建立请求，向服务器索要数据</li>
-<li><code>NSURLConnection</code>：建立网络连接，将请求发送给服务器</li>
-</ol>
-<h1 id="GET请求和POST请求"><a href="#GET请求和POST请求" class="headerlink" title="GET请求和POST请求"></a>GET请求和POST请求</h1><p>GET请求和POST请求是HTTP常见的请求方式。</p>
-<h2 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h2><h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> urlWithString:<span class="string">@""</span>];</span><br><span class="line"><span class="built_in">NSMutableURLRequest</span> *requestM = [<span class="built_in">NSMutableURLRequest</span> requestWithURL:url];</span><br><span class="line">requestM.HTTPMethod = <span class="string">@"POST"</span>;</span><br><span class="line"><span class="built_in">NSString</span> *body = <span class="string">@"username=%@&amp;password=%@"</span>;<span class="comment">//如遇中文，POST请求不需要手动转义，转义工作会自动完成</span></span><br><span class="line">requestM.HTTPBody = [body dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">[<span class="built_in">NSURLConnection</span> sendAsynchronousRequest:requestM queue:[<span class="built_in">NSOperationQueue</span> mainQueue] completionHandler:^(<span class="built_in">NSURLResponse</span> * _Nullable response, <span class="built_in">NSData</span> * _Nullable data, <span class="built_in">NSError</span> * _Nullable connectionError) &#123;</span><br><span class="line">  <span class="keyword">if</span> (connectionError == <span class="literal">nil</span> &amp;&amp; data.lenth &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dic = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="number">0</span> error:<span class="literal">nil</span>];</span><br><span class="line">    <span class="keyword">if</span> (dic[<span class="string">@"userId"</span>] intValue] == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">//成功</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//失败</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,connectionError);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>用到POST请求最常用的情况就是登陆的时候</p>
-</blockquote>
-<h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><p>转字符串NSString为二进制NSData<br>将NSData加密为字符串</p>
-<h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><h1 id="NSConnection"><a href="#NSConnection" class="headerlink" title="NSConnection"></a>NSConnection</h1><h1 id="NSSession"><a href="#NSSession" class="headerlink" title="NSSession"></a>NSSession</h1><p>dataTask POST GET<br>uploadTask 上传<br>downloadTask 下载 withResumeData断点续传<br>NSURLSessionConfiguration 用于自定义Session配置，类似NSURLConnection设置请求头<br>cancel（取消）、cancelByProducingResumeData（取消并保存当前进度）</p>
-
-          
+          <p>test<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/12/NSURLConnection/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
