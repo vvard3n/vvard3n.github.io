@@ -1,0 +1,980 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Objective-C,iOS,Networking,Socket," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="概念
+客户端（Client）：移动应用（iOS、android等应用）
+服务器（Server）：为客户端提供服务、提供数据、提供资源的特殊的计算机
+请求（Request）：客户端向服务器索取数据的一种行为
+响应（Response）：服务器对客户端的请求做出的反应,一般指返回数据给客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络基本概念和Socket">
+<meta property="og:url" content="http://nvar.xyz/2016/08/07/iOS开发之网络请求/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="概念
+客户端（Client）：移动应用（iOS、android等应用）
+服务器（Server）：为客户端提供服务、提供数据、提供资源的特殊的计算机
+请求（Request）：客户端向服务器索取数据的一种行为
+响应（Response）：服务器对客户端的请求做出的反应,一般指返回数据给客户端">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg">
+<meta property="og:updated_time" content="2016-08-12T11:38:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络基本概念和Socket">
+<meta name="twitter:description" content="概念
+客户端（Client）：移动应用（iOS、android等应用）
+服务器（Server）：为客户端提供服务、提供数据、提供资源的特殊的计算机
+请求（Request）：客户端向服务器索取数据的一种行为
+响应（Response）：服务器对客户端的请求做出的反应,一般指返回数据给客户端">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2016/08/07/iOS开发之网络请求/"/>
+
+  <title> 网络基本概念和Socket | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-51513222-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f7d05de4c415460201cbf2d7d4ac9cff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                网络基本概念和Socket
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-07T19:36:00+08:00" content="2016-08-07">
+              2016-08-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/07/iOS开发之网络请求/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/07/iOS开发之网络请求/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
+<li><strong>客户端（Client）</strong>：移动应用（iOS、android等应用）</li>
+<li><strong>服务器（Server）</strong>：为客户端提供服务、提供数据、提供资源的特殊的计算机</li>
+<li><strong>请求（Request）</strong>：客户端向服务器索取数据的一种行为</li>
+<li><strong>响应（Response）</strong>：服务器对客户端的请求做出的反应,一般指返回数据给客户端<a id="more"></a>
+<h1 id="URL基本概念"><a href="#URL基本概念" class="headerlink" title="URL基本概念"></a>URL基本概念</h1></li>
+</ul>
+<ul>
+<li><code>URL</code> 的全称是 <code>Uniform Resource Locator</code>（统一资源定位符）</li>
+<li>通过 1 个 URL，能找到互联网上唯一的 1 个资源</li>
+<li>URL就是资源在互联网上的地址、位置.互联网上的每个资源都有一个唯一的  <code>URL</code></li>
+<li>每个人都有住址.URL就是类似人的住址.</li>
+</ul>
+<h2 id="URL-格式"><a href="#URL-格式" class="headerlink" title="URL 格式"></a>URL 格式</h2><ul>
+<li>基本格式：<code>协议头://主机地址/路径</code><ul>
+<li><code>协议头</code>：不同的协议，表示不同的资源查找及传输方式</li>
+<li><code>主机地址</code>：存放资源主机的 <code>IP</code> 地址（域名）</li>
+<li><code>路径</code>：资源在主机中的具体位置</li>
+</ul>
+</li>
+</ul>
+<h2 id="协议头"><a href="#协议头" class="headerlink" title="协议头"></a>协议头</h2><ul>
+<li>浏览器会自动补全协议头.但是客户端中的网络开发时必须自己加上正确的的协议头.</li>
+<li>常见URL协议<ul>
+<li><code>HTTP://</code>     超文本传输协议</li>
+<li><code>FTP://</code>      传输文件协议</li>
+<li><code>File://</code>     获取本地文件协议</li>
+<li><code>mailto://</code>   发邮件协议</li>
+<li><code>tel://</code>      打电话协议</li>
+<li><code>sms://</code>      发短信协议</li>
+</ul>
+</li>
+</ul>
+<h2 id="主机地址"><a href="#主机地址" class="headerlink" title="主机地址"></a>主机地址</h2><ul>
+<li>主机地址(IP地址)和域名是一一对应的.<code>www.baidu.com</code> 和 <code>119.75.217.109</code>,在浏览器中都可以获取到百度首页数据.</li>
+<li>通过<code>www.baidu.com</code>是如何找到百度的服务器地址的?<ul>
+<li>DNS服务器会将域名解析成IP地址.DNS服务器交域名解析服务器.</li>
+</ul>
+</li>
+<li>域名比IP地址更方便使用者记忆和使用.效果是一样的.</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><h2 id="HTTP协议基本概念"><a href="#HTTP协议基本概念" class="headerlink" title="HTTP协议基本概念"></a>HTTP协议基本概念</h2><ul>
+<li>思考<ul>
+<li>客户端该传什么格式的数据给服务器,服务器才能看懂?</li>
+<li>服务器该返回什么格式的数据给客户端,客户端才能看懂?</li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTP协议-1"><a href="#HTTP协议-1" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><ul>
+<li><code>协议 :</code> 租房合同,规定了什么时候交房租,交给谁,怎么交,交多少,没交怎么办…</li>
+<li><code>HTTP协议</code> 的全称是 <code>Hypertext Transfer Protocol</code>，超文本传输协议<ul>
+<li><code>超文本 :</code> 网络上的数据是多种多样的.除了文字,数字以外,还有视频,音频,图片…都是属于超文本.</li>
+<li><code>传输 :</code> 客户端和服务器之间的数据传递的过程.传递的都是二进制数据.</li>
+<li><code>协议 :</code> 规定客户端和服务器之间的数据传递格式.</li>
+</ul>
+</li>
+</ul>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>规定客户端和服务器之间的数据传输格式<ul>
+<li>客户端该传什么格式的数据给服务器,服务器才能看懂.</li>
+<li>服务器该返回什么格式的数据给客户端,客户端才能看懂.</li>
+</ul>
+</li>
+<li>让客户端和服务器能有效地进行数据沟通</li>
+<li><code>HTTP</code> 协议是网络编程使用最为广泛的协议</li>
+</ul>
+<h2 id="HTTP协议特点"><a href="#HTTP协议特点" class="headerlink" title="HTTP协议特点"></a>HTTP协议特点</h2><ul>
+<li>简单快速<ul>
+<li>因为HTTP协议简单，所以 <code>HTTP</code> 服务器的程序规模小，通信速度快</li>
+</ul>
+</li>
+<li>灵活<ul>
+<li><code>HTTP 协议</code> <strong>允许传输任意类型的数据</strong></li>
+</ul>
+</li>
+<li><code>HTTP 0.9</code> 和 <code>1.0</code> 使用非持续链接<ul>
+<li>限制每次连接只处理一个请求，服务器对客户端的请求做出响应后，立刻断开连接.</li>
+<li>每建立一次链接,只能发送一次请求,得到一次响应.</li>
+<li><strong>注意 :</strong> <code>非持续链接</code>不适合频繁的请求.</li>
+</ul>
+</li>
+<li><code>HTTP 1.1</code> 使用持续连接<ul>
+<li>不必为每个web对象创建一个新的连接，一个连接可以传送多个对象</li>
+<li>每建立一次链接,发送一次请求并得到响应之后,链接不会立即断开,链接会持续保持一段时间.在这个时间内客户端如果还有请求就不需要再与服务器建立链接.</li>
+<li><strong>注意 :</strong> <code>持续链接</code>不是一直保持链接,这个链接只持续一定的时间.因为不能长时间占用服务器资源.</li>
+</ul>
+</li>
+</ul>
+<h3 id="长连接和短连接-amp-心跳包"><a href="#长连接和短连接-amp-心跳包" class="headerlink" title="长连接和短连接 &amp; 心跳包"></a>长连接和短连接 &amp; 心跳包</h3><ul>
+<li><p>短连接</p>
+<ul>
+<li>非持续链接和持续链接都是短链接.</li>
+<li>数据请求结束后，会断开连接</li>
+<li>能够及时释放服务器资源</li>
+<li>让服务器能够为更多的用户提供服务</li>
+</ul>
+</li>
+<li><p>长连接</p>
+<ul>
+<li>一旦连接建立之后,始终保持连接状态,除非断网或者主动退出登录.</li>
+<li>后续只需发送和接收数据即可，数据响应更及时</li>
+<li>长连接对服务器资源占用比较大</li>
+<li>对交互响应要求快的应用，例如即时通讯，需要使用长连接</li>
+</ul>
+</li>
+<li><p>心跳包</p>
+<ul>
+<li>是检测长连接的重要技术手段</li>
+<li>可以由服务器发送<ul>
+<li>定时向客户端发送小数据，根据回执判断客户端是否在线</li>
+</ul>
+</li>
+<li>也可以由客户端发送<ul>
+<li>定时向服务器发送小数据，报告客户端当前在线</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="网络通信过程-请求"><a href="#网络通信过程-请求" class="headerlink" title="网络通信过程-请求"></a>网络通信过程-请求</h1><ul>
+<li>监测浏览器的网络请求</li>
+</ul>
+<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><ul>
+<li><code>HTTP</code>协议规定：一个完整的<code>由客户端发给服务器</code>的 <code>HTTP 请求</code> 需要包含以下内容<ul>
+<li>请求行</li>
+<li>请求头</li>
+<li>请求体(可选)</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg" alt=""></p>
+<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><ul>
+<li><p><code>请求行</code>：指定 <code>请求方法</code>、<code>请求资源路径</code> 以及 <code>HTTP协议版本</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>GET /</code> 后面的 <code>/</code> 表示访问根目录</li>
+</ul>
+</li>
+</ul>
+<h3 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h3><ul>
+<li><p><code>请求头</code>：对客户端的环境描述、客户端请求的主机地址等信息.至少包含以下信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 客户端要访问的服务器主机地址</span></span><br><span class="line">Host: www.baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>请求头</code>中还可以包含以下信息,<code>告诉服务器一些额外的信息</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 访问结束后，是否断开连接</span></span><br><span class="line">Connection: keep-alive</span><br><span class="line"><span class="comment"># 是否缓存数据</span></span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line"><span class="comment"># 客户端所能接收的数据类型</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="comment"># 客户端的类型，客户端的软件环境</span></span><br><span class="line">User-Agent: iPhone AppleWebKit</span><br><span class="line"><span class="comment"># 客户端支持的数据压缩格式</span></span><br><span class="line">Accept-Encoding: gzip, deflate, sdch</span><br><span class="line"><span class="comment"># 客户端的语言环境</span></span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="请求体"><a href="#请求体" class="headerlink" title="请求体"></a>请求体</h3><ul>
+<li><code>请求体</code>(可选)：客户端发给服务器的具体数据，例如要上传的文件数据<ul>
+<li>GET请求没有请求体.</li>
+<li>POST请求有请求体.告诉服务器一些类似于用户名和密码的信息.比如注册和登陆.</li>
+</ul>
+</li>
+</ul>
+<h3 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h3><ul>
+<li>每一项请求信息末尾使用 <code>\r\n</code></li>
+<li>最后一个请求项末尾使用 <code>\r\n\r\n</code> 表示请求结束</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: m.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">User-Agent: iPhone AppleWebKit</span><br><span class="line">Accept-Encoding: gzip, deflate, sdch</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en;q=0.6</span><br></pre></td></tr></table></figure>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><ul>
+<li><code>HTTP</code>协议规定：一个完整的 <code>HTTP 响应</code>包含以下内容：<ul>
+<li>状态行</li>
+<li>响应头</li>
+<li>响应体</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwgw1f6r6qo6xfcj30dt06gwes.jpg" alt=""></p>
+<h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><ul>
+<li><p><code>状态行</code>：包含了<code>HTTP协议版本</code>、<code>状态码</code>、<code>状态英文名称</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请求成功</span></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line"><span class="comment"># 内容无变化</span></span><br><span class="line">HTTP/1.1 304 Not Modified</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>状态码</p>
+<ul>
+<li>1XX消息</li>
+<li>2XX 成功</li>
+<li>3XX 更多选择</li>
+<li>4XX 客户端错误</li>
+<li>5XX 服务器错误</li>
+</ul>
+</li>
+</ul>
+<h3 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h3><ul>
+<li><p><code>响应头</code>：服务器告诉客户端一些信息.包含了<code>对服务器的描述</code>、<code>对返回数据的描述</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务器的类型</span></span><br><span class="line">Server: Apache/2.4.10 (Unix) PHP/5.5.20</span><br><span class="line"><span class="comment"># 返回数据的类型</span></span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line"><span class="comment"># 返回数据的长度</span></span><br><span class="line">Content-Length: 660</span><br><span class="line"><span class="comment"># 响应时间</span></span><br><span class="line">Date: Thu, 04 Jun 2015 19:31:50 GMT</span><br><span class="line"><span class="comment"># ETag(HASH值，用于检测本地资源和服务器资源是否一致)</span></span><br><span class="line">ETag: <span class="string">"294-4e1862f57e7c0"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意 :</p>
+<ul>
+<li>请求发送的和响应返回的额外信息都是键值对的形式.</li>
+<li>text/html : 大文件类型/小文件类型. 比如 : image/png</li>
+</ul>
+</li>
+</ul>
+<h3 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h3><ul>
+<li><code>响应体</code>：服务器返回给客户端的二进制数据</li>
+</ul>
+<h1 id="网络开发方案"><a href="#网络开发方案" class="headerlink" title="网络开发方案"></a>网络开发方案</h1><p>在iOS中，常见的发送HTTP请求的方案包括：</p>
+<ul>
+<li>苹果官方</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NSURLConnection</code></td>
+<td>iOS 2.0 推出，用法简单，最古老最经典最直接的一种方案</td>
+</tr>
+<tr>
+<td><code>NSURLSession</code></td>
+<td>iOS 7 推出，功能比 NSURLConnection 更加强大</td>
+</tr>
+<tr>
+<td><code>CFNetwork</code></td>
+<td>NSURL 的底层，纯C语言，几乎不用</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第三方框架</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>底层</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ASIHttpRequest</code></td>
+<td><code>CFNetwork</code></td>
+<td>外号<code>HTTP终结者</code>，功能极其强大，2012年 10 月停止更新，MRC</td>
+</tr>
+<tr>
+<td><code>AFNetworking</code></td>
+<td><code>NSURLConnection</code> &amp; <code>NSURLSession</code></td>
+<td>简单易用，提供了基本够用的常用功能，维护和使用者多</td>
+</tr>
+<tr>
+<td><code>MKNetworkKit</code></td>
+<td><code>NSURLConnection</code></td>
+<td>简单易用，产自三哥的故乡印度，维护和使用者少</td>
+</tr>
+<tr>
+<td><code>Alamofire</code></td>
+<td><code>NSURLSession</code></td>
+<td><code>MATTT</code> 的又一力作，Swift 开发，轻量级的 HTTP 解决方案，目前功能还远不如 <code>AFNetworking</code></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/Networking/" rel="tag">#Networking</a>
+          
+            <a href="/tags/Socket/" rel="tag">#Socket</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/27/iOS开发之多线程/" rel="next" title="iOS开发之多线程">
+                <i class="fa fa-chevron-left"></i> iOS开发之多线程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/12/NSURLConnection/" rel="prev" title="NSURLConnection">
+                NSURLConnection <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL基本概念"><span class="nav-number">2.</span> <span class="nav-text">URL基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-格式"><span class="nav-number">2.1.</span> <span class="nav-text">URL 格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议头"><span class="nav-number">2.2.</span> <span class="nav-text">协议头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机地址"><span class="nav-number">2.3.</span> <span class="nav-text">主机地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">3.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP协议基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">3.1.2.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议特点"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP协议特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#长连接和短连接-amp-心跳包"><span class="nav-number">3.2.1.</span> <span class="nav-text">长连接和短连接 & 心跳包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络通信过程-请求"><span class="nav-number">4.</span> <span class="nav-text">网络通信过程-请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-number">4.1.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求行"><span class="nav-number">4.1.1.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求头"><span class="nav-number">4.1.2.</span> <span class="nav-text">请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求体"><span class="nav-number">4.1.3.</span> <span class="nav-text">请求体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求格式"><span class="nav-number">4.1.4.</span> <span class="nav-text">请求格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.1.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应"><span class="nav-number">4.2.</span> <span class="nav-text">响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态行"><span class="nav-number">4.2.1.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应头"><span class="nav-number">4.2.2.</span> <span class="nav-text">响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应体"><span class="nav-number">4.2.3.</span> <span class="nav-text">响应体</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络开发方案"><span class="nav-number">5.</span> <span class="nav-text">网络开发方案</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vvard3nsblog';
+      var disqus_identifier = '2016/08/07/iOS开发之网络请求/';
+      var disqus_title = "网络基本概念和Socket";
+      var disqus_url = 'http://nvar.xyz/2016/08/07/iOS开发之网络请求/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
