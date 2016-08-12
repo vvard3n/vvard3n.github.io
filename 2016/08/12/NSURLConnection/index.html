@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://nvar.xyz/2016/08/12/NSURLConnection/index.html">
 <meta property="og:site_name" content="vvard3n's Blog">
 <meta property="og:description" content="在iOS7后，NSURLSession基本代替了NSURLConnection进行网络开发，在iOS9后，NSURLConnection相关方法被完全的弃用，iOS系统有向下兼容的特性，尽管NSURLConnection已经被弃用，但在开发中，其方法依然可以被使用，并且如果需要兼容到很低版本的iOS系统，有时就必须使用NSURLConnection类了。">
-<meta property="og:updated_time" content="2016-08-12T12:38:22.000Z">
+<meta property="og:updated_time" content="2016-08-12T12:50:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSURLConnection">
 <meta name="twitter:description" content="在iOS7后，NSURLSession基本代替了NSURLConnection进行网络开发，在iOS9后，NSURLConnection相关方法被完全的弃用，iOS系统有向下兼容的特性，尽管NSURLConnection已经被弃用，但在开发中，其方法依然可以被使用，并且如果需要兼容到很低版本的iOS系统，有时就必须使用NSURLConnection类了。">
@@ -350,7 +350,7 @@
 <li><code>NSURLRequest</code>：根据 <code>URL</code> 建立请求，向服务器索要数据</li>
 <li><code>NSURLConnection</code>：建立网络连接，将请求发送给服务器</li>
 </ol>
-<h2 id="sendAsynchronousRequest-发送异步请求"><a href="#sendAsynchronousRequest-发送异步请求" class="headerlink" title="sendAsynchronousRequest 发送异步请求"></a><code>sendAsynchronousRequest</code> 发送异步请求</h2><ul>
+<h2 id="sendAsynchronousRequest-发送异步请求"><a href="#sendAsynchronousRequest-发送异步请求" class="headerlink" title="sendAsynchronousRequest 发送异步请求"></a>sendAsynchronousRequest 发送异步请求</h2><ul>
 <li>此方法就是异步执行的，程序员无需考虑开启线程，或者创建队列</li>
 <li>会将之前建立好的请求<code>异步</code>发送给服务器</li>
 <li>等到接收到服务器响应后，由 <code>queue</code> 负责调度 <code>completionHandler</code> 的执行</li>
