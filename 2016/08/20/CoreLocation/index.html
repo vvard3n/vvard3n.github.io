@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Objective-C,iOS,CoreLocation," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="CoreLocation主要处理iOS中的定位CLLocationManager:负责授权相关请求处理,获取当前位置与方向信息, 以及区域监听功能实现.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoreLocation">
+<meta property="og:url" content="http://nvar.xyz/2016/08/20/CoreLocation/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="CoreLocation主要处理iOS中的定位CLLocationManager:负责授权相关请求处理,获取当前位置与方向信息, 以及区域监听功能实现.">
+<meta property="og:updated_time" content="2016-08-19T17:53:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CoreLocation">
+<meta name="twitter:description" content="CoreLocation主要处理iOS中的定位CLLocationManager:负责授权相关请求处理,获取当前位置与方向信息, 以及区域监听功能实现.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2016/08/20/CoreLocation/"/>
+
+  <title> CoreLocation | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-51513222-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f7d05de4c415460201cbf2d7d4ac9cff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CoreLocation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-20T01:44:34+08:00" content="2016-08-20">
+              2016-08-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/20/CoreLocation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/20/CoreLocation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>CoreLocation主要处理iOS中的定位<br>CLLocationManager:负责授权相关请求处理,获取当前位置与方向信息, 以及区域监听功能实现.<br><a id="more"></a></p>
+<h1 id="获取权限"><a href="#获取权限" class="headerlink" title="获取权限"></a>获取权限</h1><p>从iOS6开始, 苹果在保护用户隐私方面做了很大的加强, 如获取用户的位置, 访问用户的通讯录, 相机, 相册等功能, 都需要经过用户的授权。<br>用当访问用户的隐私信息时, 系统会弹出对话框让用户进行授权  </p>
+<ul>
+<li>iOS7时, 使用到相关功能会自动弹出授权窗口  </li>
+<li>iOS8后, 需要App自己手动的调动授权相关的代码来弹出授权窗口  </li>
+</ul>
+<p>iOS7时, 可以在Info.plist中配置Privacy - Location Usage Description, 通过该Key的value说明定位的目的。<br>iOS8后, 根据请求定位权限的不同, 在Info.plist文件中配置相关Key, 可从头文件中查找权限相关Key值：  </p>
+<pre><code>* WhenInUseAuthorization, 使用NSLocationWhenInUseUsageDescription
+* AlwaysAuthorization, 使用NSLocationAlwaysUsageDescription  
+</code></pre><h2 id="授权种类"><a href="#授权种类" class="headerlink" title="授权种类"></a>授权种类</h2><ol>
+<li><p>WhenInUse授权</p>
+<ul>
+<li>App仅在前台运行时可以使用定位相关功能</li>
+<li>使用本地通知时, 可以进行区域监听实现基于区域的通知触发.</li>
+<li>不用实现地理位置的区域监听功能.</li>
+</ul>
+</li>
+<li><p>Always授权</p>
+<ul>
+<li>App处于前台/后台运行状态下, 都可以使用定位相关功能</li>
+<li>可以实现地理位置的区域监听功能,</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果用户还没给予定位授权, 请求权限(弹窗口做选择)</span></span><br><span class="line"><span class="selector-tag">if</span> ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求授权 (仅在没有决定时才会弹出窗口，一旦授权作出了选择, 下次就不会再出现了)</span></span><br><span class="line">    <span class="comment">// 注意: 一定要在Info.plist文件当中配置, 否则不执行</span></span><br><span class="line">    <span class="selector-attr">[self.manager requestWhenInUseAuthorization]</span>; <span class="comment">/*程序前台运行时允许定位*/</span></span><br><span class="line">		<span class="comment">// 或</span></span><br><span class="line">		<span class="selector-attr">[self.manager requestAlwaysAuthorization]</span>; <span class="comment">/*无论程序是否在前台或者后台都可以定位*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>info.plist文件中，设置key为NSLocationWhenInUseUsageDescription<br>    或者NSLocationAlwaysUsageDescription，value为显示给用户的描述，需要写清楚为何要定位权限。<br>    不设置info.plist的话，授权操作不会执行</p>
+</blockquote>
+<h2 id="授权状态"><a href="#授权状态" class="headerlink" title="授权状态"></a>授权状态</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  kCLAuthorizationStatusNotDetermined = 0,   还没有做出决定</span><br><span class="line">  kCLAuthorizationStatusRestricted,      受限状态(被拒绝) (用户无法改变的状态)</span><br><span class="line">  kCLAuthorizationStatusDenied,      拒绝</span><br><span class="line">  kCLAuthorizationStatusAuthorizedAlways 得到了Always授权</span><br><span class="line">  kCLAuthorizationStatusAuthorizedWhenInUse 得到仅前台可用的授权</span><br><span class="line">  kCLAuthorizationStatusAuthorized,      得到授权 (废弃)</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="代理方法"><a href="#代理方法" class="headerlink" title="代理方法"></a>代理方法</h2><p>当授权状态发生改变时，会出发代理方法<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didChangeAuthorizationStatus:<span class="params">(CLAuthorizationStatus)</span>status</span><br></pre></td></tr></table></figure></p>
+<p>在代理方法中则可以判断 <strong>status</strong> 的状态进行相应的操作<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据授权状态做出操作</span></span><br><span class="line">    <span class="keyword">if</span> <span class="comment">(status == kCLAuthorizationStatusAuthorizedWhenInUse)</span> &#123;</span><br><span class="line">				<span class="comment">// 用户同意 : 执行相关功能</span></span><br><span class="line">    &#125; else <span class="keyword">if</span> <span class="comment">(status == kCLAuthorizationStatusDenied)</span> &#123;</span><br><span class="line">        <span class="comment">// 用户拒绝 : 提醒用户给予权限(图片、文字引导)</span></span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>需要使用代理方法时，不要忘记设置CLLocationManager实例变量的delegate为当前控制器</p>
+</blockquote>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>当获得用户授权后，可以调用startUpdatingLocation启动定位<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[self.manager startUpdatingLocation]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>当位置信息更新后触发，locations中的lastObject是最新的位置<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didUpdateLocations:<span class="params">(NSArray&lt;CLLocation *&gt; *)</span>locations</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最前的位置信息是数组的最后一个元素</span></span><br><span class="line">  CLLocation *currentLocation = locations.lastObject;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// CLLocationCoordinate2D 表示经纬度的结构体, 单位是Double</span></span><br><span class="line">  CLLocationCoordinate2D <span class="built_in">coordinate</span> = currentLocation.coordinate;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取到当前位置是的时间</span></span><br><span class="line">  NSDate *<span class="built_in">date</span> = currentLocation.timestamp;</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出经纬度</span></span><br><span class="line">  NSLog(@<span class="string">"%f, %f, %@"</span>, <span class="built_in">coordinate</span>.latitude, <span class="built_in">coordinate</span>.longitude, <span class="built_in">date</span>);</span><br></pre></td></tr></table></figure>
+<p>遇到错误情况, 失败时触发，error为错误信息<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didFailWithError:<span class="params">(NSError *)</span>error</span><br></pre></td></tr></table></figure></p>
+<p>判断error.code的值，可以得知错误信息<br>常见错误：<br><code>kCLErrorDenied</code> 没有得到授权<br><code>kCLErrorNetwork</code> 网络问题导致的错误<br><code>kCLErrorLocationUnknown</code> 当前的位置未知, 会继续尝试  </p>
+<blockquote>
+<p>如果是模拟器, 报了kCLErrorLocationUnknown错误, 是模拟器的问题.<br>  此时不是代码问题，尝试以下方法解决问题：</p>
+<ol>
+<li>删掉App重新运行</li>
+<li>换一个模拟器</li>
+<li>重置模拟器</li>
+</ol>
+</blockquote>
+<h2 id="后台更新模式支持"><a href="#后台更新模式支持" class="headerlink" title="后台更新模式支持"></a>后台更新模式支持</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自动暂停位置更新, 默认为YES, 需要持续的定位需要改成NO</span></span><br><span class="line"><span class="keyword">self</span>.manager.pausesLocationUpdatesAutomatically = <span class="literal">NO</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否允许后台的位置更新, 默认是NO</span></span><br><span class="line"><span class="keyword">self</span>.manager.allowsBackgroundLocationUpdates = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="定位精度"><a href="#定位精度" class="headerlink" title="定位精度"></a>定位精度</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyBestForNavigation;	针对导航的最佳精确度</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyBest;							最佳精确度</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyNearestTenMeters;	精确到<span class="number">10</span>米</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyHundredMeters;			精确到<span class="number">100</span>米</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyKilometer;					精确到<span class="number">1000</span>米</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">const</span> CLLocationAccuracy kCLLocationAccuracyThreeKilometers;		精确到<span class="number">3000</span>米</span><br></pre></td></tr></table></figure>
+<p>设置self.manager的desiredAccuracy即可。<br><figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">_manager.desiredAccuracy </span>=<span class="string"> kCLLocationAccuracyNearestTenMeters;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>也可以直接设置数字，若设置10，则告诉程序尽量达到10米精度</p>
+</blockquote>
+<h1 id="计算平均速度"><a href="#计算平均速度" class="headerlink" title="计算平均速度"></a>计算平均速度</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -------- 计算位移, 时间 --------</span></span><br><span class="line">    <span class="comment">// 当前位置</span></span><br><span class="line">    CLLocation *currentLocaiton = locations.lastObject;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一次获取到位置时, 不用计算</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.previousLocation != <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="comment">// 计算两个位置之间的距离, 单位是米</span></span><br><span class="line">        CLLocationDistance distance = [currentLocaiton distanceFromLocation:<span class="keyword">self</span>.previousLocation];</span><br><span class="line">        _sumDistance += distance;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 计算两个点的时间差</span></span><br><span class="line">        <span class="comment">// timestamp 记录了获取到该位置信息时的时间, 秒</span></span><br><span class="line">        <span class="built_in">NSTimeInterval</span> time = [currentLocaiton.timestamp timeIntervalSinceDate:<span class="keyword">self</span>.previousLocation.timestamp];</span><br><span class="line">        _sumTime += time;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> speed = (_sumDistance / <span class="number">1000</span>) / (_sumTime / <span class="number">3600</span>);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"总距离: %f, 总时间: %f, 平均速度: %f"</span>, _sumDistance, _sumTime, speed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新上一次位置</span></span><br><span class="line">    <span class="keyword">self</span>.previousLocation = currentLocaiton;</span><br></pre></td></tr></table></figure>
+<h1 id="方向"><a href="#方向" class="headerlink" title="方向"></a>方向</h1><p>当设备的方向信息更新时触发的代理方法<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didUpdateHeading:<span class="params">(CLHeading *)</span>newHeading</span><br></pre></td></tr></table></figure></p>
+<h2 id="CLHeading"><a href="#CLHeading" class="headerlink" title="CLHeading"></a>CLHeading</h2><p>代表方向相关的信息, 包含磁北方向, 时间信息, 精确度等<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> *  CLHeading</span><br><span class="line"> *  </span><br><span class="line"> *    表示一个向量指向磁北的轴分量x,y,z的值。当前精度和时间信息也同时提供。</span><br><span class="line"> */</span></span><br><span class="line"><span class="built_in">NS_CLASS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">3</span>_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLHeading</span> : <span class="title">NSObject</span> &lt;<span class="title">NSCopying</span>, <span class="title">NSSecureCoding</span>&gt;</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">@private</span></span><br><span class="line">    <span class="keyword">id</span> _internal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="CLLocationDirection"><a href="#CLLocationDirection" class="headerlink" title="CLLocationDirection"></a>CLLocationDirection</h2><p>用于保存方向信息<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> *  CLLocationDirection</span><br><span class="line"> *  </span><br><span class="line"> *    用来表示方向的0 - 359.9度</span><br><span class="line"> *    负值表示无效的方向</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> CLLocationDirection;</span><br></pre></td></tr></table></figure></p>
+<h2 id="真北"><a href="#真北" class="headerlink" title="真北"></a>真北</h2><p>是通过磁北来计算得到的值<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">newHeading</span><span class="selector-class">.trueHeading</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="磁北"><a href="#磁北" class="headerlink" title="磁北"></a>磁北</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">newHeading</span><span class="selector-class">.magneticHeading</span></span><br></pre></td></tr></table></figure>
+<h2 id="计算弧度值"><a href="#计算弧度值" class="headerlink" title="计算弧度值"></a>计算弧度值</h2><p>可用于便宜图片（指南针）<br><figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">CGFloat angle </span>=<span class="string"> direction / 180 * M_PI;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="范围侦测"><a href="#范围侦测" class="headerlink" title="范围侦测"></a>范围侦测</h1><h2 id="CLLocationCoordinate2D"><a href="#CLLocationCoordinate2D" class="headerlink" title="CLLocationCoordinate2D"></a>CLLocationCoordinate2D</h2><p>保存坐标<br><figure class="highlight thrift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> *  CLLocationCoordinate2D</span><br><span class="line"> *  </span><br><span class="line"> *  Discussion:</span><br><span class="line"> *    一个包含了地理坐标的结构体。</span><br><span class="line"> *</span><br><span class="line"> *  字段:</span><br><span class="line"> *    latitude纬度:</span><br><span class="line"> *      坐标的纬度</span><br><span class="line"> *    longitude经度:</span><br><span class="line"> *      坐标的经度</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CLLocationCoordinate2D</span> </span>&#123;</span><br><span class="line">	CLLocationDegrees latitude;</span><br><span class="line">	CLLocationDegrees longitude;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CLLocationCoordinate2D</span> CLLocationCoordinate2D;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight fix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">CLLocationCoordinate2D center </span>=<span class="string"> CLLocationCoordinate2DMake(纬度, 经度);</span></span><br></pre></td></tr></table></figure>
+<h2 id="CLCircularRegion"><a href="#CLCircularRegion" class="headerlink" title="CLCircularRegion"></a>CLCircularRegion</h2><p>保存一个圆形的区域<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> *  CLCircularRegion</span><br><span class="line"> *</span><br><span class="line"> *    一个圆形的地理区域。</span><br><span class="line"> */</span></span><br><span class="line"><span class="built_in">NS_CLASS_AVAILABLE</span>(<span class="number">10</span>_10, <span class="number">7</span>_0)</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CLCircularRegion</span> : <span class="title">CLRegion</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CLCircularRegion *region = [[CLCircularRegion alloc] <span class="string">initWithCenter:</span>center <span class="string">radius:</span>半径 <span class="string">identifier:</span>@<span class="string">"标签"</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="开始监听"><a href="#开始监听" class="headerlink" title="开始监听"></a>开始监听</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始监听指定的区域</span></span><br><span class="line">    <span class="selector-attr">[self.manager startMonitoringForRegion:region]</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="代理方法-1"><a href="#代理方法-1" class="headerlink" title="代理方法"></a>代理方法</h2><p>区域监听失败<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager monitoringDidFailForRegion:<span class="params">(CLRegion *)</span>region withError:<span class="params">(NSError *)</span>error;</span><br></pre></td></tr></table></figure></p>
+<p>进入指定区域<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didEnterRegion:<span class="params">(CLRegion *)</span>region;</span><br></pre></td></tr></table></figure></p>
+<p>离开指定区域<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>locationManager:<span class="params">(CLLocationManager *)</span>manager didExitRegion:<span class="params">(CLRegion *)</span>region;</span><br></pre></td></tr></table></figure></p>
+<h1 id="地理编码"><a href="#地理编码" class="headerlink" title="地理编码"></a>地理编码</h1><p>地理编码: 根据具体位置的文字描述(如名字, 地址等), 获得具体的地理描述(如经纬度, 海拔等)<br>反地理编码: 根据给定的地理描述(经纬度), 获取具体位置的文字描述(如名字, 街道, 城市)  </p>
+<h2 id="地理编码的工具类"><a href="#地理编码的工具类" class="headerlink" title="地理编码的工具类"></a>地理编码的工具类</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CLGeocoder *coder<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="地理编码-1"><a href="#地理编码-1" class="headerlink" title="地理编码"></a>地理编码</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过网络来实现, 向苹果的服务器发送请求, 等待结果</span></span><br><span class="line"><span class="comment">// 文字描述 -&gt; 地理描述, Block回调</span></span><br><span class="line">[<span class="keyword">self</span>.coder geocodeAddressString:<span class="string">@"中粮商务公园"</span> completionHandler:^(<span class="built_in">NSArray</span>&lt;CLPlacemark *&gt; * _Nullable placemarks, <span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// CLPlacemark 表示地理标识 (包含了该地方的经纬度, 名称, 街道....)</span></span><br><span class="line">    <span class="comment">// 包含地理描述|文字描述</span></span><br><span class="line">    <span class="keyword">for</span> (CLPlacemark *mark <span class="keyword">in</span> placemarks) &#123;</span><br><span class="line">       <span class="built_in">NSLog</span>(<span class="string">@"%@, %@"</span>, mark.name, mark.location);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h2 id="反地理编码"><a href="#反地理编码" class="headerlink" title="反地理编码"></a>反地理编码</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CLLocation *locaiton = [[CLLocation alloc] <span class="string">initWithLatitude:</span><span class="number">22.57655800</span> <span class="string">longitude:</span><span class="number">113.92378800</span>];</span><br><span class="line"></span><br><span class="line">[self.coder <span class="string">reverseGeocodeLocation:</span>locaiton <span class="string">completionHandler:</span>^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) &#123;</span><br><span class="line">    <span class="keyword">for</span> (CLPlacemark *mark <span class="keyword">in</span> placemarks) &#123;</span><br><span class="line">        NSLog(@<span class="string">"%@, %@"</span>, mark.name, mark.location);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/CoreLocation/" rel="tag">#CoreLocation</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/NSURLSession/" rel="next" title="NSURLSession">
+                <i class="fa fa-chevron-left"></i> NSURLSession
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#获取权限"><span class="nav-number">1.</span> <span class="nav-text">获取权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#授权种类"><span class="nav-number">1.1.</span> <span class="nav-text">授权种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权状态"><span class="nav-number">1.2.</span> <span class="nav-text">授权状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理方法"><span class="nav-number">1.3.</span> <span class="nav-text">代理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位"><span class="nav-number">2.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台更新模式支持"><span class="nav-number">2.1.</span> <span class="nav-text">后台更新模式支持</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位精度"><span class="nav-number">3.</span> <span class="nav-text">定位精度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算平均速度"><span class="nav-number">4.</span> <span class="nav-text">计算平均速度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方向"><span class="nav-number">5.</span> <span class="nav-text">方向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CLHeading"><span class="nav-number">5.1.</span> <span class="nav-text">CLHeading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CLLocationDirection"><span class="nav-number">5.2.</span> <span class="nav-text">CLLocationDirection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真北"><span class="nav-number">5.3.</span> <span class="nav-text">真北</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁北"><span class="nav-number">5.4.</span> <span class="nav-text">磁北</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算弧度值"><span class="nav-number">5.5.</span> <span class="nav-text">计算弧度值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#范围侦测"><span class="nav-number">6.</span> <span class="nav-text">范围侦测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CLLocationCoordinate2D"><span class="nav-number">6.1.</span> <span class="nav-text">CLLocationCoordinate2D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CLCircularRegion"><span class="nav-number">6.2.</span> <span class="nav-text">CLCircularRegion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始监听"><span class="nav-number">6.3.</span> <span class="nav-text">开始监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理方法-1"><span class="nav-number">6.4.</span> <span class="nav-text">代理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地理编码"><span class="nav-number">7.</span> <span class="nav-text">地理编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#地理编码的工具类"><span class="nav-number">7.1.</span> <span class="nav-text">地理编码的工具类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理编码-1"><span class="nav-number">7.2.</span> <span class="nav-text">地理编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反地理编码"><span class="nav-number">7.3.</span> <span class="nav-text">反地理编码</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vvard3nsblog';
+      var disqus_identifier = '2016/08/20/CoreLocation/';
+      var disqus_title = "CoreLocation";
+      var disqus_url = 'http://nvar.xyz/2016/08/20/CoreLocation/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
