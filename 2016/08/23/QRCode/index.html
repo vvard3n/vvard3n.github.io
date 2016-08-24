@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.useso.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Objective-C,iOS,CoreImage,AVFoundation," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vvard3n's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从iOS7开始，苹果官方提供了原生的二维码生成与识别类库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QRCode">
+<meta property="og:url" content="http://nvar.xyz/2016/08/23/QRCode/index.html">
+<meta property="og:site_name" content="vvard3n's Blog">
+<meta property="og:description" content="从iOS7开始，苹果官方提供了原生的二维码生成与识别类库。">
+<meta property="og:updated_time" content="2016-08-24T15:58:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QRCode">
+<meta name="twitter:description" content="从iOS7开始，苹果官方提供了原生的二维码生成与识别类库。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://nvar.xyz/2016/08/23/QRCode/"/>
+
+  <title> QRCode | vvard3n's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-51513222-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f7d05de4c415460201cbf2d7d4ac9cff";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">vvard3n's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">上善若水，人淡如菊</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                QRCode
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-23T19:55:32+08:00" content="2016-08-23">
+              2016-08-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/23/QRCode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/23/QRCode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从iOS7开始，苹果官方提供了原生的二维码生成与识别类库。<br><a id="more"></a></p>
+<h1 id="二维码简介"><a href="#二维码简介" class="headerlink" title="二维码简介"></a>二维码简介</h1><p>二维条码/二维码（2-dimensional bar code）是用某种特定的几何图形按一定规律在平面（二维方向上）分布的黑白相间的图形记录数据符号信息的；在代码编制上巧妙地利用构成计算机内部逻辑基础的“0”、“1”比特流的概念，使用若干个与二进制相对应的几何形体来表示文字数值信息，通过图象输入设备或光电扫描设备自动识读以实现信息自动处理：它具有条码技术的一些共性：每种码制有其特定的字符集；每个字符占有一定的宽度；具有一定的校验功能等。同时还具有对不同行的信息自动识别功能、及处理图形旋转变化点。<br>二维码是一种比一维码更高级的条码格式。一维码只能在一个方向（一般是水平方向）上表达信息，而二维码在水平和垂直方向都可以存储信息。一维码只能由数字和字母组成，而二维码能存储汉字、数字和图片等信息，因此二维码的应用领域要广得多。<br>二维条码/二维码可以分为堆叠式/行排式二维条码和矩阵式二维条码。 堆叠式/行排式二维条码形态上是由多行短截的一维条码堆叠而成；矩阵式二维条码以矩阵的形式组成，在矩阵相应元素位置上用“点”表示二进制“1”， 用“空”表示二进制“0”，“点”和“空”的排列组成代码。  </p>
+<blockquote>
+<p>二维码的内容是字符串<br>二维码的内容越多，黑白像素点越多</p>
+</blockquote>
+<h1 id="CoreImage-生成二维码"><a href="#CoreImage-生成二维码" class="headerlink" title="CoreImage 生成二维码"></a>CoreImage 生成二维码</h1><p>专门用来处理静态与动态图片的类库 (实现一些特殊效果)</p>
+<h2 id="CIFilter"><a href="#CIFilter" class="headerlink" title="CIFilter"></a>CIFilter</h2><p>CIFilter过滤器对象封装了过滤器的核心形象的属性CIFilter类产生CIImage对象作为输出。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">通常一个过滤器需要一个或多个图像作为输入，然而一些过滤器生成一个图像基于其他类型的输入参数。</span><br><span class="line"><span class="built_in">CIFilter</span>对象通过KVC设置参数，而不是属性。CoreImage框架提供了很多可以直接使用的滤镜</span><br><span class="line">一个滤镜的输出可以是另一个滤镜的输入 (多个滤镜的效果可以组合起来使用)</span><br><span class="line"></span><br><span class="line"><span class="built_in">NS_CLASS_AVAILABLE</span>(<span class="number">10</span>_4, <span class="number">5</span>_0)</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CIFilter</span> : <span class="title">NSObject</span> &lt;<span class="title">NSSecureCoding</span>, <span class="title">NSCopying</span>&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">void</span> *_priv[<span class="number">8</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CIFilter就是滤镜 (为图片添加特殊效果 -&gt; 生成新的图片)</p>
+<h3 id="滤镜库所有key"><a href="#滤镜库所有key" class="headerlink" title="滤镜库所有key"></a>滤镜库所有key</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CIAccordionFoldTransition</span>,</span><br><span class="line"><span class="built_in">CIAdditionCompositing</span>,</span><br><span class="line"><span class="built_in">CIAffineClamp</span>,</span><br><span class="line"><span class="built_in">CIAffineTile</span>,</span><br><span class="line"><span class="built_in">CIAffineTransform</span>,</span><br><span class="line"><span class="built_in">CIAreaAverage</span>,</span><br><span class="line"><span class="built_in">CIAreaHistogram</span>,</span><br><span class="line"><span class="built_in">CIAreaMaximum</span>,</span><br><span class="line"><span class="built_in">CIAreaMaximumAlpha</span>,</span><br><span class="line"><span class="built_in">CIAreaMinimum</span>,</span><br><span class="line"><span class="built_in">CIAreaMinimumAlpha</span>,</span><br><span class="line"><span class="built_in">CIAztecCodeGenerator</span>,</span><br><span class="line"><span class="built_in">CIBarsSwipeTransition</span>,</span><br><span class="line"><span class="built_in">CIBlendWithAlphaMask</span>,</span><br><span class="line"><span class="built_in">CIBlendWithMask</span>,</span><br><span class="line"><span class="built_in">CIBloom</span>,</span><br><span class="line"><span class="built_in">CIBoxBlur</span>,</span><br><span class="line"><span class="built_in">CIBumpDistortion</span>,</span><br><span class="line"><span class="built_in">CIBumpDistortionLinear</span>,</span><br><span class="line"><span class="built_in">CICheckerboardGenerator</span>,</span><br><span class="line"><span class="built_in">CICircleSplashDistortion</span>,</span><br><span class="line"><span class="built_in">CICircularScreen</span>,</span><br><span class="line"><span class="built_in">CICircularWrap</span>,</span><br><span class="line"><span class="built_in">CICMYKHalftone</span>,</span><br><span class="line"><span class="built_in">CICode128BarcodeGenerator</span>,</span><br><span class="line"><span class="built_in">CIColorBlendMode</span>,</span><br><span class="line"><span class="built_in">CIColorBurnBlendMode</span>,</span><br><span class="line"><span class="built_in">CIColorClamp</span>,</span><br><span class="line"><span class="built_in">CIColorControls</span>,</span><br><span class="line"><span class="built_in">CIColorCrossPolynomial</span>,</span><br><span class="line"><span class="built_in">CIColorCube</span>,</span><br><span class="line"><span class="built_in">CIColorCubeWithColorSpace</span>,</span><br><span class="line"><span class="built_in">CIColorDodgeBlendMode</span>,</span><br><span class="line"><span class="built_in">CIColorInvert</span>,</span><br><span class="line"><span class="built_in">CIColorMap</span>,</span><br><span class="line"><span class="built_in">CIColorMatrix</span>,</span><br><span class="line"><span class="built_in">CIColorMonochrome</span>,</span><br><span class="line"><span class="built_in">CIColorPolynomial</span>,</span><br><span class="line"><span class="built_in">CIColorPosterize</span>,</span><br><span class="line"><span class="built_in">CIColumnAverage</span>,</span><br><span class="line"><span class="built_in">CIComicEffect</span>,</span><br><span class="line"><span class="built_in">CIConstantColorGenerator</span>,</span><br><span class="line"><span class="built_in">CIConvolution3X3</span>,</span><br><span class="line"><span class="built_in">CIConvolution5X5</span>,</span><br><span class="line"><span class="built_in">CIConvolution7X7</span>,</span><br><span class="line"><span class="built_in">CIConvolution9Horizontal</span>,</span><br><span class="line"><span class="built_in">CIConvolution9Vertical</span>,</span><br><span class="line"><span class="built_in">CICopyMachineTransition</span>,</span><br><span class="line"><span class="built_in">CICrop</span>,</span><br><span class="line"><span class="built_in">CICrystallize</span>,</span><br><span class="line"><span class="built_in">CIDarkenBlendMode</span>,</span><br><span class="line"><span class="built_in">CIDepthOfField</span>,</span><br><span class="line"><span class="built_in">CIDifferenceBlendMode</span>,</span><br><span class="line"><span class="built_in">CIDiscBlur</span>,</span><br><span class="line"><span class="built_in">CIDisintegrateWithMaskTransition</span>,</span><br><span class="line"><span class="built_in">CIDisplacementDistortion</span>,</span><br><span class="line"><span class="built_in">CIDissolveTransition</span>,</span><br><span class="line"><span class="built_in">CIDivideBlendMode</span>,</span><br><span class="line"><span class="built_in">CIDotScreen</span>,</span><br><span class="line"><span class="built_in">CIDroste</span>,</span><br><span class="line"><span class="built_in">CIEdges</span>,</span><br><span class="line"><span class="built_in">CIEdgeWork</span>,</span><br><span class="line"><span class="built_in">CIEightfoldReflectedTile</span>,</span><br><span class="line"><span class="built_in">CIExclusionBlendMode</span>,</span><br><span class="line"><span class="built_in">CIExposureAdjust</span>,</span><br><span class="line"><span class="built_in">CIFalseColor</span>,</span><br><span class="line"><span class="built_in">CIFlashTransition</span>,</span><br><span class="line"><span class="built_in">CIFourfoldReflectedTile</span>,</span><br><span class="line"><span class="built_in">CIFourfoldRotatedTile</span>,</span><br><span class="line"><span class="built_in">CIFourfoldTranslatedTile</span>,</span><br><span class="line"><span class="built_in">CIGammaAdjust</span>,</span><br><span class="line"><span class="built_in">CIGaussianBlur</span>,</span><br><span class="line"><span class="built_in">CIGaussianGradient</span>,</span><br><span class="line"><span class="built_in">CIGlassDistortion</span>,</span><br><span class="line"><span class="built_in">CIGlassLozenge</span>,</span><br><span class="line"><span class="built_in">CIGlideReflectedTile</span>,</span><br><span class="line"><span class="built_in">CIGloom</span>,</span><br><span class="line"><span class="built_in">CIHardLightBlendMode</span>,</span><br><span class="line"><span class="built_in">CIHatchedScreen</span>,</span><br><span class="line"><span class="built_in">CIHeightFieldFromMask</span>,</span><br><span class="line"><span class="built_in">CIHexagonalPixellate</span>,</span><br><span class="line"><span class="built_in">CIHighlightShadowAdjust</span>,</span><br><span class="line"><span class="built_in">CIHistogramDisplayFilter</span>,</span><br><span class="line"><span class="built_in">CIHoleDistortion</span>,</span><br><span class="line"><span class="built_in">CIHueAdjust</span>,</span><br><span class="line"><span class="built_in">CIHueBlendMode</span>,</span><br><span class="line"><span class="built_in">CIKaleidoscope</span>,</span><br><span class="line"><span class="built_in">CILanczosScaleTransform</span>,</span><br><span class="line"><span class="built_in">CILenticularHaloGenerator</span>,</span><br><span class="line"><span class="built_in">CILightenBlendMode</span>,</span><br><span class="line"><span class="built_in">CILightTunnel</span>,</span><br><span class="line"><span class="built_in">CILinearBurnBlendMode</span>,</span><br><span class="line"><span class="built_in">CILinearDodgeBlendMode</span>,</span><br><span class="line"><span class="built_in">CILinearGradient</span>,</span><br><span class="line"><span class="built_in">CILinearToSRGBToneCurve</span>,</span><br><span class="line"><span class="built_in">CILineOverlay</span>,</span><br><span class="line"><span class="built_in">CILineScreen</span>,</span><br><span class="line"><span class="built_in">CILuminosityBlendMode</span>,</span><br><span class="line"><span class="built_in">CIMaskedVariableBlur</span>,</span><br><span class="line"><span class="built_in">CIMaskToAlpha</span>,</span><br><span class="line"><span class="built_in">CIMaximumComponent</span>,</span><br><span class="line"><span class="built_in">CIMaximumCompositing</span>,</span><br><span class="line"><span class="built_in">CIMedianFilter</span>,</span><br><span class="line"><span class="built_in">CIMinimumComponent</span>,</span><br><span class="line"><span class="built_in">CIMinimumCompositing</span>,</span><br><span class="line"><span class="built_in">CIModTransition</span>,</span><br><span class="line"><span class="built_in">CIMotionBlur</span>,</span><br><span class="line"><span class="built_in">CIMultiplyBlendMode</span>,</span><br><span class="line"><span class="built_in">CIMultiplyCompositing</span>,</span><br><span class="line"><span class="built_in">CINoiseReduction</span>,</span><br><span class="line"><span class="built_in">CIOpTile</span>,</span><br><span class="line"><span class="built_in">CIOverlayBlendMode</span>,</span><br><span class="line"><span class="built_in">CIPageCurlTransition</span>,</span><br><span class="line"><span class="built_in">CIPageCurlWithShadowTransition</span>,</span><br><span class="line"><span class="built_in">CIParallelogramTile</span>,</span><br><span class="line"><span class="built_in">CIPDF417BarcodeGenerator</span>,</span><br><span class="line"><span class="built_in">CIPerspectiveCorrection</span>,</span><br><span class="line"><span class="built_in">CIPerspectiveTile</span>,</span><br><span class="line"><span class="built_in">CIPerspectiveTransform</span>,</span><br><span class="line"><span class="built_in">CIPerspectiveTransformWithExtent</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectChrome</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectFade</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectInstant</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectMono</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectNoir</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectProcess</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectTonal</span>,</span><br><span class="line"><span class="built_in">CIPhotoEffectTransfer</span>,</span><br><span class="line"><span class="built_in">CIPinchDistortion</span>,</span><br><span class="line"><span class="built_in">CIPinLightBlendMode</span>,</span><br><span class="line"><span class="built_in">CIPixellate</span>,</span><br><span class="line"><span class="built_in">CIPointillize</span>,</span><br><span class="line"><span class="built_in">CIQRCodeGenerator</span>,</span><br><span class="line"><span class="built_in">CIRadialGradient</span>,</span><br><span class="line"><span class="built_in">CIRandomGenerator</span>,</span><br><span class="line"><span class="built_in">CIRippleTransition</span>,</span><br><span class="line"><span class="built_in">CIRowAverage</span>,</span><br><span class="line"><span class="built_in">CISaturationBlendMode</span>,</span><br><span class="line"><span class="built_in">CIScreenBlendMode</span>,</span><br><span class="line"><span class="built_in">CISepiaTone</span>,</span><br><span class="line"><span class="built_in">CIShadedMaterial</span>,</span><br><span class="line"><span class="built_in">CISharpenLuminance</span>,</span><br><span class="line"><span class="built_in">CISixfoldReflectedTile</span>,</span><br><span class="line"><span class="built_in">CISixfoldRotatedTile</span>,</span><br><span class="line"><span class="built_in">CISmoothLinearGradient</span>,</span><br><span class="line"><span class="built_in">CISoftLightBlendMode</span>,</span><br><span class="line"><span class="built_in">CISourceAtopCompositing</span>,</span><br><span class="line"><span class="built_in">CISourceInCompositing</span>,</span><br><span class="line"><span class="built_in">CISourceOutCompositing</span>,</span><br><span class="line"><span class="built_in">CISourceOverCompositing</span>,</span><br><span class="line"><span class="built_in">CISpotColor</span>,</span><br><span class="line"><span class="built_in">CISpotLight</span>,</span><br><span class="line"><span class="built_in">CISRGBToneCurveToLinear</span>,</span><br><span class="line"><span class="built_in">CIStarShineGenerator</span>,</span><br><span class="line"><span class="built_in">CIStraightenFilter</span>,</span><br><span class="line"><span class="built_in">CIStretchCrop</span>,</span><br><span class="line"><span class="built_in">CIStripesGenerator</span>,</span><br><span class="line"><span class="built_in">CISubtractBlendMode</span>,</span><br><span class="line"><span class="built_in">CISunbeamsGenerator</span>,</span><br><span class="line"><span class="built_in">CISwipeTransition</span>,</span><br><span class="line"><span class="built_in">CITemperatureAndTint</span>,</span><br><span class="line"><span class="built_in">CIToneCurve</span>,</span><br><span class="line"><span class="built_in">CITorusLensDistortion</span>,</span><br><span class="line"><span class="built_in">CITriangleKaleidoscope</span>,</span><br><span class="line"><span class="built_in">CITriangleTile</span>,</span><br><span class="line"><span class="built_in">CITwelvefoldReflectedTile</span>,</span><br><span class="line"><span class="built_in">CITwirlDistortion</span>,</span><br><span class="line"><span class="built_in">CIUnsharpMask</span>,</span><br><span class="line"><span class="built_in">CIVibrance</span>,</span><br><span class="line"><span class="built_in">CIVignette</span>,</span><br><span class="line"><span class="built_in">CIVignetteEffect</span>,</span><br><span class="line"><span class="built_in">CIVortexDistortion</span>,</span><br><span class="line"><span class="built_in">CIWhitePointAdjust</span>,</span><br><span class="line"><span class="built_in">CIZoomBlur</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>CIQRCodeGenerator就是生成二维码的Key</p>
+</blockquote>
+<p>获取所有key可以靠代码实现<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> &lt;<span class="built_in">NSString</span> *&gt; *fileNames = [<span class="built_in">CIFilter</span> filterNamesInCategory:kCICategoryBuiltIn];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"fileNames: %@"</span>, fileNames);</span><br></pre></td></tr></table></figure></p>
+<h2 id="生成二维码实现"><a href="#生成二维码实现" class="headerlink" title="生成二维码实现"></a>生成二维码实现</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据滤镜名创建对应的滤镜 (滤镜名必须正确, 而且是系统提供的)</span></span><br><span class="line">self.filter = [CIFilter <span class="string">filterWithName:</span>@<span class="string">"CIQRCodeGenerator"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 配置输入参数 --------</span></span><br><span class="line">NSString *message = @<span class="string">"这是一个要变成二维码的字符串"</span>;</span><br><span class="line">NSData *data = [message <span class="string">dataUsingEncoding:</span>NSUTF8StringEncoding];</span><br><span class="line">[self.filter <span class="string">setValue:</span>data <span class="string">forKey:</span>@<span class="string">"inputMessage"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会影响二维码能被遮挡的内容大小 (H接近30%)</span></span><br><span class="line">[self.filter <span class="string">setValue:</span>@<span class="string">"H"</span> <span class="string">forKey:</span>@<span class="string">"inputCorrectionLevel"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 获取 --------</span></span><br><span class="line"><span class="comment">// 获取滤镜的输出图片, outputImage是二维码滤镜输出的二维码图片</span></span><br><span class="line">CIImage *outputImage = self.filter.outputImage;</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 修改颜色（可选） --------</span></span><br><span class="line">CIFilter *filter = [CIFilter <span class="string">filterWithName:</span>@<span class="string">"CIFalseColor"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置要处理的图片</span></span><br><span class="line">[filter <span class="string">setValue:</span>outputImage <span class="string">forKey:</span>@<span class="string">"inputImage"</span>];</span><br><span class="line"></span><br><span class="line">CIColor *color0 = [CIColor <span class="string">colorWithRed:</span><span class="number">10</span><span class="regexp">/255.0 green:110/</span><span class="number">255.0</span> <span class="string">blue:</span><span class="number">180</span>/<span class="number">255.0</span>];</span><br><span class="line">CIColor *color1 = [CIColor <span class="string">colorWithRed:</span><span class="number">255.0</span><span class="regexp">/255.0 green:255.0/</span><span class="number">255.0</span> <span class="string">blue:</span><span class="number">255.0</span>/<span class="number">255.0</span>];</span><br><span class="line"><span class="comment">// 前景色</span></span><br><span class="line">[filter <span class="string">setValue:</span>color0 <span class="string">forKey:</span>@<span class="string">"inputColor0"</span>];</span><br><span class="line"><span class="comment">// 背景色</span></span><br><span class="line">[filter <span class="string">setValue:</span>color1 <span class="string">forKey:</span>@<span class="string">"inputColor1"</span>];</span><br><span class="line"></span><br><span class="line">outputImage = filter.outputImage;</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 调整CIImage的大小（可选） --------</span></span><br><span class="line">outputImage = [outputImage <span class="string">imageByApplyingTransform:</span>CGAffineTransformMakeScale(<span class="number">20</span>, <span class="number">20</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换为UIImage</span></span><br><span class="line">UIImage *image = [UIImage <span class="string">imageWithCIImage:</span>outputImage];</span><br></pre></td></tr></table></figure>
+<h2 id="为二维码添加图标"><a href="#为二维码添加图标" class="headerlink" title="为二维码添加图标"></a>为二维码添加图标</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UIImage</span> *)imageWithIcon:(<span class="built_in">UIImage</span> *)icon</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 图形上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(<span class="keyword">self</span>.size);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将原来的图片画上去 (二维码)</span></span><br><span class="line">    [<span class="keyword">self</span> drawInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span>.size.width, <span class="keyword">self</span>.size.height)];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将用户头像画上去, 假定用户头像的宽高是原图25%</span></span><br><span class="line">    <span class="built_in">CGFloat</span> wh = MIN(<span class="keyword">self</span>.size.width, <span class="keyword">self</span>.size.height) * <span class="number">0.25</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> centerX = (<span class="keyword">self</span>.size.width - wh) / <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> centerY = (<span class="keyword">self</span>.size.height - wh) / <span class="number">2</span>;</span><br><span class="line">    [icon drawInRect:<span class="built_in">CGRectMake</span>(centerX, centerY, wh, wh)];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="AVFoundation"><a href="#AVFoundation" class="headerlink" title="AVFoundation"></a>AVFoundation</h1><p>AVFoundation负责处理音频与视频相关的框架, 在些的主要作用是获取摄像头数据</p>
+<h2 id="AVCaptureSession"><a href="#AVCaptureSession" class="headerlink" title="AVCaptureSession"></a>AVCaptureSession</h2><p>捕获会话</p>
+<h2 id="AVCaptureDevice"><a href="#AVCaptureDevice" class="headerlink" title="AVCaptureDevice"></a>AVCaptureDevice</h2><p>捕获设备 (关联硬件设备-摄像头)<br>第一次运行, 直接自动弹出授权窗口来请求用户, 能否访问摄像头<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">AVCaptureDevice</span> *videoDevice = [<span class="built_in">AVCaptureDevice</span> defaultDeviceWithMediaType:<span class="built_in">AVMediaTypeVideo</span>];</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Media types</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeVideo</span>                 <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeAudio</span>                 <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeText</span>                  <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeClosedCaption</span>         <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeSubtitle</span>              <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeTimecode</span>              <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeMetadata</span>              <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_8, <span class="number">6</span>_0);</span><br><span class="line"><span class="built_in">AVF_EXPORT</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">AVMediaTypeMuxed</span>                 <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_7, <span class="number">4</span>_0);</span><br></pre></td></tr></table></figure>
+<h2 id="AVCaptureDeviceInput"><a href="#AVCaptureDeviceInput" class="headerlink" title="AVCaptureDeviceInput"></a>AVCaptureDeviceInput</h2><p>数据捕获的输入端基类<br>从摄像头(硬件设备)上捕获数据 (关联捕获设备)<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">AVCaptureDeviceInput</span> *input = [<span class="built_in">AVCaptureDeviceInput</span> deviceInputWithDevice:videoDevice error:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure></p>
+<h2 id="AVCaptureMetadataOutput"><a href="#AVCaptureMetadataOutput" class="headerlink" title="AVCaptureMetadataOutput"></a>AVCaptureMetadataOutput</h2><p>输出端 (获取数据, 处理二维码(特定格式的数据[某种数据类型])<br>Metadata 表示是元数据 (数据类型)<br>AVCaptureOutput 是数据获取的输出端基类<br>AVCaptureMetadataOutput 是从捕获的数据当中, 截获特定类型的数据 (二维码)<br>Capture 捕获基本流程  </p>
+<ol>
+<li>输入端Input (绑定输入设备-摄像头) (捕获摄像头画面的数据)</li>
+<li>会话Session (协调处理输入与输出) (负责分配任务)</li>
+<li>输出端Output (处理数据的一端) (数据处理–检查有没有二維码)</li>
+<li>预览Preview (获取数据, 展示出来) (看到摄像头的画面)<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">AVCaptureMetadataOutput</span> *output = [[<span class="built_in">AVCaptureMetadataOutput</span> alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 配置输出端 (指定解析的数据类型)</span></span><br><span class="line"><span class="comment">// 查看有效的数据解析类型</span></span><br><span class="line"><span class="comment">// 注意: 要先与session进行绑定, 才能获取对应的objectTypes</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, output.availableMetadataObjectTypes);</span><br><span class="line"><span class="comment">// 1. 指定该输出端要解析的数据类型, 参数是包装了字符串的数组</span></span><br><span class="line">output.metadataObjectTypes = @[<span class="string">@"org.iso.QRCode"</span>];</span><br><span class="line"><span class="comment">// 2. 配置回调的数据代理, 可以指定代理方法触发的线程</span></span><br><span class="line">[output setMetadataObjectsDelegate:<span class="keyword">self</span> queue:dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 设置扫描范围（可选）</span></span><br><span class="line"><span class="comment">// 假定方框的有效范围是250 * 250</span></span><br><span class="line"><span class="built_in">CGFloat</span> screenWidth = <span class="keyword">self</span>.view.bounds.size.width;</span><br><span class="line"><span class="built_in">CGFloat</span> screenHeight = <span class="keyword">self</span>.view.bounds.size.height;</span><br><span class="line"><span class="built_in">CGFloat</span> x = (screenWidth - <span class="number">250</span>) / <span class="number">2</span>;</span><br><span class="line"><span class="built_in">CGFloat</span> y = (screenHeight - <span class="number">250</span>) / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 指定有效的数据解析范围, 默认值是 CGRectMake(0, 0, 1, 1)</span></span><br><span class="line"><span class="comment">// 每个值的范围是 0~1, 表示是比例 (除以整个屏幕的宽高)</span></span><br><span class="line"><span class="comment">// 注意: (y, x, height, width)</span></span><br><span class="line">output.rectOfInterest = <span class="built_in">CGRectMake</span>(y / screenHeight, x / screenWidth, <span class="number">250</span> / screenHeight, <span class="number">250</span> / screenWidth);</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 添加预览图层 (Preview)</span></span><br><span class="line"><span class="comment">// 创建预览图层, 跟会话绑定 (摄像头的数据传递给预览图层)</span></span><br><span class="line"><span class="built_in">AVCaptureVideoPreviewLayer</span> *previewLayer = [[<span class="built_in">AVCaptureVideoPreviewLayer</span> alloc] initWithSession:<span class="keyword">self</span>.session];</span><br><span class="line"><span class="comment">// 将预览图层添加到self.view.layer, 能看到</span></span><br><span class="line">[<span class="keyword">self</span>.view.layer addSublayer:previewLayer];</span><br><span class="line"><span class="comment">// 注意: 一定要手动配置Frame值</span></span><br><span class="line">previewLayer.frame = <span class="keyword">self</span>.view.bounds;</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------- 添加遮盖（可选）</span></span><br><span class="line"><span class="comment">// Rect为保留的矩形frame值</span></span><br><span class="line"><span class="built_in">CGRect</span> rect = <span class="built_in">CGRectMake</span>(x, y, <span class="number">250</span>, <span class="number">250</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGFloat</span> screenWidth = [<span class="built_in">UIScreen</span> mainScreen].bounds.size.width;</span><br><span class="line"><span class="built_in">CGFloat</span> screenHeight = [<span class="built_in">UIScreen</span> mainScreen].bounds.size.height;</span><br><span class="line"><span class="built_in">CGFloat</span> leftWidth = (screenWidth - rect.size.width) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">CAShapeLayer</span>* layerTop   = [[<span class="built_in">CAShapeLayer</span> alloc] init];</span><br><span class="line">layerTop.fillColor       = [<span class="built_in">UIColor</span> blackColor].CGColor;</span><br><span class="line">layerTop.opacity         = <span class="number">0.5</span>;</span><br><span class="line">layerTop.path            = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, screenWidth, rect.origin.y)].CGPath;</span><br><span class="line">[<span class="keyword">self</span>.view.layer addSublayer:layerTop];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CAShapeLayer</span>* layerLeft   = [[<span class="built_in">CAShapeLayer</span> alloc] init];</span><br><span class="line">layerLeft.fillColor       = [<span class="built_in">UIColor</span> blackColor].CGColor;</span><br><span class="line">layerLeft.opacity         = <span class="number">0.5</span>;</span><br><span class="line">layerLeft.path            = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, rect.origin.y, leftWidth, rect.size.height)].CGPath;</span><br><span class="line">[<span class="keyword">self</span>.view.layer addSublayer:layerLeft];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CAShapeLayer</span>* layerRight   = [[<span class="built_in">CAShapeLayer</span> alloc] init];</span><br><span class="line">layerRight.fillColor       = [<span class="built_in">UIColor</span> blackColor].CGColor;</span><br><span class="line">layerRight.opacity         = <span class="number">0.5</span>;</span><br><span class="line">layerRight.path            = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(screenWidth - leftWidth, rect.origin.y, rect.size.width, rect.size.height)].CGPath;</span><br><span class="line">[<span class="keyword">self</span>.view.layer addSublayer:layerRight];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CAShapeLayer</span>* layerBottom   = [[<span class="built_in">CAShapeLayer</span> alloc] init];</span><br><span class="line">layerBottom.fillColor       = [<span class="built_in">UIColor</span> blackColor].CGColor;</span><br><span class="line">layerBottom.opacity         = <span class="number">0.5</span>;</span><br><span class="line">layerBottom.path            = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="built_in">CGRectGetMaxY</span>(rect), screenWidth, screenHeight - <span class="built_in">CGRectGetMaxY</span>(rect))].CGPath;</span><br><span class="line">[<span class="keyword">self</span>.view.layer addSublayer:layerBottom];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动会话</span></span><br><span class="line">[<span class="keyword">self</span>.session startRunning];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="输入与输出绑定到会话"><a href="#输入与输出绑定到会话" class="headerlink" title="输入与输出绑定到会话"></a>输入与输出绑定到会话</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定输入端</span></span><br><span class="line"><span class="selector-tag">if</span> ([self.session <span class="attribute">canAddInput</span>:input]) &#123;</span><br><span class="line">    <span class="selector-attr">[self.session addInput:input]</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 绑定输出端</span></span><br><span class="line"><span class="selector-tag">if</span> ([self.session <span class="attribute">canAddOutput</span>:output]) &#123;</span><br><span class="line">    <span class="selector-attr">[self.session addOutput:output]</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结果回调"><a href="#结果回调" class="headerlink" title="结果回调"></a>结果回调</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)captureOutput:(<span class="built_in">AVCaptureOutput</span> *)captureOutput didOutputMetadataObjects:(<span class="built_in">NSArray</span> *)metadataObjects fromConnection:(<span class="built_in">AVCaptureConnection</span> *)connection</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ... 代理方法指定在哪里执行, 就会在哪个线程去执行该代码</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// metadataObjects是保存AVMetadataObject类型数据的数组</span></span><br><span class="line">    <span class="comment">// 二维码扫描得到的对象是AVMetadataMachineReadableCodeObject类型</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, metadataObjects);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// AVMetadataMachineReadableCodeObject 是最终的结果类型</span></span><br><span class="line">    <span class="built_in">AVMetadataMachineReadableCodeObject</span> *object = metadataObjects.lastObject;</span><br><span class="line">    <span class="comment">// 二维码的内容</span></span><br><span class="line">    <span class="built_in">NSString</span> *result = object.stringValue;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, result);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 停止会话的运行</span></span><br><span class="line">    [<span class="keyword">self</span>.session stopRunning];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/CoreImage/" rel="tag">#CoreImage</a>
+          
+            <a href="/tags/AVFoundation/" rel="tag">#AVFoundation</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/CoreLocation/" rel="next" title="CoreLocation">
+                <i class="fa fa-chevron-left"></i> CoreLocation
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="vvard3n" />
+          <p class="site-author-name" itemprop="name">vvard3n</p>
+          <p class="site-description motion-element" itemprop="description">「Stay hungry. Stay foolish.」</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码简介"><span class="nav-number">1.</span> <span class="nav-text">二维码简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CoreImage-生成二维码"><span class="nav-number">2.</span> <span class="nav-text">CoreImage 生成二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CIFilter"><span class="nav-number">2.1.</span> <span class="nav-text">CIFilter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#滤镜库所有key"><span class="nav-number">2.1.1.</span> <span class="nav-text">滤镜库所有key</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成二维码实现"><span class="nav-number">2.2.</span> <span class="nav-text">生成二维码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为二维码添加图标"><span class="nav-number">2.3.</span> <span class="nav-text">为二维码添加图标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AVFoundation"><span class="nav-number">3.</span> <span class="nav-text">AVFoundation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AVCaptureSession"><span class="nav-number">3.1.</span> <span class="nav-text">AVCaptureSession</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVCaptureDevice"><span class="nav-number">3.2.</span> <span class="nav-text">AVCaptureDevice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVCaptureDeviceInput"><span class="nav-number">3.3.</span> <span class="nav-text">AVCaptureDeviceInput</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVCaptureMetadataOutput"><span class="nav-number">3.4.</span> <span class="nav-text">AVCaptureMetadataOutput</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入与输出绑定到会话"><span class="nav-number">3.5.</span> <span class="nav-text">输入与输出绑定到会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果回调"><span class="nav-number">3.6.</span> <span class="nav-text">结果回调</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vvard3n</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vvard3nsblog';
+      var disqus_identifier = '2016/08/23/QRCode/';
+      var disqus_title = "QRCode";
+      var disqus_url = 'http://nvar.xyz/2016/08/23/QRCode/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
