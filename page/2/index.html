@@ -279,6 +279,128 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/04/CreateController/" itemprop="url">
+                  iOS开发中控制器的创建的三种方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-04T21:07:04+08:00" content="2016-07-04">
+              2016-07-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOSDev/" itemprop="url" rel="index">
+                    <span itemprop="name">iOSDev</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/04/CreateController/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/04/CreateController/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>当使用纯代码UI或Xib，以及一些特殊的Storyboard时，需要涉及到手动创建控制器，以便程序可以正常启动，并显示想要的View。这里简单介绍三种创建方式。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/04/CreateController/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/04/UIApplicationDelegate/" itemprop="url">
                   iOS程序生命周期
                 </a>
@@ -1356,165 +1478,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/09/FactoryDesignPatterns/" itemprop="url">
-                  理解工厂设计模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-09T21:51:50+08:00" content="2015-08-09">
-              2015-08-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/09/FactoryDesignPatterns/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/09/FactoryDesignPatterns/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>软件开发过程，离不开的就是需求变化，很可能某一个变化会引起对象的更改，在诸多使用对象的地方也都要进行修改；我们不能阻止变化，只能把代码写得更易于修改，把变化集中到一处是比较好的做法；通过前辈的经验总结，这也就有个工厂系列模式。</p>
-<h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>简单工厂模式就像它的名字，使用简单，类结构简单，相比其它两种工厂模式它可能用得更多；但因为它违反了开闭原则，并没有把它算做23种设计模式之一。<br>以下为简单工厂模式类图：</p>
-<p><img src="http://7xtksk.com1.z0.glb.clouddn.com/简单工厂模式类图.png" alt="简单工厂模式类图"></p>
-<p>以下是一个简单的计算器例子（Objective-C）：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Operation</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> numberA;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> numberB;</span><br><span class="line">- (<span class="built_in">CGFloat</span>)getResult;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Operation</span></span></span><br><span class="line">- (<span class="built_in">CGFloat</span>)getResult &#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">OperationAdd</span> : <span class="title">Operation</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">OperationAdd</span></span></span><br><span class="line">- (<span class="built_in">CGFloat</span>)getResult &#123; <span class="keyword">return</span> <span class="keyword">self</span>.numberA + <span class="keyword">self</span>.numberB; &#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">OperationSub</span> : <span class="title">Operation</span></span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">OperationSub</span></span></span><br><span class="line">- (<span class="built_in">CGFloat</span>)getResult &#123; <span class="keyword">return</span> <span class="keyword">self</span>.numberA - <span class="keyword">self</span>.numberB; &#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">OperationFactory</span> : <span class="title">NSObject</span></span></span><br><span class="line">+ (Operation *)createOperation:(<span class="built_in">NSString</span> *)operStr;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">OperationFactory</span></span></span><br><span class="line">+ (Operation *)createOperation:(<span class="built_in">NSString</span> *)operStr</span><br><span class="line">&#123;</span><br><span class="line">    Operation *oper = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span> ([operStr isEqualToString:<span class="string">@"+"</span>]) &#123;</span><br><span class="line">        oper = [[OperationAdd alloc] init];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([operStr isEqualToString:<span class="string">@"-"</span>]) &#123;</span><br><span class="line">        oper = [[OperationSub alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> oper;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p>客户端代码如下：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Operation *oper = [OperationFactory createOperation:@<span class="string">"+"</span>]<span class="comment">;      // 客户端的变化集中在此</span></span><br><span class="line">oper.numberA = <span class="number">10</span><span class="comment">;</span></span><br><span class="line">oper.numberB = <span class="number">20</span><span class="comment">;</span></span><br><span class="line">[oper getResult]<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
-<p>以上就是简单工厂模式使用方式。使用简单工厂客户端只需要知道子类依赖的基类、协议和工厂类，不用知道具体在做事的是哪个类，由工厂类创建具体工作的子类，这样就把变化集中在工厂类，简化了客户端代码的同时也实现了客户端与具体子类的解耦；缺点就是如果新增加具体的子类，就需要修改工厂类，增加判断条件，也正是由于这个原因违反了开闭原则。</p>
-<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><p>工厂方法模式是在简单工厂模式基础上进行优化，具体子类不变，把工厂进行，具体工厂创建具体子类。以下为工厂方法模式类图：<br><img src="http://7xtksk.com1.z0.glb.clouddn.com/工厂方法模式类图.png" alt="工厂方法模式类图"></p>
-<p>其它代码与简单工厂模式代码相似，客户端代码如下：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">OperationFactory *factory = [[OperationAdd alloc] init]<span class="comment">;    // 客户端的变化集中在此</span></span><br><span class="line">Operation *oper = [factory createOperation]<span class="comment">;</span></span><br><span class="line">oper.numberA = <span class="number">10</span><span class="comment">;</span></span><br><span class="line">oper.numberB = <span class="number">20</span><span class="comment">;</span></span><br><span class="line">[oper getResult]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>工厂方法模式把简单工厂类中的选择条件移到了客户端，在保持简单工厂模式的优点的同时遵守了开闭原则，有新的具体类增加时，只需要创建相应的工厂子类就行；简单工厂和工厂方法很相似，取舍两种模式看自己如何抉择了，或者看具体的需求，简单工厂的优势在于简单，工厂方法的优势在于保持了简单的同时（当然，比简单工厂稍微复杂一点点），封装性更好。</p>
-<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>抽象工厂模式比较复杂，它需要的类也是最多的。它所解决的问题是同类的产品的API，不同商家，调用细节不一样，最终结果一样，要怎么设计才能使这个系统可以做少量修改或者干脆不修改代码，就可以从一个产品到另一产品；《大话设计模式》举了多个数据库切换的例子，完美的诠释抽象工厂模式的大用。以切换SQLServer和Access数据库，来看一下它的类图：</p>
-<p><img src="http://7xtksk.com1.z0.glb.clouddn.com/抽象工厂模式类图.png" alt="抽象工厂模式类图"></p>
-<p>代码示例如下（Objective-C）：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 用户表增删改查</span></span><br><span class="line"><span class="variable">@protocol</span> UserCURD &lt;NSObject&gt;</span><br><span class="line">- (void)create;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="variable">@protocol</span> Factory &lt;NSObject&gt;</span><br><span class="line">- (id&lt;UserCURD&gt;)createUser;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ———— SQLServer系列操作 ————</span></span><br><span class="line"><span class="variable">@interface</span> <span class="attribute">SQLServerUser </span>: NSObject &lt;UserCURD&gt;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@implementation</span> SQLServerUser</span><br><span class="line">- (void)create &#123; NSLog(@"创建SQLServer用户"); &#125;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@interface</span> <span class="attribute">SQLServerFactory </span>: NSObject &lt;Factory&gt;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@implementation</span> SQLServerFactory</span><br><span class="line">- (id&lt;UserCURD&gt;)createUser &#123; return <span class="selector-attr">[[SQLServerUser alloc]</span> <span class="selector-tag">init</span>]; &#125;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ———— AccessUser系列操作 ————</span></span><br><span class="line"><span class="variable">@interface</span> <span class="attribute">AccessUser </span>: NSObject &lt;UserCURD&gt;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@implementation</span> AccessUser</span><br><span class="line">- (void)create &#123; NSLog(@"创建Access用户"); &#125;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@interface</span> <span class="attribute">AccessFactory </span>: NSObject &lt;Factory&gt;</span><br><span class="line"><span class="variable">@end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@implementation</span> AccessFactory</span><br><span class="line"></span><br><span class="line">- (id&lt;UserCURD&gt;)createUser &#123; return <span class="selector-attr">[[AccessUser alloc]</span> <span class="selector-tag">init</span>]; &#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">@end</span></span><br></pre></td></tr></table></figure>
-<p>客户端代码如下：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">id<span class="tag">&lt;Factory&gt;</span> factory = [[SQLServerFactory alloc] init];  // 客户端变化集中在此</span><br><span class="line">id<span class="tag">&lt;UserCURD&gt;</span> <span class="keyword">user</span> <span class="title">= [factory</span> createUser];</span><br><span class="line">[<span class="keyword">user</span> <span class="title">create</span>];</span><br></pre></td></tr></table></figure>
-<p>抽象工厂模式如果不考虑多产品的话，其实也就是工厂方法模式了，就因为它的设计目标和为了解决的问题，使得底层都是依赖抽象，具体的对象行为由具体子类来决定，而客户端也仅仅知道具体工厂和产品接口（UserCURD）就行了，这就使得系统能够灵活切换同类型有细微差别的产品（API）了。</p>
-<p>这个模式需要用到的类比较多，缺点也就显而易见：</p>
-<ul>
-<li>1、新增一个产品至少要新建三个类还要更改多个工厂类。</li>
-<li>2、还有一个问题没解决，既然是切换产品（SQLServer和Access），大多应该是全局切换，如果使用具体工厂的地方比较多，修改 ‘[[SQLServerFactory alloc] init]’ 这句代码也是挺烦的。</li>
-</ul>
-<h3 id="用简单工厂来改进抽象工厂"><a href="#用简单工厂来改进抽象工厂" class="headerlink" title="用简单工厂来改进抽象工厂"></a>用简单工厂来改进抽象工厂</h3><p>好吧，上面的抽象工厂模式缺点第2条，其实也不能说是抽象工厂模式的缺点（抽象工厂模式：这个锅我不背），这是具体对象与客户端耦合度太高的锅。但是，我们仔细想想工厂系列模式是用来干嘛的？不就是集中创建对象，把变化集中到一块么？就创建工厂对象这句代码，我们其实可以用简单工厂来优化。</p>
-<p>用简单工厂来优化，会有2个选择：</p>
-<ul>
-<li>1、在不更改抽象工厂所有类的情况下，创建简单工厂来封装变化。</li>
-<li>2、既然简单工厂也是工厂，我为何不去掉抽象工厂的工厂类，完全使用简单工厂来创建对象。</li>
-</ul>
-<p>第一种方式我不试，下面为第二种方式：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DataAccessFactory</span> : <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="keyword">id</span>&lt;UserCURD&gt;)createUser;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kDBConfig = <span class="string">@"SQLServer"</span>;</span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DataAccessFactory</span></span></span><br><span class="line">- (<span class="keyword">id</span>&lt;UserCURD&gt;)createUser</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([kDBConfig isEqualToString:<span class="string">@"SQLServer"</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> [[SQLServerUser alloc] init];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ([kDBConfig isEqualToString:<span class="string">@"Access"</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> [[AccessUser alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ———— 客户端代码 ————</span></span><br><span class="line">DataAccessFactory *factory = [[DataAccessFactory alloc] init];</span><br><span class="line"><span class="keyword">id</span>&lt;UserCURD&gt; user = [factory createUser];</span><br><span class="line">[user create];</span><br></pre></td></tr></table></figure>
-<p>通过以上更改也就可以抛弃抽象工厂里面的抽象工厂和具体工厂类了，增加具体的产品就只更改简单工厂类的代码，比原来更改好多个类复杂度降低不少。还存在两个问题：<br>1、这样改了还是不是抽象工厂模式？我TM也不知道。<br>2、工厂方法内判断条件太多了，如果新增一个产品还得在创建方法里面写判断条件，感觉有点不科学。</p>
-<h3 id="用反射技术来取消判断（分支）条件"><a href="#用反射技术来取消判断（分支）条件" class="headerlink" title="用反射技术来取消判断（分支）条件"></a>用反射技术来取消判断（分支）条件</h3><p>在C#中有一种技术叫“反射”，听起来很高端的样子（实际上，就是用字符串的方式来找到程序中定义好的类）；Objective-C中也有类似的技术 <code>NSClassFromString</code> 或者强大的运行时，要使用此方法来优化上面的判断条件，需要把各个类命名规范一点，注意一致性，然后就可以像下面这样用了：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kDBConfig = <span class="string">@"SQLServer"</span>;</span><br><span class="line">- (<span class="keyword">id</span>&lt;UserCURD&gt;)createUser</span><br><span class="line">&#123;</span><br><span class="line">    Class userClass = <span class="built_in">NSClassFromString</span>([<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@User"</span>, db]);</span><br><span class="line">    <span class="keyword">return</span> [[userClass alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过以上写法，切换数据库只需要更改定义的常量字符串内容，或者干脆把常量直接写到plist文件或者从外面传进来，即可做到不更改工厂内的代码，切换数据库。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>工厂系列三兄弟个人理解到此就完毕了，实例化对象系列模式不只有它们三个，还有其他几种，暂时还未深入理解。一下贴一下从书上看来的它们的标准定义：</p>
-<ul>
-<li>简单工厂模式：定义一个用于创建对象的接口，把可能发生的变化集中到工厂类中。（这也是书上说的？不是，这是我说的）</li>
-<li>工厂方法模式：定义一个用于创建对象的接口，让子类决定实例化哪一个类；工厂方法使一个类的实例化延迟到其子类。</li>
-<li>抽象工厂模式：提供一个创建一系列或相互依赖对象的接口，而无需指定它们具体的类。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1560,7 +1523,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1577,7 +1540,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
